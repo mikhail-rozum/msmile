@@ -29,6 +29,7 @@ namespace MSmile.Api
         {
             services.AddDatabase(this.Configuration);
             services.AddMigrations(this.Configuration);
+            services.AddAutoMapper();
             services.AddControllers();
             services.AddSwaggerGen();
         }

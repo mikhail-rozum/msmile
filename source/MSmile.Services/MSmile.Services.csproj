@@ -4,4 +4,13 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MSmile.Db\MSmile.Db.csproj" />
+    <ProjectReference Include="..\MSmile.Dto\MSmile.Dto.csproj" />
+  </ItemGroup>
+
 </Project>
