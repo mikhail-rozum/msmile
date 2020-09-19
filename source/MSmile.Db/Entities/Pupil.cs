@@ -5,6 +5,11 @@ namespace MSmile.Db.Entities
 {
     public partial class Pupil
     {
+        public Pupil()
+        {
+            Lesson = new HashSet<Lesson>();
+        }
+
         public long Id { get; set; }
         public long ParentId { get; set; }
         public string FirstName { get; set; }
@@ -14,5 +19,6 @@ namespace MSmile.Db.Entities
         public string Comment { get; set; }
 
         public virtual Parent Parent { get; set; }
+        public virtual ICollection<Lesson> Lesson { get; set; }
     }
 }
