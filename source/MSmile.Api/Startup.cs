@@ -30,11 +30,19 @@ namespace MSmile.Api
             services.AddDatabase(this.Configuration);
             services.AddMigrations(this.Configuration);
             services.AddControllers();
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSwagger();
+            app.UseSwaggerUI(
+                opt =>
+                {
+                    opt.SwaggerEndpoint("/swagger/v1/swagger.json", "MSmile API v1");
+                });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
