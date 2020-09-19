@@ -26,6 +26,7 @@
         public static void AddDatabase(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<MSmileDbContext>(options => options.UseNpgsql(configuration.GetConnectionString(ConnectionName)));
+            services.AddTransient(typeof(Repository<>));
         }
 
         /// <summary>
