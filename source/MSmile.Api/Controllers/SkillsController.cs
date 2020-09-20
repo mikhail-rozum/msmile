@@ -35,5 +35,17 @@
         {
             return service.Update(dto);
         }
+
+        /// <summary>
+        /// Deletes the skill.
+        /// </summary>
+        /// <param name="id">Id.</param>
+        /// <param name="service">Skill service.</param>
+        [HttpDelete("{id}")]
+        public IActionResult Delete([FromRoute] long id, [FromServices] SkillService service)
+        {
+            service.Delete(id);
+            return this.Ok();
+        }
     }
 }

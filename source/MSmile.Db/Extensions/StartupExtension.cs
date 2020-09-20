@@ -27,6 +27,7 @@
         {
             services.AddDbContext<MSmileDbContext>(options => options.UseNpgsql(configuration.GetConnectionString(ConnectionName)));
             services.AddTransient(typeof(Repository<>));
+            services.AddTransient<UnitOfWork>();
         }
 
         /// <summary>
