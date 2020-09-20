@@ -1,11 +1,12 @@
 ﻿namespace MSmile.Db.Infrastructure
 {
     using System;
+    using System.Linq;
 
     /// <summary>
     /// Implements Repository pattern.
     /// </summary>
-    public class Repository<TEntity> : IDisposable
+    public sealed class Repository<TEntity>
         where TEntity : class
     {
         private readonly MSmileDbContext dbContext;
@@ -23,16 +24,16 @@
         /// Adds entity to database
         /// </summary>
         /// <param name="entity">Entity</param>
-        public virtual async void AddAsync(TEntity entity)
+        public void Add(TEntity entity)
         {
-            await this.dbContext.Set<TEntity>().AddAsync(entity);
+            this.dbContext.Set<TEntity>().Add(entity);
         }
 
         /// <summary>
         /// Updates entity.
         /// </summary>
         /// <param name="entity">Entity</param>
-        public virtual void Update(TEntity entity)
+        public void Update(TEntity entity)
         {
             this.dbContext.Set<TEntity>().Update(entity);
         }
@@ -41,15 +42,26 @@
         /// Deletes entity.
         /// </summary>
         /// <param name="entity">Entity.</param>
-        public virtual void Delete(TEntity entity)
+        public void Delete(TEntity entity)
         {
             this.dbContext.Set<TEntity>().Remove(entity);
         }
 
-        /// <inheritdoc />
-        public virtual async void Dispose()
+        /// <summary>
+        /// Get <see cref="IQueryable{T}"/> collection of entities.
+        /// </summary>
+        /// <returns>Collection of entities.</returns>
+        public IQueryable<TEntity> Get()
         {
-            await this.dbContext.SaveChangesAsync();
+            return this.dbContext.Set<TEntity>().AsQueryable();
+        }
+
+        /// <summary>
+        /// Saves changes.
+        /// </summary>
+        public void SaveChanges()
+        {
+            this.dbContext.SaveChanges();
         }
     }
 }

@@ -1,13 +1,13 @@
 ﻿namespace MSmile.Services
 {
-    using System;
-    using System.Threading.Tasks;
+    using System.Linq;
 
     using AutoMapper;
 
     using MSmile.Db.Entities;
     using MSmile.Db.Infrastructure;
     using MSmile.Dto.Dto;
+    using MSmile.Services.Exceptions;
 
     /// <summary>
     /// Skill service.
@@ -32,10 +32,34 @@
         /// </summary>
         /// <param name="dto">Dto.</param>
         /// <returns>Dto.</returns>
-        public Task<SkillDto> AddAsync(SkillDto dto)
+        public SkillDto Add(SkillDto dto)
         {
-            // TODO: Implement this after including validation on dtos
-            throw new NotImplementedException();
+            dto.Id = default;
+
+            var entity = this.Mapper.Map<Skill>(dto);
+            this.skillRepository.Add(entity);
+            this.skillRepository.SaveChanges();
+
+            return this.Mapper.Map<SkillDto>(entity);
+        }
+
+        /// <summary>
+        /// Updates Skill.
+        /// </summary>
+        /// <param name="dto">Dto.</param>
+        /// <returns>Dto.</returns>
+        public SkillDto Update(SkillDto dto)
+        {
+            var entity = this.skillRepository
+                .Get()
+                .SingleOrDefault(x => x.Id == dto.Id)
+                ?? throw new BusinessException(MessageConstants.Common.EntityNotFound);
+
+            this.Mapper.Map(dto, entity);
+            this.skillRepository.Update(entity);
+            this.skillRepository.SaveChanges();
+
+            return this.Mapper.Map<SkillDto>(entity);
         }
     }
 }

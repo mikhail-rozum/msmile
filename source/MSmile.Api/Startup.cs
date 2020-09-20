@@ -1,5 +1,7 @@
 namespace MSmile.Api
 {
+    using FluentValidation.AspNetCore;
+
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
@@ -7,6 +9,7 @@ namespace MSmile.Api
     using Microsoft.Extensions.Hosting;
 
     using MSmile.Db.Extensions;
+    using MSmile.Dto.Validators;
 
     public class Startup
     {
@@ -32,6 +35,8 @@ namespace MSmile.Api
             services.AddAutoMapper();
             services.AddControllers();
             services.AddSwaggerGen();
+            services.AddFluentValidator();
+            services.AddDataServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
