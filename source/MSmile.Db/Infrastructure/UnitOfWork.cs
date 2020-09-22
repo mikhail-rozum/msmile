@@ -19,6 +19,7 @@
             this.dbContext = dbContext;
             this.SkillRepository = new Repository<Skill>(this.dbContext);
             this.DifficultyLevelRepository = new Repository<DifficultyLevel>(this.dbContext);
+            this.EmployeeRepository = new Repository<Employee>(this.dbContext);
         }
 
         /// <summary>
@@ -30,6 +31,11 @@
         /// Difficulty level repository.
         /// </summary>
         public Repository<DifficultyLevel> DifficultyLevelRepository { get; }
+
+        /// <summary>
+        /// Employee repository.
+        /// </summary>
+        public Repository<Employee> EmployeeRepository { get; }
 
         /// <summary>
         /// Saves all the changes.

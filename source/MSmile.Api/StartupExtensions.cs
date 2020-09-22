@@ -50,6 +50,7 @@
         {
             services.AddTransient<SkillService>();
             services.AddTransient<DifficultyLevelService>();
+            services.AddTransient<EmployeeService>();
         }
     }
 }
