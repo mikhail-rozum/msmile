@@ -15,7 +15,6 @@
         {
             this.Create.Table(TableName).WithDescription("Pupils")
                 .WithColumn("Id").AsInt64().PrimaryKey().Identity()
-                .WithColumn("ParentId").AsInt64().NotNullable().ForeignKey("Parent", "Id")
                 .WithColumn("FirstName").AsString(50).NotNullable()
                 .WithColumn("MiddleName").AsString(50).NotNullable()
                 .WithColumn("LastName").AsString(50).NotNullable()
