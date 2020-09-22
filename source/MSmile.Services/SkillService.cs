@@ -109,6 +109,8 @@
                         ?? throw new BusinessException(MessageConstants.Common.EntityNotFound);
 
                     uow.SkillRepository.Delete(entity);
+
+                    uow.Save();
                 });
         }
     }

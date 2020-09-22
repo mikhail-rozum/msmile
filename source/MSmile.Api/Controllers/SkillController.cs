@@ -1,5 +1,7 @@
 ﻿namespace MSmile.Api.Controllers
 {
+    using System.Collections.Generic;
+
     using Microsoft.AspNetCore.Mvc;
 
     using MSmile.Dto.Dto;
@@ -10,8 +12,19 @@
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class SkillsController : Controller
+    public class SkillController : Controller
     {
+        /// <summary>
+        /// Get all the skills.
+        /// </summary>
+        /// <param name="service">Service.</param>
+        /// <returns>Skills.</returns>
+        [HttpGet]
+        public List<SkillDto> GetAll([FromServices] SkillService service)
+        {
+            return service.GetAll();
+        }
+
         /// <summary>
         /// Adds Skill.
         /// </summary>

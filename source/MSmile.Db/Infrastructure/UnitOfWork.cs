@@ -18,12 +18,18 @@
         {
             this.dbContext = dbContext;
             this.SkillRepository = new Repository<Skill>(this.dbContext);
+            this.DifficultyLevelRepository = new Repository<DifficultyLevel>(this.dbContext);
         }
 
         /// <summary>
         /// Skills repository.
         /// </summary>
         public Repository<Skill> SkillRepository { get; }
+
+        /// <summary>
+        /// Difficulty level repository.
+        /// </summary>
+        public Repository<DifficultyLevel> DifficultyLevelRepository { get; }
 
         /// <summary>
         /// Saves all the changes.

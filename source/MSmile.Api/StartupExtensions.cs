@@ -49,6 +49,7 @@
         public static void AddDataServices(this IServiceCollection services)
         {
             services.AddTransient<SkillService>();
+            services.AddTransient<DifficultyLevelService>();
         }
     }
 }

@@ -16,6 +16,7 @@
         public DictionariesMapperProfile()
         {
             this.CreateMap<Skill, SkillDto>().ReverseMap();
+            this.CreateMap<DifficultyLevel, DifficultyLevelDto>().ReverseMap();
         }
     }
 }
