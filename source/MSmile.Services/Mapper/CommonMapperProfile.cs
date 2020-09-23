@@ -16,6 +16,7 @@
         public CommonMapperProfile()
         {
             this.CreateMap<Employee, EmployeeDto>().ReverseMap();
+            this.CreateMap<Pupil, PupilDto>().ReverseMap();
         }
     }
 }

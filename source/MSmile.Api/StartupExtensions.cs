@@ -25,6 +25,7 @@
                 mc =>
                 {
                     mc.AddProfile<DictionariesMapperProfile>();
+                    mc.AddProfile<CommonMapperProfile>();
                 });
 
             var mapper = mapperConfig.CreateMapper();
@@ -51,6 +52,7 @@
             services.AddTransient<SkillService>();
             services.AddTransient<DifficultyLevelService>();
             services.AddTransient<EmployeeService>();
+            services.AddTransient<PupilService>();
         }
     }
 }

@@ -20,7 +20,13 @@
             this.SkillRepository = new Repository<Skill>(this.dbContext);
             this.DifficultyLevelRepository = new Repository<DifficultyLevel>(this.dbContext);
             this.EmployeeRepository = new Repository<Employee>(this.dbContext);
+            this.PupilRepository = new Repository<Pupil>(this.dbContext);
         }
+
+        /// <summary>
+        /// Pupil repository.
+        /// </summary>
+        public Repository<Pupil> PupilRepository { get; }
 
         /// <summary>
         /// Skills repository.

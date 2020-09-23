@@ -22,11 +22,13 @@ namespace MSmile.Db.Infrastructure
         public virtual DbSet<LessonTask> LessonTask { get; set; }
         public virtual DbSet<Parent> Parent { get; set; }
         public virtual DbSet<ParentContact> ParentContact { get; set; }
+        public virtual DbSet<ParentPupil> ParentPupil { get; set; }
         public virtual DbSet<Pupil> Pupil { get; set; }
         public virtual DbSet<Skill> Skill { get; set; }
         public virtual DbSet<Task> Task { get; set; }
         public virtual DbSet<TaskSkill> TaskSkill { get; set; }
         public virtual DbSet<Test> Test { get; set; }
+        public virtual DbSet<User> User { get; set; }
         public virtual DbSet<VersionInfo> VersionInfo { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -141,6 +143,25 @@ namespace MSmile.Db.Infrastructure
                     .HasConstraintName("FK_ParentContact_ParentId_Parent_Id");
             });
 
+            modelBuilder.Entity<ParentPupil>(entity =>
+            {
+                entity.HasKey(e => new { e.ParentId, e.PupilId });
+
+                entity.HasComment("Link between Parents and Pupils");
+
+                entity.HasOne(d => d.Parent)
+                    .WithMany(p => p.ParentPupil)
+                    .HasForeignKey(d => d.ParentId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ParentPupil_ParentId_Parent_Id");
+
+                entity.HasOne(d => d.Pupil)
+                    .WithMany(p => p.ParentPupil)
+                    .HasForeignKey(d => d.PupilId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ParentPupil_PupilId_Pupil_Id");
+            });
+
             modelBuilder.Entity<Pupil>(entity =>
             {
                 entity.HasComment("Pupils");
@@ -160,12 +181,6 @@ namespace MSmile.Db.Infrastructure
                 entity.Property(e => e.MiddleName)
                     .IsRequired()
                     .HasMaxLength(50);
-
-                entity.HasOne(d => d.Parent)
-                    .WithMany(p => p.Pupil)
-                    .HasForeignKey(d => d.ParentId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Pupil_ParentId_Parent_Id");
             });
 
             modelBuilder.Entity<Skill>(entity =>
@@ -228,6 +243,25 @@ namespace MSmile.Db.Infrastructure
                 entity.Property(e => e.Value)
                     .IsRequired()
                     .HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasComment("Users");
+
+                entity.Property(e => e.Login)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.PasswordHash)
+                    .IsRequired()
+                    .HasMaxLength(500);
+
+                entity.HasOne(d => d.Employee)
+                    .WithMany(p => p.User)
+                    .HasForeignKey(d => d.EmployeeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_User_EmployeeId_Employee_Id");
             });
 
             modelBuilder.Entity<VersionInfo>(entity =>

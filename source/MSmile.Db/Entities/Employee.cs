@@ -8,6 +8,7 @@ namespace MSmile.Db.Entities
         public Employee()
         {
             Lesson = new HashSet<Lesson>();
+            User = new HashSet<User>();
         }
 
         public long Id { get; set; }
@@ -20,5 +21,6 @@ namespace MSmile.Db.Entities
         public byte[] Photo { get; set; }
 
         public virtual ICollection<Lesson> Lesson { get; set; }
+        public virtual ICollection<User> User { get; set; }
     }
 }

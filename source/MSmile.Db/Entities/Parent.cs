@@ -8,7 +8,7 @@ namespace MSmile.Db.Entities
         public Parent()
         {
             ParentContact = new HashSet<ParentContact>();
-            Pupil = new HashSet<Pupil>();
+            ParentPupil = new HashSet<ParentPupil>();
         }
 
         public long Id { get; set; }
@@ -18,6 +18,6 @@ namespace MSmile.Db.Entities
         public string Comment { get; set; }
 
         public virtual ICollection<ParentContact> ParentContact { get; set; }
-        public virtual ICollection<Pupil> Pupil { get; set; }
+        public virtual ICollection<ParentPupil> ParentPupil { get; set; }
     }
 }
