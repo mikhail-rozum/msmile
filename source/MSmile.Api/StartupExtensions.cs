@@ -53,6 +53,7 @@
             services.AddTransient<DifficultyLevelService>();
             services.AddTransient<EmployeeService>();
             services.AddTransient<PupilService>();
+            services.AddTransient<DataGenerationService>();
         }
     }
 }

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MSmile.DataMaker\MSmile.DataMaker.csproj" />
     <ProjectReference Include="..\MSmile.Db\MSmile.Db.csproj" />
     <ProjectReference Include="..\MSmile.Dto\MSmile.Dto.csproj" />
   </ItemGroup>
