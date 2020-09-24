@@ -21,7 +21,13 @@
             this.DifficultyLevelRepository = new Repository<DifficultyLevel>(this.dbContext);
             this.EmployeeRepository = new Repository<Employee>(this.dbContext);
             this.PupilRepository = new Repository<Pupil>(this.dbContext);
+            this.ParentRepository = new Repository<Parent>(this.dbContext);
         }
+
+        /// <summary>
+        /// Parent repository.
+        /// </summary>
+        public Repository<Parent> ParentRepository { get; }
 
         /// <summary>
         /// Pupil repository.
@@ -42,6 +48,17 @@
         /// Employee repository.
         /// </summary>
         public Repository<Employee> EmployeeRepository { get; }
+
+        /// <summary>
+        /// Returns repository.
+        /// </summary>
+        /// <typeparam name="TEntity">Entity type</typeparam>
+        /// <returns>Repository</returns>
+        public Repository<TEntity> GetRepository<TEntity>()
+            where TEntity : class, IEntity
+        {
+            return new Repository<TEntity>(this.dbContext);
+        }
 
         /// <summary>
         /// Saves all the changes.

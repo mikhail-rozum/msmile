@@ -9,54 +9,54 @@
     using MSmile.Services.DataServices;
 
     /// <summary>
-    /// Methods for Skills
+    /// Methods for parents.
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class SkillController : Controller
+    public class ParentController : Controller
     {
         /// <summary>
-        /// Get all the skills.
+        /// Get all the parents.
         /// </summary>
         /// <param name="service">Service.</param>
-        /// <returns>Skills.</returns>
+        /// <returns>Parents.</returns>
         [HttpGet]
-        public List<SkillDto> GetAll([FromServices] SkillService service)
+        public List<ParentDto> GetAll([FromServices] ParentService service)
         {
             return service.GetAll();
         }
 
         /// <summary>
-        /// Adds Skill.
+        /// Adds Parent.
         /// </summary>
         /// <param name="dto">Dto.</param>
         /// <param name="service">Service.</param>
         /// <returns>Dto.</returns>
         [HttpPost]
-        public SkillDto Add([FromBody] SkillDto dto, [FromServices] SkillService service)
+        public ParentDto Add([FromBody] ParentDto dto, [FromServices] ParentService service)
         {
             return service.Add(dto);
         }
 
         /// <summary>
-        /// Updates Skill.
+        /// Updates Parent.
         /// </summary>
         /// <param name="dto">Dto.</param>
         /// <param name="service">Service.</param>
         /// <returns>Dto.</returns>
         [HttpPut]
-        public SkillDto Update([FromBody] SkillDto dto, [FromServices] SkillService service)
+        public ParentDto Update([FromBody] ParentDto dto, [FromServices] ParentService service)
         {
             return service.Update(dto);
         }
 
         /// <summary>
-        /// Deletes the skill.
+        /// Deletes the Parent.
         /// </summary>
         /// <param name="id">Id.</param>
-        /// <param name="service">Skill service.</param>
+        /// <param name="service">Parent service.</param>
         [HttpDelete("{id}")]
-        public IActionResult Delete([FromRoute] long id, [FromServices] SkillService service)
+        public IActionResult Delete([FromRoute] long id, [FromServices] ParentService service)
         {
             service.Delete(id);
             return this.Ok();

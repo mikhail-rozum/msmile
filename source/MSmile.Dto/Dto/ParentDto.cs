@@ -1,34 +1,27 @@
 ﻿namespace MSmile.Dto.Dto
 {
-    using System;
-
     /// <summary>
-    /// Pupil dto.
+    /// Parent dto.
     /// </summary>
-    public class PupilDto : BaseDto
+    public class ParentDto : BaseDto
     {
         /// <summary>
-        /// First name.
+        /// First name
         /// </summary>
         public string FirstName { get; set; }
 
         /// <summary>
-        /// Middle name.
+        /// Middle name
         /// </summary>
         public string MiddleName { get; set; }
 
         /// <summary>
-        /// Last name.
+        /// Last name
         /// </summary>
         public string LastName { get; set; }
 
         /// <summary>
-        /// Birth date.
-        /// </summary>
-        public DateTime BirthDate { get; set; }
-
-        /// <summary>
-        /// Comment.
+        /// Comment
         /// </summary>
         public string Comment { get; set; }
     }

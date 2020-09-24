@@ -1,4 +1,4 @@
-﻿namespace MSmile.Services
+﻿namespace MSmile.Services.DataServices
 {
     using System;
     using System.Collections.Generic;
@@ -34,6 +34,25 @@
                     var result = faker.Generate(count);
                     var entities = this.Mapper.Map<List<Employee>>(result);
                     uow.EmployeeRepository.Add(entities);
+
+                    return result;
+                });
+        }
+
+        /// <summary>
+        /// Generates Parents and inserts them to database.
+        /// </summary>
+        /// <param name="count">Amount of records.</param>
+        /// <returns>Records.</returns>
+        public List<ParentDto> GenerateParents(int count)
+        {
+            return this.ExecuteInDb(
+                uow =>
+                {
+                    var faker = new ParentFaker();
+                    var result = faker.Generate(count);
+                    var entities = this.Mapper.Map<List<Parent>>(result);
+                    uow.ParentRepository.Add(entities);
 
                     return result;
                 });

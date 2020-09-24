@@ -8,6 +8,7 @@
 
     using MSmile.Dto.Validators;
     using MSmile.Services;
+    using MSmile.Services.DataServices;
     using MSmile.Services.Mapper;
 
     /// <summary>
@@ -54,6 +55,7 @@
             services.AddTransient<EmployeeService>();
             services.AddTransient<PupilService>();
             services.AddTransient<DataGenerationService>();
+            services.AddTransient<ParentService>();
         }
     }
 }

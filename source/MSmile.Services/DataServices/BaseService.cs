@@ -1,7 +1,6 @@
-﻿namespace MSmile.Services
+﻿namespace MSmile.Services.DataServices
 {
     using System;
-    using System.Collections.Generic;
 
     using AutoMapper;
 

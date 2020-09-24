@@ -5,70 +5,70 @@
     /// <summary>
     /// Difficulty level.
     /// </summary>
-    public partial class DifficultyLevel : BaseEntity
+    public partial class DifficultyLevel : IEntityWithId
     {
     }
 
     /// <summary>
     /// Employee.
     /// </summary>
-    public partial class Employee : BaseEntity
+    public partial class Employee : IEntityWithId
     {
     }
 
     /// <summary>
     /// Lesson.
     /// </summary>
-    public partial class Lesson : BaseEntity
+    public partial class Lesson : IEntityWithId
     {
     }
 
     /// <summary>
     /// Lesson task.
     /// </summary>
-    public partial class LessonTask : BaseEntity
+    public partial class LessonTask : IEntity
     {
     }
 
     /// <summary>
     /// Parent.
     /// </summary>
-    public partial class Parent : BaseEntity
+    public partial class Parent : IEntityWithId
     {
     }
 
     /// <summary>
     /// Parent contact.
     /// </summary>
-    public partial class ParentContact : BaseEntity
+    public partial class ParentContact : IEntityWithId
     {
     }
 
     /// <summary>
     /// Pupil.
     /// </summary>
-    public partial class Pupil : BaseEntity
+    public partial class Pupil : IEntityWithId
     {
     }
 
     /// <summary>
     /// Skill.
     /// </summary>
-    public partial class Skill : BaseEntity
+    public partial class Skill : IEntityWithId
     {
     }
 
     /// <summary>
     /// Task.
     /// </summary>
-    public partial class Task : BaseEntity
+    public partial class Task : IEntityWithId
     {
     }
 
     /// <summary>
     /// Task skill.
     /// </summary>
-    public partial class TaskSkill : BaseEntity
+    public partial class TaskSkill : IEntity
     {
     }
 }

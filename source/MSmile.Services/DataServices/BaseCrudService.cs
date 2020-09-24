@@ -1,4 +1,4 @@
-﻿namespace MSmile.Services
+﻿namespace MSmile.Services.DataServices
 {
     using System;
     using System.Collections.Generic;
@@ -7,107 +7,113 @@
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
 
-    using MSmile.Db.Entities;
+    using MSmile.Db.Infrastructure;
     using MSmile.Dto.Dto;
     using MSmile.Services.Exceptions;
 
     /// <summary>
-    /// Difficulty level service.
+    /// Base service with CRUD operations.
     /// </summary>
-    public class DifficultyLevelService : BaseService
+    /// <typeparam name="TEntity">Entity type</typeparam>
+    /// <typeparam name="TDto">Dto type</typeparam>
+    public abstract class BaseCrudService<TEntity, TDto> : BaseService
+        where TEntity : class, IEntityWithId
+        where TDto : BaseDto
     {
         /// <inheritdoc />
-        public DifficultyLevelService(IMapper mapper, IServiceProvider serviceProvider)
+        protected BaseCrudService(IMapper mapper, IServiceProvider serviceProvider)
             : base(mapper, serviceProvider)
         {
         }
 
         /// <summary>
-        /// Get all difficulty levels.
+        /// Get all objects.
         /// </summary>
-        /// <returns>Difficulty levels.</returns>
-        public List<DifficultyLevelDto> GetAll()
+        /// <returns>Dtos.</returns>
+        public List<TDto> GetAll()
         {
             return this.ExecuteInDb(
-                uow => uow.DifficultyLevelRepository
+                uow => uow.GetRepository<TEntity>()
                     .Get()
-                    .ProjectTo<DifficultyLevelDto>(this.Mapper.ConfigurationProvider)
+                    .ProjectTo<TDto>(this.Mapper.ConfigurationProvider)
                     .ToList());
         }
 
         /// <summary>
-        /// Gets difficulty level.
+        /// Gets object.
         /// </summary>
-        /// <param name="id">Identifier.</param>
-        /// <returns>Difficulty level.</returns>
-        public DifficultyLevelDto Get(long id)
+        /// <param name="id">Id.</param>
+        /// <returns>Object.</returns>
+        public TDto Get(long id)
         {
-            return this.ExecuteInDb(uow => 
-                uow.DifficultyLevelRepository
+            return this.ExecuteInDb(uow =>
+                uow.GetRepository<TEntity>()
                    .Get()
                    .Where(x => x.Id == id)
-                   .ProjectTo<DifficultyLevelDto>(this.Mapper.ConfigurationProvider)
+                   .ProjectTo<TDto>(this.Mapper.ConfigurationProvider)
                    .FirstOrDefault());
         }
 
         /// <summary>
-        /// Adds difficulty level.
+        /// Adds object.
         /// </summary>
         /// <param name="dto">Dto.</param>
         /// <returns>Dto.</returns>
-        public DifficultyLevelDto Add(DifficultyLevelDto dto)
+        public TDto Add(TDto dto)
         {
             dto.Id = default;
 
-            var entity = this.Mapper.Map<DifficultyLevel>(dto);
+            var entity = this.Mapper.Map<TEntity>(dto);
             return this.ExecuteInDb(
                 uow =>
                 {
-                    uow.DifficultyLevelRepository.Add(entity);
+                    uow.GetRepository<TEntity>().Add(entity);
                     uow.Save();
 
-                    return this.Mapper.Map<DifficultyLevelDto>(entity);
+                    return this.Mapper.Map<TDto>(entity);
                 });
         }
 
         /// <summary>
-        /// Updates difficulty level.
+        /// Updates object.
         /// </summary>
         /// <param name="dto">Dto.</param>
         /// <returns>Dto.</returns>
-        public DifficultyLevelDto Update(DifficultyLevelDto dto)
+        public TDto Update(TDto dto)
         {
             return this.ExecuteInDb(
                 uow =>
                 {
-                    var entity = uow.DifficultyLevelRepository
+                    var repository = uow.GetRepository<TEntity>();
+                    var entity = repository
                         .Get()
                         .SingleOrDefault(x => x.Id == dto.Id)
                         ?? throw new BusinessException(MessageConstants.Common.EntityNotFound);
 
                     this.Mapper.Map(dto, entity);
-                    uow.DifficultyLevelRepository.Update(entity);
+                    repository.Update(entity);
                     uow.Save();
 
-                    return this.Mapper.Map<DifficultyLevelDto>(entity);
+                    return this.Mapper.Map<TDto>(entity);
                 });
         }
 
         /// <summary>
-        /// Deletes difficulty level.
+        /// Deletes object.
         /// </summary>
-        /// <param name="id">Identifier.</param>
+        /// <param name="id">Id.</param>
         public void Delete(long id)
         {
             this.ExecuteInDb(
                 uow =>
                 {
-                    var entity = uow.DifficultyLevelRepository
+                    var repository = uow.GetRepository<TEntity>();
+                    var entity = repository
                         .Get()
                         .FirstOrDefault(x => x.Id == id)
                         ?? throw new BusinessException(MessageConstants.Common.EntityNotFound);
 
-                    uow.DifficultyLevelRepository.Delete(entity);
+                    repository.Delete(entity);
 
                     uow.Save();
                 });

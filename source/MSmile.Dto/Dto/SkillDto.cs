@@ -3,13 +3,8 @@
     /// <summary>
     /// Skill dto
     /// </summary>
-    public class SkillDto
+    public class SkillDto : BaseDto
     {
-        /// <summary>
-        /// Id
-        /// </summary>
-        public long Id { get; set; }
-
         /// <summary>
         /// Name
         /// </summary>

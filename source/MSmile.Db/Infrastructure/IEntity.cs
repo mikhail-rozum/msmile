@@ -1,9 +1,9 @@
 ﻿namespace MSmile.Db.Infrastructure
 {
     /// <summary>
-    /// Base class for all entities.
+    /// Common interface for all the entities.
     /// </summary>
-    public abstract class BaseEntity
+    public interface IEntity
     {
     }
 }

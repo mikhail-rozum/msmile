@@ -6,6 +6,7 @@
 
     using MSmile.Dto.Dto;
     using MSmile.Services;
+    using MSmile.Services.DataServices;
 
     /// <summary>
     /// Generates test data.
@@ -20,10 +21,22 @@
         /// <param name="service">Service.</param>
         /// <param name="count">Amount.</param>
         /// <returns>Employees.</returns>
-        [HttpGet]
+        [HttpGet("employees")]
         public List<EmployeeDto> GenerateEmployees([FromServices] DataGenerationService service, int count)
         {
             return service.GenerateEmployees(count);
+        }
+
+        /// <summary>
+        /// Generates parents and insert them to database.
+        /// </summary>
+        /// <param name="service">Service.</param>
+        /// <param name="count">Amount.</param>
+        /// <returns>Parents.</returns>
+        [HttpGet("parents")]
+        public List<ParentDto> GenerateParents([FromServices] DataGenerationService service, int count)
+        {
+            return service.GenerateParents(count);
         }
     }
 }

@@ -3,13 +3,8 @@
     /// <summary>
     /// Difficulty level dto.
     /// </summary>
-    public class DifficultyLevelDto
+    public class DifficultyLevelDto : BaseDto
     {
-        /// <summary>
-        /// Id.
-        /// </summary>
-        public long Id { get; set; }
-
         /// <summary>
         /// Name.
         /// </summary>

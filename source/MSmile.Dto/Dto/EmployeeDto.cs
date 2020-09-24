@@ -5,13 +5,8 @@
     /// <summary>
     /// Employee dto.
     /// </summary>
-    public class EmployeeDto
+    public class EmployeeDto : BaseDto
     {
-        /// <summary>
-        /// Id.
-        /// </summary>
-        public long Id { get; set; }
-
         /// <summary>
         /// First name.
         /// </summary>
