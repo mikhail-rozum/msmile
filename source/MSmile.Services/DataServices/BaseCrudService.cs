@@ -40,6 +40,23 @@
         }
 
         /// <summary>
+        /// Gets all object.
+        /// </summary>
+        /// <param name="page">Page number.</param>
+        /// <param name="pageSize">Page size.</param>
+        /// <returns>Dtos.</returns>
+        public List<TDto> GetAll(int page, int pageSize)
+        {
+            return this.ExecuteInDb(
+                uow => uow.GetRepository<TEntity>()
+                    .Get()
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize)
+                    .ProjectTo<TDto>(this.Mapper.ConfigurationProvider)
+                    .ToList());
+        }
+
+        /// <summary>
         /// Gets object.
         /// </summary>
         /// <param name="id">Id.</param>

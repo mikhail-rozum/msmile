@@ -5,83 +5,82 @@
     using Microsoft.AspNetCore.Mvc;
 
     using MSmile.Dto.Dto;
-    using MSmile.Services;
     using MSmile.Services.DataServices;
 
     /// <summary>
-    /// Methods for parents.
+    /// Lesson controller.
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class ParentController : Controller
+    public class LessonController : Controller
     {
         /// <summary>
-        /// Get all the parents.
+        /// Get all the lessons.
         /// </summary>
         /// <param name="service">Service.</param>
-        /// <returns>Parents.</returns>
+        /// <returns>Lessons.</returns>
         [HttpGet]
-        public List<ParentDto> GetAll([FromServices] ParentService service)
+        public List<LessonDto> GetAll([FromServices] LessonService service)
         {
             return service.GetAll();
         }
 
         /// <summary>
-        /// Get all the parents.
+        /// Get all the lessons.
         /// </summary>
         /// <param name="service">Service.</param>
         /// <param name="page">Page number.</param>
         /// <param name="pageSize">Page size.</param>
-        /// <returns>Parents.</returns>
+        /// <returns>Lessons.</returns>
         [HttpGet("getAll")]
-        public List<ParentDto> GetAll([FromServices] ParentService service, int page, int pageSize)
+        public List<LessonDto> GetAll([FromServices] LessonService service, int page, int pageSize)
         {
             return service.GetAll(page, pageSize);
         }
 
         /// <summary>
-        /// Get the parent level.
+        /// Get the lesson.
         /// </summary>
         /// <param name="service">Service.</param>
         /// <param name="id">Id</param>
-        /// <returns>Parent.</returns>
+        /// <returns>Lesson.</returns>
         [HttpGet("{id}")]
-        public ParentDto Get([FromServices] ParentService service, [FromRoute] long id)
+        public LessonDto Get([FromServices] LessonService service, [FromRoute] long id)
         {
             return service.Get(id);
         }
 
         /// <summary>
-        /// Adds Parent.
+        /// Adds Lesson.
         /// </summary>
         /// <param name="dto">Dto.</param>
         /// <param name="service">Service.</param>
         /// <returns>Dto.</returns>
         [HttpPost]
-        public ParentDto Add([FromBody] ParentDto dto, [FromServices] ParentService service)
+        public LessonDto Add([FromBody] LessonDto dto, [FromServices] LessonService service)
         {
             return service.Add(dto);
         }
 
         /// <summary>
-        /// Updates Parent.
+        /// Updates Lesson.
         /// </summary>
         /// <param name="dto">Dto.</param>
         /// <param name="service">Service.</param>
         /// <returns>Dto.</returns>
         [HttpPut]
-        public ParentDto Update([FromBody] ParentDto dto, [FromServices] ParentService service)
+        public LessonDto Update([FromBody] LessonDto dto, [FromServices] LessonService service)
         {
             return service.Update(dto);
         }
 
         /// <summary>
-        /// Deletes the Parent.
+        /// Deletes the Lesson.
         /// </summary>
         /// <param name="id">Id.</param>
-        /// <param name="service">Parent service.</param>
+        /// <param name="service">Lesson service.</param>
         [HttpDelete("{id}")]
-        public IActionResult Delete([FromRoute] long id, [FromServices] ParentService service)
+        public IActionResult Delete([FromRoute] long id, [FromServices] LessonService service)
         {
             service.Delete(id);
             return this.Ok();

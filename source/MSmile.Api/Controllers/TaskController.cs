@@ -5,83 +5,70 @@
     using Microsoft.AspNetCore.Mvc;
 
     using MSmile.Dto.Dto;
-    using MSmile.Services;
     using MSmile.Services.DataServices;
 
     /// <summary>
-    /// Methods for parents.
+    /// Task controller.
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class ParentController : Controller
+    public class TaskController : Controller
     {
         /// <summary>
-        /// Get all the parents.
+        /// Get all the tasks.
         /// </summary>
         /// <param name="service">Service.</param>
-        /// <returns>Parents.</returns>
+        /// <returns>Tasks.</returns>
         [HttpGet]
-        public List<ParentDto> GetAll([FromServices] ParentService service)
+        public List<TaskDto> GetAll([FromServices] TaskService service)
         {
             return service.GetAll();
         }
 
         /// <summary>
-        /// Get all the parents.
+        /// Get all the tasks.
         /// </summary>
         /// <param name="service">Service.</param>
         /// <param name="page">Page number.</param>
         /// <param name="pageSize">Page size.</param>
-        /// <returns>Parents.</returns>
+        /// <returns>Tasks.</returns>
         [HttpGet("getAll")]
-        public List<ParentDto> GetAll([FromServices] ParentService service, int page, int pageSize)
+        public List<TaskDto> GetAll([FromServices] TaskService service, int page, int pageSize)
         {
             return service.GetAll(page, pageSize);
         }
 
         /// <summary>
-        /// Get the parent level.
-        /// </summary>
-        /// <param name="service">Service.</param>
-        /// <param name="id">Id</param>
-        /// <returns>Parent.</returns>
-        [HttpGet("{id}")]
-        public ParentDto Get([FromServices] ParentService service, [FromRoute] long id)
-        {
-            return service.Get(id);
-        }
-
-        /// <summary>
-        /// Adds Parent.
+        /// Adds Task.
         /// </summary>
         /// <param name="dto">Dto.</param>
         /// <param name="service">Service.</param>
         /// <returns>Dto.</returns>
         [HttpPost]
-        public ParentDto Add([FromBody] ParentDto dto, [FromServices] ParentService service)
+        public TaskDto Add([FromBody] TaskDto dto, [FromServices] TaskService service)
         {
             return service.Add(dto);
         }
 
         /// <summary>
-        /// Updates Parent.
+        /// Updates Task.
         /// </summary>
         /// <param name="dto">Dto.</param>
         /// <param name="service">Service.</param>
         /// <returns>Dto.</returns>
         [HttpPut]
-        public ParentDto Update([FromBody] ParentDto dto, [FromServices] ParentService service)
+        public TaskDto Update([FromBody] TaskDto dto, [FromServices] TaskService service)
         {
             return service.Update(dto);
         }
 
         /// <summary>
-        /// Deletes the Parent.
+        /// Deletes the task.
         /// </summary>
         /// <param name="id">Id.</param>
-        /// <param name="service">Parent service.</param>
+        /// <param name="service">Task service.</param>
         [HttpDelete("{id}")]
-        public IActionResult Delete([FromRoute] long id, [FromServices] ParentService service)
+        public IActionResult Delete([FromRoute] long id, [FromServices] TaskService service)
         {
             service.Delete(id);
             return this.Ok();

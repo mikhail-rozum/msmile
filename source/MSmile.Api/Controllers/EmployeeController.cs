@@ -27,6 +27,31 @@
         }
 
         /// <summary>
+        /// Get all the employees.
+        /// </summary>
+        /// <param name="service">Service.</param>
+        /// <param name="page">Page number.</param>
+        /// <param name="pageSize">Page size.</param>
+        /// <returns>Employees.</returns>
+        [HttpGet("getAll")]
+        public List<EmployeeDto> GetAll([FromServices] EmployeeService service, int page, int pageSize)
+        {
+            return service.GetAll(page, pageSize);
+        }
+
+        /// <summary>
+        /// Get the employee level.
+        /// </summary>
+        /// <param name="service">Service.</param>
+        /// <param name="id">Id</param>
+        /// <returns>Employee.</returns>
+        [HttpGet("{id}")]
+        public EmployeeDto Get([FromServices] EmployeeService service, [FromRoute] long id)
+        {
+            return service.Get(id);
+        }
+
+        /// <summary>
         /// Adds Employee.
         /// </summary>
         /// <param name="dto">Dto.</param>

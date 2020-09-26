@@ -5,7 +5,6 @@
     using Microsoft.AspNetCore.Mvc;
 
     using MSmile.Dto.Dto;
-    using MSmile.Services;
     using MSmile.Services.DataServices;
 
     /// <summary>
@@ -24,6 +23,31 @@
         public List<PupilDto> GetAll([FromServices] PupilService service)
         {
             return service.GetAll();
+        }
+
+        /// <summary>
+        /// Get all the pupils.
+        /// </summary>
+        /// <param name="service">Service.</param>
+        /// <param name="page">Page number.</param>
+        /// <param name="pageSize">Page size.</param>
+        /// <returns>Pupils.</returns>
+        [HttpGet("getAll")]
+        public List<PupilDto> GetAll([FromServices] PupilService service, int page, int pageSize)
+        {
+            return service.GetAll(page, pageSize);
+        }
+
+        /// <summary>
+        /// Get the pupil.
+        /// </summary>
+        /// <param name="service">Service.</param>
+        /// <param name="id">Id</param>
+        /// <returns>Pupil.</returns>
+        [HttpGet("{id}")]
+        public PupilDto Get([FromServices] PupilService service, [FromRoute] long id)
+        {
+            return service.Get(id);
         }
 
         /// <summary>

@@ -5,7 +5,6 @@
     using Microsoft.AspNetCore.Mvc;
 
     using MSmile.Dto.Dto;
-    using MSmile.Services;
     using MSmile.Services.DataServices;
 
     /// <summary>
@@ -24,6 +23,31 @@
         public List<DifficultyLevelDto> GetAll([FromServices] DifficultyLevelService service)
         {
             return service.GetAll();
+        }
+
+        /// <summary>
+        /// Get the difficulty level.
+        /// </summary>
+        /// <param name="service">Service.</param>
+        /// <param name="id">Id</param>
+        /// <returns>Difficulty level.</returns>
+        [HttpGet("{id}")]
+        public DifficultyLevelDto Get([FromServices] DifficultyLevelService service, [FromRoute] long id)
+        {
+            return service.Get(id);
+        }
+
+        /// <summary>
+        /// Get all the difficulty levels.
+        /// </summary>
+        /// <param name="service">Service.</param>
+        /// <param name="page">Page number.</param>
+        /// <param name="pageSize">Page size.</param>
+        /// <returns>Difficulty levels.</returns>
+        [HttpGet("getAll")]
+        public List<DifficultyLevelDto> GetAll([FromServices] DifficultyLevelService service, int page, int pageSize)
+        {
+            return service.GetAll(page, pageSize);
         }
 
         /// <summary>

@@ -5,7 +5,6 @@
     using Microsoft.AspNetCore.Mvc;
 
     using MSmile.Dto.Dto;
-    using MSmile.Services;
     using MSmile.Services.DataServices;
 
     /// <summary>
@@ -24,6 +23,19 @@
         public List<SkillDto> GetAll([FromServices] SkillService service)
         {
             return service.GetAll();
+        }
+
+        /// <summary>
+        /// Get all the skills.
+        /// </summary>
+        /// <param name="service">Service.</param>
+        /// <param name="page">Page number.</param>
+        /// <param name="pageSize">Page size.</param>
+        /// <returns>Skills.</returns>
+        [HttpGet("getAll")]
+        public List<SkillDto> GetAll([FromServices] SkillService service, int page, int pageSize)
+        {
+            return service.GetAll(page, pageSize);
         }
 
         /// <summary>

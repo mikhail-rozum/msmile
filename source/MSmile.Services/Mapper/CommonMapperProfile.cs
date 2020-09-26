@@ -18,6 +18,7 @@
             this.CreateMap<Employee, EmployeeDto>().ReverseMap();
             this.CreateMap<Pupil, PupilDto>().ReverseMap();
             this.CreateMap<Parent, ParentDto>().ReverseMap();
+            this.CreateMap<Lesson, LessonDto>().ReverseMap();
         }
     }
 }
