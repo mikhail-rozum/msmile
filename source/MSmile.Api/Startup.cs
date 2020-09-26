@@ -50,11 +50,6 @@ namespace MSmile.Api
                     opt.SwaggerEndpoint("/swagger/v1/swagger.json", "MSmile API v1");
                 });
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
             app.UseHttpsRedirection();
 
             app.UseRouting();

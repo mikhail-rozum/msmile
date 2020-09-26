@@ -4,22 +4,34 @@
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Http;
+    using Microsoft.Extensions.Logging;
 
     using MSmile.Services.Exceptions;
 
+    /// <summary>
+    /// Error handling middleware.
+    /// </summary>
     public class ErrorHandlingMiddleware
     {
         private readonly RequestDelegate next;
+
+        private readonly ILogger<ErrorHandlingMiddleware> logger;
 
         /// <summary>
         /// ctor.
         /// </summary>
         /// <param name="next">Next delegate.</param>
-        public ErrorHandlingMiddleware(RequestDelegate next)
+        /// <param name="logger">Logger.</param>
+        public ErrorHandlingMiddleware(RequestDelegate next, ILogger<ErrorHandlingMiddleware> logger)
         {
             this.next = next;
+            this.logger = logger;
         }
 
+        /// <summary>
+        /// Invoke method
+        /// </summary>
+        /// <param name="context">Http context.</param>
         public async Task InvokeAsync(HttpContext context)
         {
             try
@@ -28,11 +40,15 @@
             }
             catch (BusinessException ex)
             {
-                // TODO: return appropriate response
+                this.logger.LogInformation(ex, "Business logic error");
+                context.Response.StatusCode = StatusCodes.Status400BadRequest;
+                await context.Response.WriteAsync("Bad request. The sent request could not be processed.");
             }
             catch (Exception ex)
             {
-                // TODO: log exception and then return appropriate response
+                this.logger.LogError(ex, "Unexpected error");
+                context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                await context.Response.WriteAsync("Unexpected error. See logs for the detail information.");
             }
         }
     }

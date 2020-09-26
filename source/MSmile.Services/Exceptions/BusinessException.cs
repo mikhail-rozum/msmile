@@ -8,7 +8,7 @@
     public class BusinessException : Exception
     {
         /// <inheritdoc />
-        public BusinessException(string? message)
+        public BusinessException(string message)
             : base(message)
         {
         }
