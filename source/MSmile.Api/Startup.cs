@@ -1,3 +1,5 @@
+using System.IO;
+
 namespace MSmile.Api
 {
     using FluentValidation.AspNetCore;

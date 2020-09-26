@@ -37,6 +37,7 @@
         /// <param name="configuration">Configuration.</param>
         public static void AddMigrations(this IServiceCollection services, IConfiguration configuration)
         {
+            Console.WriteLine(configuration.GetConnectionString(ConnectionName));
             services
                 .AddFluentMigratorCore()
                 .ConfigureRunner(rb =>
