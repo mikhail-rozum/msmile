@@ -1,17 +1,11 @@
-using System.IO;
-
 namespace MSmile.Api
 {
-    using FluentValidation.AspNetCore;
-
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
 
     using MSmile.Db.Extensions;
-    using MSmile.Dto.Validators;
 
     public class Startup
     {

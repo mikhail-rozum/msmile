@@ -1,8 +1,5 @@
 version: '3'
 
-volumes:
-  pg_project:
-
 services:
   pg_db:
     image: postgres:12.4
@@ -30,3 +27,16 @@ services:
       - /home/v0id/msmile-files/logs:/var/lib/msmile/logs/
     depends_on:
       - pg_db
+
+  ng_proxy:
+    image: arm64v8/nginx:latest
+    restart: always
+    ports:
+      - "80:80"
+    environment:
+      - NGINX_HOST=foobar.com
+      - NGINX_PORT=8001
+    volumes:
+      - ./ci/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - backend
