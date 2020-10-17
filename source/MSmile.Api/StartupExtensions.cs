@@ -56,6 +56,8 @@
             services.AddTransient<PupilService>();
             services.AddTransient<DataGenerationService>();
             services.AddTransient<ParentService>();
+            services.AddTransient<TaskService>();
+            services.AddTransient<LessonService>();
         }
     }
 }
