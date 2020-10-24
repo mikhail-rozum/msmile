@@ -18,7 +18,7 @@
         /// <summary>
         /// Difficulty level name.
         /// </summary>
-        public long DifficultyLevelName { get; set; }
+        public string DifficultyLevelName { get; set; }
 
         /// <summary>
         /// Description.
