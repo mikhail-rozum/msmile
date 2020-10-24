@@ -16,10 +16,11 @@
         public DictionariesMapperProfile()
         {
             this.CreateMap<Skill, DictionaryDto>();
-            this.CreateMap<DifficultyLevel, DifficultyLevelDto>();
             this.CreateMap<Skill, SkillDto>().ReverseMap();
             this.CreateMap<DifficultyLevel, DifficultyLevelDto>().ReverseMap();
-            this.CreateMap<Task, TaskDto>().ReverseMap();
+            this.CreateMap<Task, TaskDto>()
+                .ForMember(dst => dst.DifficultyLevelName, opt => opt.MapFrom(src => src.DifficultyLevel.Name));
+            this.CreateMap<TaskDto, Task>();
         }
     }
 }

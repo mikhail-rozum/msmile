@@ -16,6 +16,11 @@
         public long DifficultyLevelId { get; set; }
 
         /// <summary>
+        /// Difficulty level name.
+        /// </summary>
+        public long DifficultyLevelName { get; set; }
+
+        /// <summary>
         /// Description.
         /// </summary>
         public string Description { get; set; }
