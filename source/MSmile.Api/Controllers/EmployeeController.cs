@@ -1,6 +1,7 @@
 ﻿namespace MSmile.Api.Controllers
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +22,7 @@
         /// <param name="service">Service.</param>
         /// <returns>Employees.</returns>
         [HttpGet]
-        public List<EmployeeDto> GetAll([FromServices] EmployeeService service)
+        public Task<List<EmployeeDto>> GetAll([FromServices] EmployeeService service)
         {
             return service.GetAll();
         }
@@ -34,7 +35,7 @@
         /// <param name="pageSize">Page size.</param>
         /// <returns>Employees.</returns>
         [HttpGet("getAll")]
-        public List<EmployeeDto> GetAll([FromServices] EmployeeService service, int page, int pageSize)
+        public Task<List<EmployeeDto>> GetAll([FromServices] EmployeeService service, int page, int pageSize)
         {
             return service.GetAll(page, pageSize);
         }
@@ -46,7 +47,7 @@
         /// <param name="id">Id</param>
         /// <returns>Employee.</returns>
         [HttpGet("{id}")]
-        public EmployeeDto Get([FromServices] EmployeeService service, [FromRoute] long id)
+        public Task<EmployeeDto> Get([FromServices] EmployeeService service, [FromRoute] long id)
         {
             return service.Get(id);
         }
@@ -58,7 +59,7 @@
         /// <param name="service">Service.</param>
         /// <returns>Dto.</returns>
         [HttpPost]
-        public EmployeeDto Add([FromBody] EmployeeDto dto, [FromServices] EmployeeService service)
+        public Task<EmployeeDto> Add([FromBody] EmployeeDto dto, [FromServices] EmployeeService service)
         {
             return service.Add(dto);
         }
@@ -70,7 +71,7 @@
         /// <param name="service">Service.</param>
         /// <returns>Dto.</returns>
         [HttpPut]
-        public EmployeeDto Update([FromBody] EmployeeDto dto, [FromServices] EmployeeService service)
+        public Task<EmployeeDto> Update([FromBody] EmployeeDto dto, [FromServices] EmployeeService service)
         {
             return service.Update(dto);
         }
@@ -81,9 +82,9 @@
         /// <param name="id">Id.</param>
         /// <param name="service">Employees service.</param>
         [HttpDelete("{id}")]
-        public IActionResult Delete([FromRoute] long id, [FromServices] EmployeeService service)
+        public async Task<IActionResult> Delete([FromRoute] long id, [FromServices] EmployeeService service)
         {
-            service.Delete(id);
+            await service.Delete(id);
             return this.Ok();
         }
     }

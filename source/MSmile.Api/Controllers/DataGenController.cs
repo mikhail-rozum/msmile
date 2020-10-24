@@ -1,6 +1,7 @@
 ﻿namespace MSmile.Api.Controllers
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +22,9 @@
         /// <param name="count">Amount.</param>
         /// <returns>Employees.</returns>
         [HttpGet("employees")]
-        public List<EmployeeDto> GenerateEmployees([FromServices] DataGenerationService service, int count)
+        public Task<List<EmployeeDto>> GenerateEmployees(
+            [FromServices] DataGenerationService service, 
+            int count)
         {
             return service.GenerateEmployees(count);
         }
@@ -33,7 +36,7 @@
         /// <param name="count">Amount.</param>
         /// <returns>Parents.</returns>
         [HttpGet("parents")]
-        public List<ParentDto> GenerateParents([FromServices] DataGenerationService service, int count)
+        public Task<List<ParentDto>> GenerateParents([FromServices] DataGenerationService service, int count)
         {
             return service.GenerateParents(count);
         }

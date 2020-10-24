@@ -1,6 +1,7 @@
 ﻿namespace MSmile.Api.Controllers
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +22,7 @@
         /// <param name="service">Service.</param>
         /// <returns>Parents.</returns>
         [HttpGet]
-        public List<ParentDto> GetAll([FromServices] ParentService service)
+        public Task<List<ParentDto>> GetAll([FromServices] ParentService service)
         {
             return service.GetAll();
         }
@@ -34,7 +35,7 @@
         /// <param name="pageSize">Page size.</param>
         /// <returns>Parents.</returns>
         [HttpGet("getAll")]
-        public List<ParentDto> GetAll([FromServices] ParentService service, int page, int pageSize)
+        public Task<List<ParentDto>> GetAll([FromServices] ParentService service, int page, int pageSize)
         {
             return service.GetAll(page, pageSize);
         }
@@ -46,7 +47,7 @@
         /// <param name="id">Id</param>
         /// <returns>Parent.</returns>
         [HttpGet("{id}")]
-        public ParentDto Get([FromServices] ParentService service, [FromRoute] long id)
+        public Task<ParentDto> Get([FromServices] ParentService service, [FromRoute] long id)
         {
             return service.Get(id);
         }
@@ -58,7 +59,7 @@
         /// <param name="service">Service.</param>
         /// <returns>Dto.</returns>
         [HttpPost]
-        public ParentDto Add([FromBody] ParentDto dto, [FromServices] ParentService service)
+        public Task<ParentDto> Add([FromBody] ParentDto dto, [FromServices] ParentService service)
         {
             return service.Add(dto);
         }
@@ -70,7 +71,7 @@
         /// <param name="service">Service.</param>
         /// <returns>Dto.</returns>
         [HttpPut]
-        public ParentDto Update([FromBody] ParentDto dto, [FromServices] ParentService service)
+        public Task<ParentDto> Update([FromBody] ParentDto dto, [FromServices] ParentService service)
         {
             return service.Update(dto);
         }
@@ -81,9 +82,9 @@
         /// <param name="id">Id.</param>
         /// <param name="service">Parent service.</param>
         [HttpDelete("{id}")]
-        public IActionResult Delete([FromRoute] long id, [FromServices] ParentService service)
+        public async Task<IActionResult> Delete([FromRoute] long id, [FromServices] ParentService service)
         {
-            service.Delete(id);
+            await service.Delete(id);
             return this.Ok();
         }
     }

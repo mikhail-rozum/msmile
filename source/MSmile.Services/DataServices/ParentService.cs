@@ -5,6 +5,7 @@
     using AutoMapper;
 
     using MSmile.Db.Entities;
+    using MSmile.Db.Infrastructure;
     using MSmile.Dto.Dto;
 
     /// <summary>
@@ -13,8 +14,8 @@
     public class ParentService : BaseCrudService<Parent, ParentDto>
     {
         /// <inheritdoc />
-        public ParentService(IMapper mapper, IServiceProvider serviceProvider)
-            : base(mapper, serviceProvider)
+        public ParentService(IMapper mapper, IServiceProvider serviceProvider, IRepository<Parent> parentRepository)
+            : base(mapper, serviceProvider, parentRepository)
         {
         }
     }

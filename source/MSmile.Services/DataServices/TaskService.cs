@@ -5,6 +5,7 @@
     using AutoMapper;
 
     using MSmile.Db.Entities;
+    using MSmile.Db.Infrastructure;
     using MSmile.Dto.Dto;
 
     /// <summary>
@@ -13,8 +14,8 @@
     public class TaskService : BaseCrudService<Task, TaskDto>
     {
         /// <inheritdoc />
-        public TaskService(IMapper mapper, IServiceProvider serviceProvider)
-            : base(mapper, serviceProvider)
+        public TaskService(IMapper mapper, IServiceProvider serviceProvider, IRepository<Task> taskRepository)
+            : base(mapper, serviceProvider, taskRepository)
         {
         }
     }

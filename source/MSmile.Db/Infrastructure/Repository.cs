@@ -3,11 +3,17 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Linq.Expressions;
+    using System.Threading.Tasks;
+
+    using Microsoft.EntityFrameworkCore;
+
+    using Z.EntityFramework.Plus;
 
     /// <summary>
     /// Implements Repository pattern.
     /// </summary>
-    public sealed class Repository<TEntity>
+    public sealed class Repository<TEntity> : IRepository<TEntity>
         where TEntity : class
     {
         private readonly MSmileDbContext dbContext;
@@ -21,57 +27,80 @@
             this.dbContext = dbContext;
         }
 
-        /// <summary>
-        /// Adds entity to database
-        /// </summary>
-        /// <param name="entity">Entity</param>
-        public void Add(TEntity entity)
+        /// <inheritdoc />
+        public Task AddAsync(TEntity entity)
         {
             this.dbContext.Set<TEntity>().Add(entity);
+            return this.dbContext.SaveChangesAsync();
         }
 
-        /// <summary>
-        /// Adds set of entities to database.
-        /// </summary>
-        /// <param name="entities">Entities.</param>
-        public void Add(IEnumerable<TEntity> entities)
+        /// <inheritdoc />
+        public Task AddAsync(IEnumerable<TEntity> entities)
         {
-            this.dbContext.AddRange(entities);
+            this.dbContext.Set<TEntity>().AddRange(entities);
+            return this.dbContext.SaveChangesAsync();
         }
 
-        /// <summary>
-        /// Updates entity.
-        /// </summary>
-        /// <param name="entity">Entity</param>
-        public void Update(TEntity entity)
+        /// <inheritdoc />
+        public Task UpdateAsync(TEntity entity)
         {
             this.dbContext.Set<TEntity>().Update(entity);
+            return this.dbContext.SaveChangesAsync();
         }
 
-        /// <summary>
-        /// Deletes entity.
-        /// </summary>
-        /// <param name="entity">Entity.</param>
-        public void Delete(TEntity entity)
+        /// <inheritdoc />
+        public Task DeleteAsync(Expression<Func<TEntity, bool>> filter)
         {
-            this.dbContext.Set<TEntity>().Remove(entity);
+            this.dbContext.Set<TEntity>().Where(filter).Delete();
+            return this.dbContext.SaveChangesAsync();
         }
 
-        /// <summary>
-        /// Get <see cref="IQueryable{T}"/> collection of entities.
-        /// </summary>
-        /// <returns>Collection of entities.</returns>
+        /// <inheritdoc />
         public IQueryable<TEntity> Get()
         {
-            return this.dbContext.Set<TEntity>().AsQueryable();
+            return this.dbContext.Set<TEntity>();
         }
 
-        /// <summary>
-        /// Saves changes.
-        /// </summary>
-        public void SaveChanges()
+        /// <inheritdoc />
+        public IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> filter)
         {
-            this.dbContext.SaveChanges();
+            return this.Get().Where(filter);
+        }
+
+        /// <inheritdoc />
+        public Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> filter)
+        {
+            return this.Get(filter).FirstOrDefaultAsync();
+        }
+
+        /// <inheritdoc />
+        public Task<TEntity> FirstAsync(Expression<Func<TEntity, bool>> filter)
+        {
+            return this.Get(filter).FirstAsync();
+        }
+
+        /// <inheritdoc />
+        public Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> filter)
+        {
+            return this.Get(filter).SingleOrDefaultAsync();
+        }
+
+        /// <inheritdoc />
+        public Task<TEntity> SingleAsync(Expression<Func<TEntity, bool>> filter)
+        {
+            return this.Get(filter).SingleAsync();
+        }
+
+        /// <inheritdoc />
+        public Task<bool> AnyAsync(Expression<Func<TEntity, bool>> filter)
+        {
+            return this.Get(filter).AnyAsync();
+        }
+
+        /// <inheritdoc />
+        public Task<int> SaveChangesAsync()
+        {
+            return this.dbContext.SaveChangesAsync();
         }
     }
 }

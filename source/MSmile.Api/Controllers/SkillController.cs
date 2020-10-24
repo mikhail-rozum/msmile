@@ -1,6 +1,7 @@
 ﻿namespace MSmile.Api.Controllers
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
 
@@ -20,7 +21,7 @@
         /// <param name="service">Service.</param>
         /// <returns>Skills.</returns>
         [HttpGet]
-        public List<SkillDto> GetAll([FromServices] SkillService service)
+        public Task<List<SkillDto>> GetAll([FromServices] SkillService service)
         {
             return service.GetAll();
         }
@@ -33,7 +34,7 @@
         /// <param name="pageSize">Page size.</param>
         /// <returns>Skills.</returns>
         [HttpGet("getAll")]
-        public List<SkillDto> GetAll([FromServices] SkillService service, int page, int pageSize)
+        public Task<List<SkillDto>> GetAll([FromServices] SkillService service, int page, int pageSize)
         {
             return service.GetAll(page, pageSize);
         }
@@ -45,7 +46,7 @@
         /// <param name="service">Service.</param>
         /// <returns>Dto.</returns>
         [HttpPost]
-        public SkillDto Add([FromBody] SkillDto dto, [FromServices] SkillService service)
+        public Task<SkillDto> Add([FromBody] SkillDto dto, [FromServices] SkillService service)
         {
             return service.Add(dto);
         }
@@ -57,7 +58,7 @@
         /// <param name="service">Service.</param>
         /// <returns>Dto.</returns>
         [HttpPut]
-        public SkillDto Update([FromBody] SkillDto dto, [FromServices] SkillService service)
+        public Task<SkillDto> Update([FromBody] SkillDto dto, [FromServices] SkillService service)
         {
             return service.Update(dto);
         }
@@ -68,9 +69,9 @@
         /// <param name="id">Id.</param>
         /// <param name="service">Skill service.</param>
         [HttpDelete("{id}")]
-        public IActionResult Delete([FromRoute] long id, [FromServices] SkillService service)
+        public async Task<IActionResult> Delete([FromRoute] long id, [FromServices] SkillService service)
         {
-            service.Delete(id);
+            await service.Delete(id);
             return this.Ok();
         }
     }

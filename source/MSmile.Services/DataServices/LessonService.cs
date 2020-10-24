@@ -5,6 +5,7 @@
     using AutoMapper;
 
     using MSmile.Db.Entities;
+    using MSmile.Db.Infrastructure;
     using MSmile.Dto.Dto;
 
     /// <summary>
@@ -13,8 +14,8 @@
     public class LessonService : BaseCrudService<Lesson, LessonDto>
     {
         /// <inheritdoc />
-        public LessonService(IMapper mapper, IServiceProvider serviceProvider)
-            : base(mapper, serviceProvider)
+        public LessonService(IMapper mapper, IServiceProvider serviceProvider, IRepository<Lesson> lessonRepository)
+            : base(mapper, serviceProvider, lessonRepository)
         {
         }
     }

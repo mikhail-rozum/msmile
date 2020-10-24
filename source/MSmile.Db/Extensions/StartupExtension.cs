@@ -1,6 +1,8 @@
 ﻿namespace MSmile.Db.Extensions
 {
     using System;
+    using System.Linq;
+    using System.Reflection;
 
     using FluentMigrator.Runner;
 
@@ -26,8 +28,7 @@
         public static void AddDatabase(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<MSmileDbContext>(options => options.UseNpgsql(configuration.GetConnectionString(ConnectionName)));
-            services.AddTransient(typeof(Repository<>));
-            services.AddTransient<UnitOfWork>();
+            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
         }
 
         /// <summary>

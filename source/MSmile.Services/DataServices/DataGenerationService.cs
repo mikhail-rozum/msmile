@@ -1,23 +1,35 @@
 ﻿namespace MSmile.Services.DataServices
 {
-    using System;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     using AutoMapper;
 
     using MSmile.DataMaker.Fakers;
     using MSmile.Db.Entities;
+    using MSmile.Db.Infrastructure;
     using MSmile.Dto.Dto;
 
     /// <summary>
     /// Data generation service.
     /// </summary>
-    public class DataGenerationService : BaseService
+    public class DataGenerationService
     {
-        /// <inheritdoc />
-        public DataGenerationService(IMapper mapper, IServiceProvider serviceProvider)
-            : base(mapper, serviceProvider)
+        private readonly IMapper mapper;
+        private readonly IRepository<Employee> employeeRepository;
+        private readonly IRepository<Parent> parentRepository;
+
+        /// <summary>
+        /// ctor.
+        /// </summary>
+        /// <param name="mapper">Mapper.</param>
+        /// <param name="employeeRepository">Employee repository.</param>
+        /// <param name="parentRepository">Parent repository.</param>
+        public DataGenerationService(IMapper mapper, IRepository<Employee> employeeRepository, IRepository<Parent> parentRepository)
         {
+            this.mapper = mapper;
+            this.employeeRepository = employeeRepository;
+            this.parentRepository = parentRepository;
         }
 
         /// <summary>
@@ -25,18 +37,14 @@
         /// </summary>
         /// <param name="count">Amount of records.</param>
         /// <returns>Records.</returns>
-        public List<EmployeeDto> GenerateEmployees(int count)
+        public async Task<List<EmployeeDto>> GenerateEmployees(int count)
         {
-            return this.ExecuteInDb(
-                uow =>
-                {
-                    var faker = new EmployeeFaker();
-                    var result = faker.Generate(count);
-                    var entities = this.Mapper.Map<List<Employee>>(result);
-                    uow.EmployeeRepository.Add(entities);
+            var faker = new EmployeeFaker();
+            var result = faker.Generate(count);
+            var entities = this.mapper.Map<List<Employee>>(result);
+            await this.employeeRepository.AddAsync(entities);
 
-                    return result;
-                });
+            return result;
         }
 
         /// <summary>
@@ -44,18 +52,14 @@
         /// </summary>
         /// <param name="count">Amount of records.</param>
         /// <returns>Records.</returns>
-        public List<ParentDto> GenerateParents(int count)
+        public async Task<List<ParentDto>> GenerateParents(int count)
         {
-            return this.ExecuteInDb(
-                uow =>
-                {
-                    var faker = new ParentFaker();
-                    var result = faker.Generate(count);
-                    var entities = this.Mapper.Map<List<Parent>>(result);
-                    uow.ParentRepository.Add(entities);
+            var faker = new ParentFaker();
+            var result = faker.Generate(count);
+            var entities = this.mapper.Map<List<Parent>>(result);
+            await this.parentRepository.AddAsync(entities);
 
-                    return result;
-                });
+            return result;
         }
     }
 }

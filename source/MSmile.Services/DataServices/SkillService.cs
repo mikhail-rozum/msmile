@@ -5,6 +5,7 @@
     using AutoMapper;
 
     using MSmile.Db.Entities;
+    using MSmile.Db.Infrastructure;
     using MSmile.Dto.Dto;
 
     /// <summary>
@@ -13,8 +14,8 @@
     public class SkillService : BaseCrudService<Skill, SkillDto>
     {
         /// <inheritdoc />
-        public SkillService(IMapper mapper, IServiceProvider serviceProvider)
-            : base(mapper, serviceProvider)
+        public SkillService(IMapper mapper, IServiceProvider serviceProvider, IRepository<Skill> skillRepository)
+            : base(mapper, serviceProvider, skillRepository)
         {
         }
     }

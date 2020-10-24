@@ -3,9 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
+
+    using Microsoft.EntityFrameworkCore;
 
     using MSmile.Db.Infrastructure;
     using MSmile.Dto.Dto;
@@ -16,27 +19,48 @@
     /// </summary>
     /// <typeparam name="TEntity">Entity type</typeparam>
     /// <typeparam name="TDto">Dto type</typeparam>
-    public abstract class BaseCrudService<TEntity, TDto> : BaseService
+    public abstract class BaseCrudService<TEntity, TDto>
         where TEntity : class, IEntityWithId
         where TDto : BaseDto
     {
-        /// <inheritdoc />
-        protected BaseCrudService(IMapper mapper, IServiceProvider serviceProvider)
-            : base(mapper, serviceProvider)
+        /// <summary>
+        /// ctor.
+        /// </summary>
+        /// <param name="mapper">Mapper.</param>
+        /// <param name="serviceProvider">Service provider.</param>
+        /// <param name="repository">Repository.</param>
+        protected BaseCrudService(IMapper mapper, IServiceProvider serviceProvider, IRepository<TEntity> repository)
         {
+            this.Mapper = mapper;
+            this.ServiceProvider = serviceProvider;
+            this.Repository = repository;
         }
+
+        /// <summary>
+        /// Mapper.
+        /// </summary>
+        protected IMapper Mapper { get; }
+
+        /// <summary>
+        /// Service provider.
+        /// </summary>
+        protected IServiceProvider ServiceProvider { get; }
+
+        /// <summary>
+        /// Repository.
+        /// </summary>
+        protected IRepository<TEntity> Repository { get; }
 
         /// <summary>
         /// Get all objects.
         /// </summary>
         /// <returns>Dtos.</returns>
-        public List<TDto> GetAll()
+        public Task<List<TDto>> GetAll()
         {
-            return this.ExecuteInDb(
-                uow => uow.GetRepository<TEntity>()
-                    .Get()
-                    .ProjectTo<TDto>(this.Mapper.ConfigurationProvider)
-                    .ToList());
+            return this.Repository
+                .Get()
+                .ProjectTo<TDto>(this.Mapper.ConfigurationProvider)
+                .ToListAsync();
         }
 
         /// <summary>
@@ -45,15 +69,14 @@
         /// <param name="page">Page number.</param>
         /// <param name="pageSize">Page size.</param>
         /// <returns>Dtos.</returns>
-        public List<TDto> GetAll(int page, int pageSize)
+        public Task<List<TDto>> GetAll(int page, int pageSize)
         {
-            return this.ExecuteInDb(
-                uow => uow.GetRepository<TEntity>()
-                    .Get()
-                    .Skip((page - 1) * pageSize)
-                    .Take(pageSize)
-                    .ProjectTo<TDto>(this.Mapper.ConfigurationProvider)
-                    .ToList());
+            return this.Repository
+                .Get()
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ProjectTo<TDto>(this.Mapper.ConfigurationProvider)
+                .ToListAsync();
         }
 
         /// <summary>
@@ -61,14 +84,13 @@
         /// </summary>
         /// <param name="id">Id.</param>
         /// <returns>Object.</returns>
-        public TDto Get(long id)
+        public Task<TDto> Get(long id)
         {
-            return this.ExecuteInDb(uow =>
-                uow.GetRepository<TEntity>()
-                   .Get()
-                   .Where(x => x.Id == id)
-                   .ProjectTo<TDto>(this.Mapper.ConfigurationProvider)
-                   .FirstOrDefault());
+            return this.Repository
+                .Get()
+                .Where(x => x.Id == id)
+                .ProjectTo<TDto>(this.Mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync();
         }
 
         /// <summary>
@@ -76,19 +98,14 @@
         /// </summary>
         /// <param name="dto">Dto.</param>
         /// <returns>Dto.</returns>
-        public TDto Add(TDto dto)
+        public async Task<TDto> Add(TDto dto)
         {
             dto.Id = default;
 
             var entity = this.Mapper.Map<TEntity>(dto);
-            return this.ExecuteInDb(
-                uow =>
-                {
-                    uow.GetRepository<TEntity>().Add(entity);
-                    uow.Save();
+            await this.Repository.AddAsync(entity);
 
-                    return this.Mapper.Map<TDto>(entity);
-                });
+            return this.Mapper.Map<TDto>(entity);
         }
 
         /// <summary>
@@ -96,44 +113,25 @@
         /// </summary>
         /// <param name="dto">Dto.</param>
         /// <returns>Dto.</returns>
-        public TDto Update(TDto dto)
+        public async Task<TDto> Update(TDto dto)
         {
-            return this.ExecuteInDb(
-                uow =>
-                {
-                    var repository = uow.GetRepository<TEntity>();
-                    var entity = repository
-                        .Get()
-                        .SingleOrDefault(x => x.Id == dto.Id)
-                        ?? throw new BusinessException(MessageConstants.Common.EntityNotFound);
+            var entity = await this.Repository
+                .SingleOrDefaultAsync(x => x.Id == dto.Id) 
+                ?? throw new BusinessException(MessageConstants.Common.EntityNotFound);
 
-                    this.Mapper.Map(dto, entity);
-                    repository.Update(entity);
-                    uow.Save();
+            this.Mapper.Map(dto, entity);
+            await this.Repository.UpdateAsync(entity);
 
-                    return this.Mapper.Map<TDto>(entity);
-                });
+            return this.Mapper.Map<TDto>(entity);
         }
 
         /// <summary>
         /// Deletes object.
         /// </summary>
         /// <param name="id">Id.</param>
-        public void Delete(long id)
+        public Task Delete(long id)
         {
-            this.ExecuteInDb(
-                uow =>
-                {
-                    var repository = uow.GetRepository<TEntity>();
-                    var entity = repository
-                        .Get()
-                        .FirstOrDefault(x => x.Id == id)
-                        ?? throw new BusinessException(MessageConstants.Common.EntityNotFound);
-
-                    repository.Delete(entity);
-
-                    uow.Save();
-                });
+            return this.Repository.DeleteAsync(x => x.Id == id);
         }
     }
 }

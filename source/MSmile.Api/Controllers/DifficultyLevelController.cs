@@ -1,6 +1,7 @@
 ﻿namespace MSmile.Api.Controllers
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
 
@@ -20,7 +21,7 @@
         /// <param name="service">Service.</param>
         /// <returns>Difficulty levels.</returns>
         [HttpGet]
-        public List<DifficultyLevelDto> GetAll([FromServices] DifficultyLevelService service)
+        public Task<List<DifficultyLevelDto>> GetAll([FromServices] DifficultyLevelService service)
         {
             return service.GetAll();
         }
@@ -32,7 +33,7 @@
         /// <param name="id">Id</param>
         /// <returns>Difficulty level.</returns>
         [HttpGet("{id}")]
-        public DifficultyLevelDto Get([FromServices] DifficultyLevelService service, [FromRoute] long id)
+        public Task<DifficultyLevelDto> Get([FromServices] DifficultyLevelService service, [FromRoute] long id)
         {
             return service.Get(id);
         }
@@ -45,7 +46,7 @@
         /// <param name="pageSize">Page size.</param>
         /// <returns>Difficulty levels.</returns>
         [HttpGet("getAll")]
-        public List<DifficultyLevelDto> GetAll([FromServices] DifficultyLevelService service, int page, int pageSize)
+        public Task<List<DifficultyLevelDto>> GetAll([FromServices] DifficultyLevelService service, int page, int pageSize)
         {
             return service.GetAll(page, pageSize);
         }
@@ -57,7 +58,7 @@
         /// <param name="service">Service.</param>
         /// <returns>Dto.</returns>
         [HttpPost]
-        public DifficultyLevelDto Add([FromBody] DifficultyLevelDto dto, [FromServices] DifficultyLevelService service)
+        public Task<DifficultyLevelDto> Add([FromBody] DifficultyLevelDto dto, [FromServices] DifficultyLevelService service)
         {
             return service.Add(dto);
         }
@@ -69,7 +70,7 @@
         /// <param name="service">Service.</param>
         /// <returns>Dto.</returns>
         [HttpPut]
-        public DifficultyLevelDto Update([FromBody] DifficultyLevelDto dto, [FromServices] DifficultyLevelService service)
+        public Task<DifficultyLevelDto> Update([FromBody] DifficultyLevelDto dto, [FromServices] DifficultyLevelService service)
         {
             return service.Update(dto);
         }
@@ -80,9 +81,9 @@
         /// <param name="id">Id.</param>
         /// <param name="service">Difficulty levels service.</param>
         [HttpDelete("{id}")]
-        public IActionResult Delete([FromRoute] long id, [FromServices] DifficultyLevelService service)
+        public async Task<IActionResult> Delete([FromRoute] long id, [FromServices] DifficultyLevelService service)
         {
-            service.Delete(id);
+            await service.Delete(id);
             return this.Ok();
         }
     }
