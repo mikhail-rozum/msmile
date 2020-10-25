@@ -25,9 +25,8 @@
                 .Build();
 
             var services = new ServiceCollection();
-            services.AddAutoMapper();
-            services.AddDataServices();
-            services.AddDatabase(this.Configuration);
+
+            this.AddServices(services);
             this.ServiceProvider = services.BuildServiceProvider();
         }
 
@@ -40,5 +39,16 @@
         /// Configuration.
         /// </summary>
         public IConfiguration Configuration { get; }
+
+        /// <summary>
+        /// Configures DI.
+        /// </summary>
+        /// <param name="services">Services.</param>
+        private void AddServices(ServiceCollection services)
+        {
+            services.AddAutoMapper();
+            services.AddDataServices();
+            services.AddDatabase(this.Configuration);
+        }
     }
 }
