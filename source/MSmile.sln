@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSmile.Dto", "MSmile.Dto\MS
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DAC3A8B7-B1E3-42B3-9BC1-DF58A1064C9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSmile.DataMaker", "MSmile.DataMaker\MSmile.DataMaker.csproj", "{1B34DF99-A2D6-4479-BFDD-9725F840104F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSmile.DataMaker", "MSmile.DataMaker\MSmile.DataMaker.csproj", "{1B34DF99-A2D6-4479-BFDD-9725F840104F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSmile.Services.Integration.Tests", "MSmile.Services.Integration.Tests\MSmile.Services.Integration.Tests.csproj", "{B6EA845A-CA07-4A51-906B-25F5F12A1928}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,12 +43,17 @@ Global
 		{1B34DF99-A2D6-4479-BFDD-9725F840104F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B34DF99-A2D6-4479-BFDD-9725F840104F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B34DF99-A2D6-4479-BFDD-9725F840104F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6EA845A-CA07-4A51-906B-25F5F12A1928}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6EA845A-CA07-4A51-906B-25F5F12A1928}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6EA845A-CA07-4A51-906B-25F5F12A1928}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6EA845A-CA07-4A51-906B-25F5F12A1928}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1B34DF99-A2D6-4479-BFDD-9725F840104F} = {DAC3A8B7-B1E3-42B3-9BC1-DF58A1064C9C}
+		{B6EA845A-CA07-4A51-906B-25F5F12A1928} = {DAC3A8B7-B1E3-42B3-9BC1-DF58A1064C9C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7B30FE85-4057-4379-91C6-7A7484A5A291}
