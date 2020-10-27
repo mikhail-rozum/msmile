@@ -105,7 +105,12 @@
             var entity = this.Mapper.Map<TEntity>(dto);
             await this.Repository.AddAsync(entity);
 
-            return this.Mapper.Map<TDto>(entity);
+            var result = await this.Repository
+                .Get(x => x.Id == entity.Id)
+                .ProjectTo<TDto>(this.Mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync();
+
+            return result;
         }
 
         /// <summary>
@@ -122,7 +127,12 @@
             this.Mapper.Map(dto, entity);
             await this.Repository.UpdateAsync(entity);
 
-            return this.Mapper.Map<TDto>(entity);
+            var result = await this.Repository
+                .Get(x => x.Id == entity.Id)
+                .ProjectTo<TDto>(this.Mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync();
+
+            return result;
         }
 
         /// <summary>
