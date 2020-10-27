@@ -5,6 +5,16 @@
 
 image: mcr.microsoft.com/dotnet/core/sdk:3.1
 
+definitions:
+  services:
+    postgres:
+      image: postgres
+      environment:
+        POSTGRES_DB: MSmileDb
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: "1882320"
+        ConnectionStrings__MSmileDb: "HOST=127.0.0.1;DB=MSmileDb;UID=postgres;PWD=1882320;PORT=5432;"
+
 pipelines:
   default:
     - parallel:
