@@ -13,9 +13,19 @@
         public long PupilId { get; set; }
 
         /// <summary>
+        /// Pupil.
+        /// </summary>
+        public PupilDto Pupil { get; set; }
+
+        /// <summary>
         /// Employee id.
         /// </summary>
         public long EmployeeId { get; set; }
+
+        /// <summary>
+        /// Employee.
+        /// </summary>
+        public EmployeeDto Employee { get; set; }
 
         /// <summary>
         /// Date.
