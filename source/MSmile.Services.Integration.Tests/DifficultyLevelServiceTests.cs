@@ -1,4 +1,4 @@
-namespace MSmile.Services.Integration.Tests
+﻿namespace MSmile.Services.Integration.Tests
 {
     using FluentAssertions;
 
@@ -13,13 +13,10 @@ namespace MSmile.Services.Integration.Tests
     using Task = System.Threading.Tasks.Task;
 
     /// <inheritdoc />
-    public class SkillServiceTests : TestBase<SkillService>
+    public class DifficultyLevelServiceTests : TestBase<DifficultyLevelService>
     {
-        /// <summary>
-        /// ctor.
-        /// </summary>
-        /// <param name="diFixture">DI fixture.</param>
-        public SkillServiceTests(DiFixture diFixture)
+        /// <inheritdoc />
+        public DifficultyLevelServiceTests(DiFixture diFixture)
             : base(diFixture)
         {
         }
@@ -33,22 +30,20 @@ namespace MSmile.Services.Integration.Tests
             await this.ExecuteTest(
                 async (context, service) =>
                 {
-                    var dto = new SkillDto
+                    var dto = new DifficultyLevelDto
                     {
-                        Name = "Name",
-                        Description = "Description"
+                        Name = "Test level"
                     };
 
                     var result = await service.Add(dto);
 
-                    var entity = await context.Skill
+                    var entity = await context.DifficultyLevel
                         .AsNoTracking()
                         .FirstOrDefaultAsync(x => x.Id == result.Id);
 
                     entity.Should().NotBeNull();
 
                     dto.Name.Should().Be(entity.Name);
-                    dto.Description.Should().Be(entity.Description);
                 });
         }
 
@@ -61,25 +56,23 @@ namespace MSmile.Services.Integration.Tests
             await this.ExecuteTest(
                 async (context, service) =>
                 {
-                    var skill = new Skill
+                    var level = new DifficultyLevel
                     {
-                        Name = "Test",
-                        Description = "Test description"
+                        Name = "Test level"
                     };
 
-                    await context.Skill.AddAsync(skill);
+                    await context.DifficultyLevel.AddAsync(level);
                     await context.SaveChangesAsync();
 
-                    var dto = new SkillDto
+                    var dto = new DifficultyLevelDto
                     {
-                        Id = skill.Id,
-                        Name = "New name",
-                        Description = "New description"
+                        Id = level.Id,
+                        Name = "New name"
                     };
 
                     var result = await service.Update(dto);
 
-                    var entity = await context.Skill.FirstOrDefaultAsync(x => x.Id == skill.Id);
+                    var entity = await context.DifficultyLevel.FirstOrDefaultAsync(x => x.Id == level.Id);
 
                     result.Should().NotBeNull();
                     entity.Should().NotBeNull();
@@ -89,9 +82,6 @@ namespace MSmile.Services.Integration.Tests
 
                     dto.Name.Should().Be(result.Name);
                     dto.Name.Should().Be(entity.Name);
-
-                    dto.Description.Should().Be(result.Description);
-                    dto.Description.Should().Be(entity.Description);
                 });
         }
 
@@ -104,41 +94,42 @@ namespace MSmile.Services.Integration.Tests
             await this.ExecuteTest(
                 async (context, service) =>
                 {
-                    var skill = new Skill
+                    var level = new DifficultyLevel
                     {
-                        Name = "Name",
-                        Description = "Description"
+                        Name = "Test name"
                     };
 
-                    await context.Skill.AddAsync(skill);
+                    await context.AddAsync(level);
                     await context.SaveChangesAsync();
 
-                    await service.Delete(skill.Id);
+                    await service.Delete(level.Id);
 
-                    var entity = await context.Skill.FirstOrDefaultAsync(x => x.Id == skill.Id);
+                    var entity = await context
+                        .DifficultyLevel
+                        .FirstOrDefaultAsync(x => x.Id == level.Id);
                     entity.Should().BeNull();
                 });
         }
 
         /// <summary>
-        /// Get success test.
+        /// Get success
         /// </summary>
+        /// <returns></returns>
         [Fact]
         public async Task GetShouldReturn()
         {
             await this.ExecuteTest(
                 async (context, service) =>
                 {
-                    var skill = new Skill
+                    var level = new DifficultyLevel
                     {
-                        Name = "Test name",
-                        Description = "Test description"
+                        Name = "Test name"
                     };
 
-                    await context.Skill.AddAsync(skill);
+                    await context.AddAsync(level);
                     await context.SaveChangesAsync();
 
-                    var result = await service.Get(skill.Id);
+                    var result = await service.Get(level.Id);
                     result.Should().NotBeNull();
                 });
         }
