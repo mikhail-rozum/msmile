@@ -1,0 +1,17 @@
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
+ARG logpath
+ENV logpath ${logpath}
+WORKDIR /app
+EXPOSE 5000
+EXPOSE 5001
+
+FROM mcr.microsoft.com/dotnet/sdk:latest AS build
+WORKDIR /src
+COPY ["source/", "MSmile/"]
+RUN dotnet restore "MSmile/MSmile.Services.Integration.Tests/MSmile.Services.Integration.Tests.csproj"
+COPY . .
+WORKDIR "/src/MSmile"
+RUN dotnet build "MSmile.Services.Integration.Tests/MSmile.Services.Integration.Tests.csproj" -c Release -o /app/build
+RUN dotnet test "MSmile.Services.Integration.Tests/MSmile.Services.Integration.Tests.csproj" -v d
