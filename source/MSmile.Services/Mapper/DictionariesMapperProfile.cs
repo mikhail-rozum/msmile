@@ -2,15 +2,13 @@
 {
     using System.Linq;
 
-    using AutoMapper;
-
     using MSmile.Db.Entities;
     using MSmile.Dto.Dto;
 
     /// <summary>
     /// Mappings for dictionaries
     /// </summary>
-    public class DictionariesMapperProfile : Profile
+    public class DictionariesMapperProfile : MapperProfileBase
     {
         /// <summary>
         /// ctor.

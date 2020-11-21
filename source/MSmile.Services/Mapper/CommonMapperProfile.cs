@@ -1,14 +1,12 @@
 ﻿namespace MSmile.Services.Mapper
 {
-    using AutoMapper;
-
     using MSmile.Db.Entities;
     using MSmile.Dto.Dto;
 
     /// <summary>
     /// Common mappings profile.
     /// </summary>
-    public class CommonMapperProfile : Profile
+    public class CommonMapperProfile : MapperProfileBase
     {
         /// <summary>
         /// ctor.
