@@ -8,6 +8,10 @@
     <DocumentationFile>E:\Code\msmile\source\MSmile.Api\MSmile.Api.xml</DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>E:\Code\msmile\source\MSmile.Api\MSmile.Api.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="9.3.0" />
