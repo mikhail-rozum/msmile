@@ -1,0 +1,445 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MSmile.Api</name>
+    </assembly>
+    <members>
+        <member name="T:MSmile.Api.Controllers.DataGenController">
+            <summary>
+            Generates test data.
+            </summary>
+        </member>
+        <member name="M:MSmile.Api.Controllers.DataGenController.GenerateEmployees(MSmile.Services.DataServices.DataGenerationService,System.Int32)">
+            <summary>
+            Generates employees and insert them to database.
+            </summary>
+            <param name="service">Service.</param>
+            <param name="count">Amount.</param>
+            <returns>Employees.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.DataGenController.GenerateParents(MSmile.Services.DataServices.DataGenerationService,System.Int32)">
+            <summary>
+            Generates parents and insert them to database.
+            </summary>
+            <param name="service">Service.</param>
+            <param name="count">Amount.</param>
+            <returns>Parents.</returns>
+        </member>
+        <member name="T:MSmile.Api.Controllers.DifficultyLevelController">
+            <summary>
+            Methods for difficulty levels.
+            </summary>
+        </member>
+        <member name="M:MSmile.Api.Controllers.DifficultyLevelController.GetAll(MSmile.Services.DataServices.DifficultyLevelService)">
+            <summary>
+            Get all the difficulty levels.
+            </summary>
+            <param name="service">Service.</param>
+            <returns>Difficulty levels.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.DifficultyLevelController.Get(MSmile.Services.DataServices.DifficultyLevelService,System.Int64)">
+            <summary>
+            Get the difficulty level.
+            </summary>
+            <param name="service">Service.</param>
+            <param name="id">Id</param>
+            <returns>Difficulty level.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.DifficultyLevelController.GetAll(MSmile.Services.DataServices.DifficultyLevelService,System.Int32,System.Int32)">
+            <summary>
+            Get all the difficulty levels.
+            </summary>
+            <param name="service">Service.</param>
+            <param name="page">Page number.</param>
+            <param name="pageSize">Page size.</param>
+            <returns>Difficulty levels.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.DifficultyLevelController.Add(MSmile.Dto.Dto.DifficultyLevelDto,MSmile.Services.DataServices.DifficultyLevelService)">
+            <summary>
+            Adds difficulty levels.
+            </summary>
+            <param name="dto">Dto.</param>
+            <param name="service">Service.</param>
+            <returns>Dto.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.DifficultyLevelController.Update(MSmile.Dto.Dto.DifficultyLevelDto,MSmile.Services.DataServices.DifficultyLevelService)">
+            <summary>
+            Updates Difficulty levels.
+            </summary>
+            <param name="dto">Dto.</param>
+            <param name="service">Service.</param>
+            <returns>Dto.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.DifficultyLevelController.Delete(System.Int64,MSmile.Services.DataServices.DifficultyLevelService)">
+            <summary>
+            Deletes the Difficulty levels.
+            </summary>
+            <param name="id">Id.</param>
+            <param name="service">Difficulty levels service.</param>
+        </member>
+        <member name="T:MSmile.Api.Controllers.EmployeeController">
+            <summary>
+            Methods for employees.
+            </summary>
+        </member>
+        <member name="M:MSmile.Api.Controllers.EmployeeController.GetAll(MSmile.Services.DataServices.EmployeeService)">
+            <summary>
+            Get all the employees.
+            </summary>
+            <param name="service">Service.</param>
+            <returns>Employees.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.EmployeeController.GetAll(MSmile.Services.DataServices.EmployeeService,System.Int32,System.Int32)">
+            <summary>
+            Get all the employees.
+            </summary>
+            <param name="service">Service.</param>
+            <param name="page">Page number.</param>
+            <param name="pageSize">Page size.</param>
+            <returns>Employees.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.EmployeeController.Get(MSmile.Services.DataServices.EmployeeService,System.Int64)">
+            <summary>
+            Get the employee level.
+            </summary>
+            <param name="service">Service.</param>
+            <param name="id">Id</param>
+            <returns>Employee.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.EmployeeController.Add(MSmile.Dto.Dto.EmployeeDto,MSmile.Services.DataServices.EmployeeService)">
+            <summary>
+            Adds Employee.
+            </summary>
+            <param name="dto">Dto.</param>
+            <param name="service">Service.</param>
+            <returns>Dto.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.EmployeeController.Update(MSmile.Dto.Dto.EmployeeDto,MSmile.Services.DataServices.EmployeeService)">
+            <summary>
+            Updates Employee.
+            </summary>
+            <param name="dto">Dto.</param>
+            <param name="service">Service.</param>
+            <returns>Dto.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.EmployeeController.Delete(System.Int64,MSmile.Services.DataServices.EmployeeService)">
+            <summary>
+            Deletes the Employee.
+            </summary>
+            <param name="id">Id.</param>
+            <param name="service">Employees service.</param>
+        </member>
+        <member name="T:MSmile.Api.Controllers.LessonController">
+            <summary>
+            Lesson controller.
+            </summary>
+        </member>
+        <member name="M:MSmile.Api.Controllers.LessonController.GetAll(MSmile.Services.DataServices.LessonService)">
+            <summary>
+            Get all the lessons.
+            </summary>
+            <param name="service">Service.</param>
+            <returns>Lessons.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.LessonController.GetAll(MSmile.Services.DataServices.LessonService,System.Int32,System.Int32)">
+            <summary>
+            Get all the lessons.
+            </summary>
+            <param name="service">Service.</param>
+            <param name="page">Page number.</param>
+            <param name="pageSize">Page size.</param>
+            <returns>Lessons.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.LessonController.Get(MSmile.Services.DataServices.LessonService,System.Int64)">
+            <summary>
+            Get the lesson.
+            </summary>
+            <param name="service">Service.</param>
+            <param name="id">Id</param>
+            <returns>Lesson.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.LessonController.Add(MSmile.Dto.Dto.LessonDto,MSmile.Services.DataServices.LessonService)">
+            <summary>
+            Adds Lesson.
+            </summary>
+            <param name="dto">Dto.</param>
+            <param name="service">Service.</param>
+            <returns>Dto.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.LessonController.Update(MSmile.Dto.Dto.LessonDto,MSmile.Services.DataServices.LessonService)">
+            <summary>
+            Updates Lesson.
+            </summary>
+            <param name="dto">Dto.</param>
+            <param name="service">Service.</param>
+            <returns>Dto.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.LessonController.Delete(System.Int64,MSmile.Services.DataServices.LessonService)">
+            <summary>
+            Deletes the Lesson.
+            </summary>
+            <param name="id">Id.</param>
+            <param name="service">Lesson service.</param>
+        </member>
+        <member name="T:MSmile.Api.Controllers.ParentController">
+            <summary>
+            Methods for parents.
+            </summary>
+        </member>
+        <member name="M:MSmile.Api.Controllers.ParentController.GetAll(MSmile.Services.DataServices.ParentService)">
+            <summary>
+            Get all the parents.
+            </summary>
+            <param name="service">Service.</param>
+            <returns>Parents.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.ParentController.GetAll(MSmile.Services.DataServices.ParentService,System.Int32,System.Int32)">
+            <summary>
+            Get all the parents.
+            </summary>
+            <param name="service">Service.</param>
+            <param name="page">Page number.</param>
+            <param name="pageSize">Page size.</param>
+            <returns>Parents.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.ParentController.Get(MSmile.Services.DataServices.ParentService,System.Int64)">
+            <summary>
+            Get the parent level.
+            </summary>
+            <param name="service">Service.</param>
+            <param name="id">Id</param>
+            <returns>Parent.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.ParentController.Add(MSmile.Dto.Dto.ParentDto,MSmile.Services.DataServices.ParentService)">
+            <summary>
+            Adds Parent.
+            </summary>
+            <param name="dto">Dto.</param>
+            <param name="service">Service.</param>
+            <returns>Dto.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.ParentController.Update(MSmile.Dto.Dto.ParentDto,MSmile.Services.DataServices.ParentService)">
+            <summary>
+            Updates Parent.
+            </summary>
+            <param name="dto">Dto.</param>
+            <param name="service">Service.</param>
+            <returns>Dto.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.ParentController.Delete(System.Int64,MSmile.Services.DataServices.ParentService)">
+            <summary>
+            Deletes the Parent.
+            </summary>
+            <param name="id">Id.</param>
+            <param name="service">Parent service.</param>
+        </member>
+        <member name="T:MSmile.Api.Controllers.PupilController">
+            <summary>
+            Methods for pupils.
+            </summary>
+        </member>
+        <member name="M:MSmile.Api.Controllers.PupilController.GetAll(MSmile.Services.DataServices.PupilService)">
+            <summary>
+            Get all the pupils.
+            </summary>
+            <param name="service">Service.</param>
+            <returns>Pupils.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.PupilController.GetAll(MSmile.Services.DataServices.PupilService,System.Int32,System.Int32)">
+            <summary>
+            Get all the pupils.
+            </summary>
+            <param name="service">Service.</param>
+            <param name="page">Page number.</param>
+            <param name="pageSize">Page size.</param>
+            <returns>Pupils.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.PupilController.Get(MSmile.Services.DataServices.PupilService,System.Int64)">
+            <summary>
+            Get the pupil.
+            </summary>
+            <param name="service">Service.</param>
+            <param name="id">Id</param>
+            <returns>Pupil.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.PupilController.Add(MSmile.Dto.Dto.PupilDto,MSmile.Services.DataServices.PupilService)">
+            <summary>
+            Adds Pupil.
+            </summary>
+            <param name="dto">Dto.</param>
+            <param name="service">Service.</param>
+            <returns>Dto.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.PupilController.Update(MSmile.Dto.Dto.PupilDto,MSmile.Services.DataServices.PupilService)">
+            <summary>
+            Updates Pupil.
+            </summary>
+            <param name="dto">Dto.</param>
+            <param name="service">Service.</param>
+            <returns>Dto.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.PupilController.Delete(System.Int64,MSmile.Services.DataServices.PupilService)">
+            <summary>
+            Deletes the Pupil.
+            </summary>
+            <param name="id">Id.</param>
+            <param name="service">Pupils service.</param>
+        </member>
+        <member name="T:MSmile.Api.Controllers.SkillController">
+            <summary>
+            Methods for Skills
+            </summary>
+        </member>
+        <member name="M:MSmile.Api.Controllers.SkillController.GetAll(MSmile.Services.DataServices.SkillService)">
+            <summary>
+            Get all the skills.
+            </summary>
+            <param name="service">Service.</param>
+            <returns>Skills.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.SkillController.GetAll(MSmile.Services.DataServices.SkillService,System.Int32,System.Int32)">
+            <summary>
+            Get all the skills.
+            </summary>
+            <param name="service">Service.</param>
+            <param name="page">Page number.</param>
+            <param name="pageSize">Page size.</param>
+            <returns>Skills.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.SkillController.Add(MSmile.Dto.Dto.SkillDto,MSmile.Services.DataServices.SkillService)">
+            <summary>
+            Adds Skill.
+            </summary>
+            <param name="dto">Dto.</param>
+            <param name="service">Service.</param>
+            <returns>Dto.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.SkillController.Update(MSmile.Dto.Dto.SkillDto,MSmile.Services.DataServices.SkillService)">
+            <summary>
+            Updates Skill.
+            </summary>
+            <param name="dto">Dto.</param>
+            <param name="service">Service.</param>
+            <returns>Dto.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.SkillController.Delete(System.Int64,MSmile.Services.DataServices.SkillService)">
+            <summary>
+            Deletes the skill.
+            </summary>
+            <param name="id">Id.</param>
+            <param name="service">Skill service.</param>
+        </member>
+        <member name="T:MSmile.Api.Controllers.TaskController">
+            <summary>
+            Task controller.
+            </summary>
+        </member>
+        <member name="M:MSmile.Api.Controllers.TaskController.GetAll(MSmile.Services.DataServices.TaskService)">
+            <summary>
+            Get all the tasks.
+            </summary>
+            <param name="service">Service.</param>
+            <returns>Tasks.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.TaskController.GetAll(MSmile.Services.DataServices.TaskService,System.Int32,System.Int32)">
+            <summary>
+            Get all the tasks.
+            </summary>
+            <param name="service">Service.</param>
+            <param name="page">Page number.</param>
+            <param name="pageSize">Page size.</param>
+            <returns>Tasks.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.TaskController.Add(MSmile.Dto.Dto.TaskDto,MSmile.Services.DataServices.TaskService)">
+            <summary>
+            Adds Task.
+            </summary>
+            <param name="dto">Dto.</param>
+            <param name="service">Service.</param>
+            <returns>Dto.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.TaskController.Update(MSmile.Dto.Dto.TaskDto,MSmile.Services.DataServices.TaskService)">
+            <summary>
+            Updates Task.
+            </summary>
+            <param name="dto">Dto.</param>
+            <param name="service">Service.</param>
+            <returns>Dto.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.TaskController.Delete(System.Int64,MSmile.Services.DataServices.TaskService)">
+            <summary>
+            Deletes the task.
+            </summary>
+            <param name="id">Id.</param>
+            <param name="service">Task service.</param>
+        </member>
+        <member name="T:MSmile.Api.Controllers.TestController">
+            <summary>
+            Test controller.
+            </summary>
+        </member>
+        <member name="M:MSmile.Api.Controllers.TestController.ThrowBusinessException">
+            <summary>
+            Throws BusinessException
+            </summary>
+        </member>
+        <member name="M:MSmile.Api.Controllers.TestController.ThrowUnknownException">
+            <summary>
+            Throws unknown exception
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:MSmile.Api.ErrorHandlingMiddleware">
+            <summary>
+            Error handling middleware.
+            </summary>
+        </member>
+        <member name="M:MSmile.Api.ErrorHandlingMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{MSmile.Api.ErrorHandlingMiddleware})">
+            <summary>
+            ctor.
+            </summary>
+            <param name="next">Next delegate.</param>
+            <param name="logger">Logger.</param>
+        </member>
+        <member name="M:MSmile.Api.ErrorHandlingMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Invoke method
+            </summary>
+            <param name="context">Http context.</param>
+        </member>
+        <member name="M:MSmile.Api.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            ctor
+            </summary>
+            <param name="configuration">Configuration</param>
+        </member>
+        <member name="P:MSmile.Api.Startup.Configuration">
+            <summary>
+            Configuration
+            </summary>
+        </member>
+        <member name="T:MSmile.Api.StartupExtensions">
+            <summary>
+            Extensions for starting up
+            </summary>
+        </member>
+        <member name="M:MSmile.Api.StartupExtensions.AddAutoMapper(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Register all needed classes for AutoMapper.
+            </summary>
+            <param name="services">Services.</param>
+        </member>
+        <member name="M:MSmile.Api.StartupExtensions.AddFluentValidator(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Registers all needed classes for FluentValidator
+            </summary>
+            <param name="services">Services</param>
+        </member>
+        <member name="M:MSmile.Api.StartupExtensions.AddDataServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Registers all the data services.
+            </summary>
+            <param name="services">Services.</param>
+        </member>
+    </members>
+</doc>

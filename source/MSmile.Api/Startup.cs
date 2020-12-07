@@ -30,7 +30,7 @@ namespace MSmile.Api
             services.AddMigrations(this.Configuration);
             services.AddAutoMapper();
             services.AddControllers();
-            services.AddSwaggerGen();
+            services.AddSwaggerDocument();
             services.AddFluentValidator();
             services.AddDataServices();
         }
@@ -39,12 +39,8 @@ namespace MSmile.Api
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseMiddleware<ErrorHandlingMiddleware>();
-            app.UseSwagger();
-            app.UseSwaggerUI(
-                opt =>
-                {
-                    opt.SwaggerEndpoint("/swagger/v1/swagger.json", "MSmile API v1");
-                });
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
 
             app.UseHttpsRedirection();
 
