@@ -407,6 +407,29 @@
             </summary>
             <param name="context">Http context.</param>
         </member>
+        <member name="T:MSmile.Api.Program">
+            <summary>
+            Program.
+            </summary>
+        </member>
+        <member name="M:MSmile.Api.Program.Main(System.String[])">
+            <summary>
+            Entry point.
+            </summary>
+            <param name="args">Arguments.</param>
+        </member>
+        <member name="M:MSmile.Api.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            Creates host.
+            </summary>
+            <param name="args">Arguments.</param>
+            <returns>Host builder.</returns>
+        </member>
+        <member name="T:MSmile.Api.Startup">
+            <summary>
+            Startup.
+            </summary>
+        </member>
         <member name="M:MSmile.Api.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             ctor
@@ -417,6 +440,19 @@
             <summary>
             Configuration
             </summary>
+        </member>
+        <member name="M:MSmile.Api.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configures services.
+            </summary>
+            <param name="services">Services collection.</param>
+        </member>
+        <member name="M:MSmile.Api.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Configures application.
+            </summary>
+            <param name="app">Application.</param>
+            <param name="env">Environment.</param>
         </member>
         <member name="T:MSmile.Api.StartupExtensions">
             <summary>

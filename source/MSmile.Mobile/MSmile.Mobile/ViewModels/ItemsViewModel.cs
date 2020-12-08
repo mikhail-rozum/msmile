@@ -8,22 +8,26 @@ using Xamarin.Forms;
 
 namespace MSmile.Mobile.ViewModels
 {
+    using MSmile.Api.Client;
+    using MSmile.Dto.Dto;
+
     public class ItemsViewModel : BaseViewModel
     {
-        private Item _selectedItem;
+        private DifficultyLevelDto _selectedItem;
 
-        public ObservableCollection<Item> Items { get; }
+        public DifficultyLevelClient DifficultyLevelClient => DependencyService.Get<DifficultyLevelClient>();
+        public ObservableCollection<DifficultyLevelDto> Items { get; set; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
-        public Command<Item> ItemTapped { get; }
+        public Command<DifficultyLevelDto> ItemTapped { get; }
 
         public ItemsViewModel()
         {
             Title = "Browse";
-            Items = new ObservableCollection<Item>();
+            Items = new ObservableCollection<DifficultyLevelDto>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-            ItemTapped = new Command<Item>(OnItemSelected);
+            ItemTapped = new Command<DifficultyLevelDto>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
         }
@@ -35,7 +39,7 @@ namespace MSmile.Mobile.ViewModels
             try
             {
                 Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
+                var items = await DifficultyLevelClient.GetAllAllAsync();
                 foreach (var item in items)
                 {
                     Items.Add(item);
@@ -57,7 +61,7 @@ namespace MSmile.Mobile.ViewModels
             SelectedItem = null;
         }
 
-        public Item SelectedItem
+        public DifficultyLevelDto SelectedItem
         {
             get => _selectedItem;
             set
@@ -72,7 +76,7 @@ namespace MSmile.Mobile.ViewModels
             await Shell.Current.GoToAsync(nameof(NewItemPage));
         }
 
-        async void OnItemSelected(Item item)
+        async void OnItemSelected(DifficultyLevelDto item)
         {
             if (item == null)
                 return;

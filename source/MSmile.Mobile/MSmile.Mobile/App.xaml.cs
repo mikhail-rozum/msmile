@@ -6,6 +6,8 @@ using Xamarin.Forms.Xaml;
 
 namespace MSmile.Mobile
 {
+    using MSmile.Api.Client;
+
     public partial class App : Application
     {
 
@@ -14,6 +16,7 @@ namespace MSmile.Mobile
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
+            DependencyService.Register<DifficultyLevelClient>();
             MainPage = new AppShell();
         }
 

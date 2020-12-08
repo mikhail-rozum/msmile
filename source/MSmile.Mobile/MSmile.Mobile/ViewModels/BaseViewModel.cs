@@ -8,6 +8,8 @@ using Xamarin.Forms;
 
 namespace MSmile.Mobile.ViewModels
 {
+    using MSmile.Api.Client;
+
     public class BaseViewModel : INotifyPropertyChanged
     {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();

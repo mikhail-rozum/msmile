@@ -4,7 +4,8 @@
              x:Class="MSmile.Mobile.Views.ItemsPage"
              Title="{Binding Title}"
              xmlns:local="clr-namespace:MSmile.Mobile.ViewModels"  
-             xmlns:model="clr-namespace:MSmile.Mobile.Models"  
+             xmlns:model="clr-namespace:MSmile.Mobile.Models"
+             xmlns:dto="clr-namespace:MSmile.Dto.Dto;assembly=MSmile.Dto"
              x:Name="BrowseItemsPage">
 
     <ContentPage.ToolbarItems>
@@ -20,12 +21,12 @@
                 SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="10" x:DataType="model:Item">
-                        <Label Text="{Binding Text}" 
+                    <StackLayout Padding="10" x:DataType="dto:DifficultyLevelDto">
+                        <Label Text="{Binding Id}" 
                             LineBreakMode="NoWrap" 
                             Style="{DynamicResource ListItemTextStyle}" 
                             FontSize="16" />
-                        <Label Text="{Binding Description}" 
+                        <Label Text="{Binding Name}" 
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="13" />

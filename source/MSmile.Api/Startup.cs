@@ -7,6 +7,9 @@ namespace MSmile.Api
 
     using MSmile.Db.Extensions;
 
+    /// <summary>
+    /// Startup.
+    /// </summary>
     public class Startup
     {
         /// <summary>
@@ -23,7 +26,10 @@ namespace MSmile.Api
         /// </summary>
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// Configures services.
+        /// </summary>
+        /// <param name="services">Services collection.</param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDatabase(this.Configuration);
@@ -35,7 +41,11 @@ namespace MSmile.Api
             services.AddDataServices();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Configures application.
+        /// </summary>
+        /// <param name="app">Application.</param>
+        /// <param name="env">Environment.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseMiddleware<ErrorHandlingMiddleware>();
