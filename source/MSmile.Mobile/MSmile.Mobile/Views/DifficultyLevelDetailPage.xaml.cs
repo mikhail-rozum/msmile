@@ -4,12 +4,12 @@ using Xamarin.Forms;
 
 namespace MSmile.Mobile.Views
 {
-    public partial class ItemDetailPage : ContentPage
+    public partial class DifficultyLevelDetailPage : ContentPage
     {
-        public ItemDetailPage()
+        public DifficultyLevelDetailPage()
         {
             InitializeComponent();
-            BindingContext = new ItemDetailViewModel();
+            BindingContext = new DifficultyLevelDetailViewModel();
         }
     }
 }

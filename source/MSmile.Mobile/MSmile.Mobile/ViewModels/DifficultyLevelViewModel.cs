@@ -1,17 +1,16 @@
-﻿using MSmile.Mobile.Models;
-using MSmile.Mobile.Views;
-using System;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Threading.Tasks;
-using Xamarin.Forms;
-
-namespace MSmile.Mobile.ViewModels
+﻿namespace MSmile.Mobile.ViewModels
 {
+    using MSmile.Mobile.Views;
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.Threading.Tasks;
+    using Xamarin.Forms;
+
     using MSmile.Api.Client;
     using MSmile.Dto.Dto;
 
-    public class ItemsViewModel : BaseViewModel
+    public class DifficultyLevelViewModel : BaseViewModel
     {
         private DifficultyLevelDto _selectedItem;
 
@@ -21,7 +20,7 @@ namespace MSmile.Mobile.ViewModels
         public Command AddItemCommand { get; }
         public Command<DifficultyLevelDto> ItemTapped { get; }
 
-        public ItemsViewModel()
+        public DifficultyLevelViewModel()
         {
             Title = "Browse";
             Items = new ObservableCollection<DifficultyLevelDto>();
@@ -73,7 +72,7 @@ namespace MSmile.Mobile.ViewModels
 
         private async void OnAddItem(object obj)
         {
-            await Shell.Current.GoToAsync(nameof(NewItemPage));
+            await Shell.Current.GoToAsync(nameof(DifficultyLevelDetailPage));
         }
 
         async void OnItemSelected(DifficultyLevelDto item)
@@ -82,7 +81,8 @@ namespace MSmile.Mobile.ViewModels
                 return;
 
             // This will push the ItemDetailPage onto the navigation stack
-            await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
+            var state = $"{nameof(DifficultyLevelDetailPage)}?{nameof(DifficultyLevelDetailViewModel.ItemId)}={item.Id}";
+            await Shell.Current.GoToAsync(state);
         }
     }
 }

@@ -12,15 +12,15 @@ using Xamarin.Forms.Xaml;
 
 namespace MSmile.Mobile.Views
 {
-    public partial class ItemsPage : ContentPage
+    public partial class DifficultyLevelPage : ContentPage
     {
-        ItemsViewModel _viewModel;
+        DifficultyLevelViewModel _viewModel;
 
-        public ItemsPage()
+        public DifficultyLevelPage()
         {
             InitializeComponent();
 
-            BindingContext = _viewModel = new ItemsViewModel();
+            BindingContext = _viewModel = new DifficultyLevelViewModel();
         }
 
         protected override void OnAppearing()

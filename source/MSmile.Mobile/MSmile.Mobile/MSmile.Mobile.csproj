@@ -13,4 +13,18 @@
   <ItemGroup>
     <ProjectReference Include="..\..\MSmile.Api.Client\MSmile.Api.Client.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\DifficultyLevelPage.xaml.cs">
+      <DependentUpon>DifficultyLevelPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\DifficultyLevelDetailPage.xaml.cs">
+      <DependentUpon>DifficultyLevelDetailPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModels\DifficultyLevel\" />
+    <Folder Include="Views\DifficultyLevel\" />
+  </ItemGroup>
 </Project>
