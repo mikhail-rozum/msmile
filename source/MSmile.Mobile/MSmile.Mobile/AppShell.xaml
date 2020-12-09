@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Shell xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:local="clr-namespace:MSmile.Mobile.Views"
+       xmlns:local="clr-namespace:MSmile.Mobile.Views.DifficultyLevel;assembly=MSmile.Mobile"
+       xmlns:common="clr-namespace:MSmile.Mobile.Views;assembly=MSmile.Mobile"
        Title="MSmile.Mobile"
        x:Class="MSmile.Mobile.AppShell">
 
@@ -80,7 +81,7 @@
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
     <FlyoutItem Title="About" Icon="icon_about.png">
-        <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
+        <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate common:AboutPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Уровни сложности" Icon="icon_feed.png">
         <ShellContent Route="DifficultyLevelPage" ContentTemplate="{DataTemplate local:DifficultyLevelPage}" />
@@ -98,7 +99,7 @@
         await Shell.Current.GoToAsync("//LoginPage");
     -->
     <TabBar>
-        <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
+        <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate common:LoginPage}" />
     </TabBar>
 
     <!-- Optional Templates 

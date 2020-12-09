@@ -1,11 +1,11 @@
-﻿using MSmile.Mobile.ViewModels;
-using MSmile.Mobile.Views;
-using System;
-using System.Collections.Generic;
-using Xamarin.Forms;
-
-namespace MSmile.Mobile
+﻿namespace MSmile.Mobile
 {
+    using MSmile.Mobile.Views;
+    using System;
+    using Xamarin.Forms;
+
+    using MSmile.Mobile.Views.DifficultyLevel;
+
     public partial class AppShell : Xamarin.Forms.Shell
     {
         public AppShell()

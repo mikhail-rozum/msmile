@@ -1,8 +1,7 @@
-﻿namespace MSmile.Mobile.ViewModels
+﻿namespace MSmile.Mobile.ViewModels.DifficultyLevel
 {
     using System;
     using System.Diagnostics;
-    using System.Threading.Tasks;
 
     using MSmile.Dto.Dto;
 

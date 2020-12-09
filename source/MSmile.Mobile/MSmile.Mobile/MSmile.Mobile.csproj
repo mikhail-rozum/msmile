@@ -15,16 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\DifficultyLevelPage.xaml.cs">
+    <Compile Update="Views\DifficultyLevel\DifficultyLevelPage.xaml.cs">
       <DependentUpon>DifficultyLevelPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\DifficultyLevelDetailPage.xaml.cs">
+    <Compile Update="Views\DifficultyLevel\DifficultyLevelDetailPage.xaml.cs">
       <DependentUpon>DifficultyLevelDetailPage.xaml</DependentUpon>
     </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ViewModels\DifficultyLevel\" />
-    <Folder Include="Views\DifficultyLevel\" />
   </ItemGroup>
 </Project>

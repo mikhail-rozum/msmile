@@ -1,14 +1,15 @@
-﻿namespace MSmile.Mobile.ViewModels
+﻿namespace MSmile.Mobile.ViewModels.DifficultyLevel
 {
-    using MSmile.Mobile.Views;
     using System;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Threading.Tasks;
-    using Xamarin.Forms;
 
     using MSmile.Api.Client;
     using MSmile.Dto.Dto;
+    using MSmile.Mobile.Views.DifficultyLevel;
+
+    using Xamarin.Forms;
 
     public class DifficultyLevelViewModel : BaseViewModel
     {
@@ -22,7 +23,7 @@
 
         public DifficultyLevelViewModel()
         {
-            Title = "Browse";
+            Title = "Уровни сложности";
             Items = new ObservableCollection<DifficultyLevelDto>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 

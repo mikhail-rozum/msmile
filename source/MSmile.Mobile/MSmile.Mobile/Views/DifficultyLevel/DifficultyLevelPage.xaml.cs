@@ -1,17 +1,9 @@
-﻿using MSmile.Mobile.Models;
-using MSmile.Mobile.ViewModels;
-using MSmile.Mobile.Views;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-namespace MSmile.Mobile.Views
+﻿namespace MSmile.Mobile.Views.DifficultyLevel
 {
+    using Xamarin.Forms;
+
+    using MSmile.Mobile.ViewModels.DifficultyLevel;
+
     public partial class DifficultyLevelPage : ContentPage
     {
         DifficultyLevelViewModel _viewModel;
