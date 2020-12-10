@@ -1,9 +1,12 @@
 ﻿namespace MSmile.Mobile.ViewModels.DifficultyLevel
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Threading.Tasks;
+
+    using AutoMapper;
 
     using MSmile.Api.Client;
     using MSmile.Dto.Dto;
@@ -13,23 +16,30 @@
 
     public class DifficultyLevelViewModel : BaseViewModel
     {
-        private DifficultyLevelDto _selectedItem;
+        private DifficultyLevelItemViewModel _selectedItem;
 
         public DifficultyLevelClient DifficultyLevelClient => DependencyService.Get<DifficultyLevelClient>();
-        public ObservableCollection<DifficultyLevelDto> Items { get; set; }
+        public ObservableCollection<DifficultyLevelItemViewModel> Items { get; set; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
-        public Command<DifficultyLevelDto> ItemTapped { get; }
+        public Command RemoveItemCommand { get; }
+        public Command<DifficultyLevelItemViewModel> ItemTapped { get; }
 
         public DifficultyLevelViewModel()
         {
             Title = "Уровни сложности";
-            Items = new ObservableCollection<DifficultyLevelDto>();
+            Items = new ObservableCollection<DifficultyLevelItemViewModel>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-            ItemTapped = new Command<DifficultyLevelDto>(OnItemSelected);
+            ItemTapped = new Command<DifficultyLevelItemViewModel>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
+            RemoveItemCommand = new Command(RemoveItem);
+        }
+
+        private void RemoveItem()
+        {
+            throw new NotImplementedException();
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -38,8 +48,10 @@
 
             try
             {
+                var mapper = DependencyService.Get<IMapper>();
                 Items.Clear();
-                var items = await DifficultyLevelClient.GetAllAllAsync();
+                var result = await DifficultyLevelClient.GetAllAllAsync();
+                var items = mapper.Map<List<DifficultyLevelItemViewModel>>(result);
                 foreach (var item in items)
                 {
                     Items.Add(item);
@@ -61,7 +73,7 @@
             SelectedItem = null;
         }
 
-        public DifficultyLevelDto SelectedItem
+        public DifficultyLevelItemViewModel SelectedItem
         {
             get => _selectedItem;
             set
@@ -76,7 +88,7 @@
             await Shell.Current.GoToAsync(nameof(DifficultyLevelDetailPage));
         }
 
-        async void OnItemSelected(DifficultyLevelDto item)
+        async void OnItemSelected(DifficultyLevelItemViewModel item)
         {
             if (item == null)
                 return;

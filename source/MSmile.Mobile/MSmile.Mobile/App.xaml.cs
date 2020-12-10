@@ -6,6 +6,8 @@ using Xamarin.Forms.Xaml;
 
 namespace MSmile.Mobile
 {
+    using AutoMapper;
+
     using MSmile.Api.Client;
 
     public partial class App : Application
@@ -15,6 +17,8 @@ namespace MSmile.Mobile
         {
             InitializeComponent();
 
+            var mapper = CreateMapper();
+            DependencyService.RegisterSingleton(mapper);
             DependencyService.Register<MockDataStore>();
             DependencyService.Register<DifficultyLevelClient>();
             MainPage = new AppShell();
@@ -30,6 +34,12 @@ namespace MSmile.Mobile
 
         protected override void OnResume()
         {
+        }
+
+        private static IMapper CreateMapper()
+        {
+            var config = new MapperConfiguration(x => x.AddProfile<MapperProfile>());
+            return config.CreateMapper();
         }
     }
 }

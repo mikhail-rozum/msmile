@@ -1,5 +1,7 @@
 ﻿namespace MSmile.Mobile.Views.DifficultyLevel
 {
+    using System;
+
     using Xamarin.Forms;
 
     using MSmile.Mobile.ViewModels.DifficultyLevel;

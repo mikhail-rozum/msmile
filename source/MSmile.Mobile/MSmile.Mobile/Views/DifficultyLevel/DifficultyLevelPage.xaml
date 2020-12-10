@@ -4,10 +4,10 @@
              x:Class="MSmile.Mobile.Views.DifficultyLevel.DifficultyLevelPage"
              Title="{Binding Title}"
              xmlns:local="clr-namespace:MSmile.Mobile.ViewModels"  
+             xmlns:vm="clr-namespace:MSmile.Mobile.ViewModels.DifficultyLevel"
              xmlns:model="clr-namespace:MSmile.Mobile.Models"
              xmlns:dto="clr-namespace:MSmile.Dto.Dto;assembly=MSmile.Dto"
              xmlns:difficultyLevel="clr-namespace:MSmile.Mobile.ViewModels.DifficultyLevel;assembly=MSmile.Mobile">
-
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Добавить" Command="{Binding AddItemCommand}" />
     </ContentPage.ToolbarItems>
@@ -21,28 +21,38 @@
                 SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Padding="10" x:DataType="dto:DifficultyLevelDto">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.1*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Text="{Binding Id}" 
-                               LineBreakMode="NoWrap" 
-                               Style="{DynamicResource ListItemTextStyle}" 
-                               FontSize="16" />
-                        <Label Grid.Column="1" Text="{Binding Name}" 
-                               LineBreakMode="NoWrap"
-                               Style="{DynamicResource ListItemDetailTextStyle}"
-                               FontSize="13" />
+                    <SwipeView>
+                        <SwipeView.LeftItems>
+                            <SwipeItem x:DataType="vm:DifficultyLevelItemViewModel"
+                                Text="Delete"
+                                BackgroundColor="LightPink"
+                                Command="{Binding DeleteCommand}"
+                                CommandParameter="{Binding}"
+                                />
+                        </SwipeView.LeftItems>
+                        <Grid Padding="10" x:DataType="vm:DifficultyLevelItemViewModel">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.1*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="{Binding Id}" 
+                                   LineBreakMode="NoWrap" 
+                                   Style="{DynamicResource ListItemTextStyle}" 
+                                   FontSize="16" />
+                            <Label Grid.Column="1" Text="{Binding Name}" 
+                                   LineBreakMode="NoWrap"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                   FontSize="13" />
 
-                        <Grid.GestureRecognizers>
-                            <TapGestureRecognizer 
-                                NumberOfTapsRequired="1"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type difficultyLevel:DifficultyLevelViewModel}}, Path=ItemTapped}"		
-                                CommandParameter="{Binding .}">
-                            </TapGestureRecognizer>
-                        </Grid.GestureRecognizers>
-                    </Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    NumberOfTapsRequired="1"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type difficultyLevel:DifficultyLevelViewModel}}, Path=ItemTapped}"		
+                                    CommandParameter="{Binding .}">
+                                </TapGestureRecognizer>
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </SwipeView>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
