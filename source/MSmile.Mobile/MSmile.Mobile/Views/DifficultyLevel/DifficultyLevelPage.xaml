@@ -27,8 +27,8 @@
                                 Text="Delete"
                                 BackgroundColor="LightPink"
                                 Command="{Binding DeleteCommand}"
-                                CommandParameter="{Binding}"
-                                />
+                                CommandParameter="{Binding Source={Reference ItemsListView}, Path=BindingContext}">
+                            </SwipeItem>
                         </SwipeView.LeftItems>
                         <Grid Padding="10" x:DataType="vm:DifficultyLevelItemViewModel">
                             <Grid.ColumnDefinitions>

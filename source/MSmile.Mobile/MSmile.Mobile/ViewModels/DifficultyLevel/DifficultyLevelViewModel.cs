@@ -18,11 +18,9 @@
     {
         private DifficultyLevelItemViewModel _selectedItem;
 
-        public DifficultyLevelClient DifficultyLevelClient => DependencyService.Get<DifficultyLevelClient>();
         public ObservableCollection<DifficultyLevelItemViewModel> Items { get; set; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
-        public Command RemoveItemCommand { get; }
         public Command<DifficultyLevelItemViewModel> ItemTapped { get; }
 
         public DifficultyLevelViewModel()
@@ -34,37 +32,6 @@
             ItemTapped = new Command<DifficultyLevelItemViewModel>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
-            RemoveItemCommand = new Command(RemoveItem);
-        }
-
-        private void RemoveItem()
-        {
-            throw new NotImplementedException();
-        }
-
-        async Task ExecuteLoadItemsCommand()
-        {
-            IsBusy = true;
-
-            try
-            {
-                var mapper = DependencyService.Get<IMapper>();
-                Items.Clear();
-                var result = await DifficultyLevelClient.GetAllAllAsync();
-                var items = mapper.Map<List<DifficultyLevelItemViewModel>>(result);
-                foreach (var item in items)
-                {
-                    Items.Add(item);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-            finally
-            {
-                IsBusy = false;
-            }
         }
 
         public void OnAppearing()
@@ -88,7 +55,7 @@
             await Shell.Current.GoToAsync(nameof(DifficultyLevelDetailPage));
         }
 
-        async void OnItemSelected(DifficultyLevelItemViewModel item)
+        private async void OnItemSelected(DifficultyLevelItemViewModel item)
         {
             if (item == null)
                 return;
@@ -96,6 +63,31 @@
             // This will push the ItemDetailPage onto the navigation stack
             var state = $"{nameof(DifficultyLevelDetailPage)}?{nameof(DifficultyLevelDetailViewModel.ItemId)}={item.Id}";
             await Shell.Current.GoToAsync(state);
+        }
+
+        private async Task ExecuteLoadItemsCommand()
+        {
+            IsBusy = true;
+
+            try
+            {
+                var mapper = DependencyService.Get<IMapper>();
+                Items.Clear();
+                var result = await DependencyService.Get<DifficultyLevelClient>().GetAllAllAsync();
+                var items = mapper.Map<List<DifficultyLevelItemViewModel>>(result);
+                foreach (var item in items)
+                {
+                    Items.Add(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
     }
 }

@@ -23,4 +23,8 @@
       <DependentUpon>DifficultyLevelDetailPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Converters\" />
+  </ItemGroup>
 </Project>

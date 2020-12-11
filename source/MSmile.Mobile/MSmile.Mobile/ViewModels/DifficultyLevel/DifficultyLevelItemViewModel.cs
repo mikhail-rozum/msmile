@@ -1,5 +1,10 @@
 ﻿namespace MSmile.Mobile.ViewModels.DifficultyLevel
 {
+    using System;
+    using System.Linq;
+
+    using MSmile.Api.Client;
+
     using Xamarin.Forms;
 
     /// <summary>
@@ -17,11 +22,20 @@
         /// </summary>
         public string Name { get; set; }
 
-        public Command<DifficultyLevelItemViewModel> DeleteCommand => new Command<DifficultyLevelItemViewModel>(OnDelete);
+        public Command<DifficultyLevelViewModel> DeleteCommand => new Command<DifficultyLevelViewModel>(OnDelete);
 
-        private void OnDelete(DifficultyLevelItemViewModel item)
+        private async void OnDelete(DifficultyLevelViewModel viewModel)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                await DependencyService.Get<DifficultyLevelClient>().DeleteAsync(this.Id);
+                var item = viewModel.Items.First(x => x.Id == this.Id);
+                viewModel.Items.Remove(item);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Removing difficulty level error: {ex.Message}");
+            }
         }
     }
 }
