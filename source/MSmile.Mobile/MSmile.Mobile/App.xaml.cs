@@ -1,11 +1,7 @@
-﻿using MSmile.Mobile.Services;
-using MSmile.Mobile.Views;
-using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-namespace MSmile.Mobile
+﻿namespace MSmile.Mobile
 {
+    using Xamarin.Forms;
+
     using AutoMapper;
 
     using MSmile.Api.Client;
