@@ -3,6 +3,7 @@
     using System;
     using System.Diagnostics;
 
+    using MSmile.Api.Client;
     using MSmile.Dto.Dto;
 
     using Xamarin.Forms;
@@ -54,7 +55,7 @@
         {
             try
             {
-                var item = await this.DifficultyLevelClient.GetAsync(id);
+                var item = await DependencyService.Get<DifficultyLevelClient>().GetAsync(id);
                 Id = id;
                 Name = item.Name;
             }
@@ -78,9 +79,9 @@
             };
 
             if (_id == default)
-                await this.DifficultyLevelClient.AddAsync(dto);
+                await DependencyService.Get<DifficultyLevelClient>().AddAsync(dto);
             else
-                await this.DifficultyLevelClient.UpdateAsync(dto);
+                await DependencyService.Get<DifficultyLevelClient>().UpdateAsync(dto);
 
             await Shell.Current.GoToAsync("..");
         }

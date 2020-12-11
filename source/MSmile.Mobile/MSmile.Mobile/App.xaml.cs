@@ -19,7 +19,6 @@ namespace MSmile.Mobile
 
             var mapper = CreateMapper();
             DependencyService.RegisterSingleton(mapper);
-            DependencyService.Register<MockDataStore>();
             DependencyService.Register<DifficultyLevelClient>();
             MainPage = new AppShell();
         }

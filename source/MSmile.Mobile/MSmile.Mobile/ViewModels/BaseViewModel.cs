@@ -1,20 +1,15 @@
-﻿using MSmile.Mobile.Models;
-using MSmile.Mobile.Services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Xamarin.Forms;
-
-namespace MSmile.Mobile.ViewModels
+﻿namespace MSmile.Mobile.ViewModels
 {
-    using MSmile.Api.Client;
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
 
+    /// <summary>
+    /// Base view model.
+    /// </summary>
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
-        public DifficultyLevelClient DifficultyLevelClient => DependencyService.Get<DifficultyLevelClient>();
-
         bool isBusy = false;
         public bool IsBusy
         {
