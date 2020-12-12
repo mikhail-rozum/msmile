@@ -9,6 +9,7 @@
     using AutoMapper;
 
     using MSmile.Api.Client;
+    using MSmile.Mobile.Views.Employee;
 
     using Xamarin.Forms;
 
@@ -38,7 +39,20 @@
             set => SetProperty(ref _selectedItem, value);
         }
 
+        /// <summary>
+        /// Load item command.
+        /// </summary>
         public Command LoadItemsCommand => new Command(async () => await ExecuteLoadItems());
+
+        /// <summary>
+        /// Add item command.
+        /// </summary>
+        public Command AddItemCommand => new Command(ExecuteAddItem);
+
+        /// <summary>
+        /// Item tapped command.
+        /// </summary>
+        public Command<EmployeeItemViewModel> ItemTappedCommand => new Command<EmployeeItemViewModel>(ExecuteTappedItem);
 
         /// <summary>
         /// ctor.
@@ -77,6 +91,20 @@
             {
                 IsBusy = false;
             }
+        }
+
+        private async void ExecuteAddItem()
+        {
+            await Shell.Current.GoToAsync(nameof(EmployeeDetailPage));
+        }
+
+        private async void ExecuteTappedItem(EmployeeItemViewModel item)
+        {
+            if (item == null)
+                return;
+            
+            var state = $"{nameof(EmployeeDetailPage)}?{nameof(EmployeeDetailViewModel.ItemId)}={item.Id}";
+            await Shell.Current.GoToAsync(state);
         }
     }
 }

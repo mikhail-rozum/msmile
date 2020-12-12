@@ -1,5 +1,7 @@
 ﻿namespace MSmile.Mobile
 {
+    using System;
+
     using AutoMapper;
 
     using MSmile.Dto.Dto;
@@ -18,6 +20,9 @@
         {
             CreateMap<DifficultyLevelDto, DifficultyLevelItemViewModel>();
             CreateMap<EmployeeDto, EmployeeItemViewModel>();
+            CreateMap<EmployeeDto, EmployeeDetailViewModel>();
+            CreateMap<EmployeeDetailViewModel, EmployeeDto>()
+                .ForMember(dst => dst.BirthDate, opt => opt.MapFrom(src => src.BirthDate.HasValue ? src.BirthDate.Value.ToUniversalTime() : (DateTime?)null));
         }
     }
 }

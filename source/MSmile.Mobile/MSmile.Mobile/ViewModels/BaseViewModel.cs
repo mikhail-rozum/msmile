@@ -5,6 +5,10 @@
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
 
+    using AutoMapper;
+
+    using Xamarin.Forms;
+
     /// <summary>
     /// Base view model.
     /// </summary>
@@ -22,6 +26,19 @@
         {
             get { return title; }
             set { SetProperty(ref title, value); }
+        }
+
+        /// <summary>
+        /// Mapper.
+        /// </summary>
+        protected IMapper Mapper { get; }
+
+        /// <summary>
+        /// ctor.
+        /// </summary>
+        public BaseViewModel()
+        {
+            Mapper = DependencyService.Get<IMapper>();
         }
 
         protected bool SetProperty<T>(ref T backingStore, T value,
