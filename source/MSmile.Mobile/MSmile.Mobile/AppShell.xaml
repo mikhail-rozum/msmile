@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Shell xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:local="clr-namespace:MSmile.Mobile.Views.DifficultyLevel;assembly=MSmile.Mobile"
+       xmlns:local="clr-namespace:MSmile.Mobile.Views.DifficultyLevel"
+       xmlns:emp="clr-namespace:MSmile.Mobile.Views.Employee"
        xmlns:common="clr-namespace:MSmile.Mobile.Views;assembly=MSmile.Mobile"
        Title="MSmile.Mobile"
        x:Class="MSmile.Mobile.AppShell">
@@ -85,6 +86,9 @@
     </FlyoutItem>
     <FlyoutItem Title="Уровни сложности" Icon="icon_feed.png">
         <ShellContent Route="DifficultyLevelPage" ContentTemplate="{DataTemplate local:DifficultyLevelPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Сотрудники" Icon="icon_feed.png">
+        <ShellContent Route="EmployeePage" ContentTemplate="{DataTemplate emp:EmployeePage}" />
     </FlyoutItem>
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->

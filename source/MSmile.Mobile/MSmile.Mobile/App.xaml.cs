@@ -16,6 +16,8 @@
             var mapper = CreateMapper();
             DependencyService.RegisterSingleton(mapper);
             DependencyService.Register<DifficultyLevelClient>();
+            DependencyService.Register<EmployeeClient>();
+
             MainPage = new AppShell();
         }
 

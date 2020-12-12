@@ -4,6 +4,7 @@
 
     using MSmile.Dto.Dto;
     using MSmile.Mobile.ViewModels.DifficultyLevel;
+    using MSmile.Mobile.ViewModels.Employee;
 
     /// <summary>
     /// Automapper profile.
@@ -16,6 +17,7 @@
         public MapperProfile()
         {
             CreateMap<DifficultyLevelDto, DifficultyLevelItemViewModel>();
+            CreateMap<EmployeeDto, EmployeeItemViewModel>();
         }
     }
 }
