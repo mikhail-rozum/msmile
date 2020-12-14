@@ -7,6 +7,7 @@
     using MSmile.Dto.Dto;
     using MSmile.Mobile.ViewModels.DifficultyLevel;
     using MSmile.Mobile.ViewModels.Employee;
+    using MSmile.Mobile.ViewModels.Parent;
 
     /// <summary>
     /// Automapper profile.
@@ -23,6 +24,9 @@
             CreateMap<EmployeeDto, EmployeeDetailViewModel>();
             CreateMap<EmployeeDetailViewModel, EmployeeDto>()
                 .ForMember(dst => dst.BirthDate, opt => opt.MapFrom(src => src.BirthDate.HasValue ? src.BirthDate.Value.ToUniversalTime() : (DateTime?)null));
+            CreateMap<ParentDto, ParentItemViewModel>();
+            CreateMap<ParentDto, ParentDetailViewModel>();
+            CreateMap<ParentDetailViewModel, ParentDto>();
         }
     }
 }

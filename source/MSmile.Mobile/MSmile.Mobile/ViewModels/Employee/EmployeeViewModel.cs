@@ -74,10 +74,9 @@
 
             try
             {
-                var mapper = DependencyService.Get<IMapper>();
                 Items.Clear();
                 var result = await DependencyService.Get<EmployeeClient>().GetAllAllAsync();
-                var items = mapper.Map<List<EmployeeItemViewModel>>(result);
+                var items = Mapper.Map<List<EmployeeItemViewModel>>(result);
                 foreach (var item in items)
                 {
                     Items.Add(item);

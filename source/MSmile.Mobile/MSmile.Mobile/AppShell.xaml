@@ -3,6 +3,7 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:MSmile.Mobile.Views.DifficultyLevel"
        xmlns:emp="clr-namespace:MSmile.Mobile.Views.Employee"
+       xmlns:parent="clr-namespace:MSmile.Mobile.Views.Parent"
        xmlns:common="clr-namespace:MSmile.Mobile.Views;assembly=MSmile.Mobile"
        Title="MSmile.Mobile"
        x:Class="MSmile.Mobile.AppShell">
@@ -89,6 +90,9 @@
     </FlyoutItem>
     <FlyoutItem Title="Сотрудники" Icon="icon_feed.png">
         <ShellContent Route="EmployeePage" ContentTemplate="{DataTemplate emp:EmployeePage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Родители" Icon="icon_feed.png">
+        <ShellContent Route="ParentPage" ContentTemplate="{DataTemplate parent:ParentPage}" />
     </FlyoutItem>
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->

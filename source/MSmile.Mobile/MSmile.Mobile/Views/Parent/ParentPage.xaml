@@ -1,28 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:MSmile.Mobile.ViewModels.Employee"
-             x:Class="MSmile.Mobile.Views.Employee.EmployeePage">
+             xmlns:vm="clr-namespace:MSmile.Mobile.ViewModels.Parent"
+             x:Class="MSmile.Mobile.Views.Parent.ParentPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Добавить" Command="{Binding AddItemCommand}" />
     </ContentPage.ToolbarItems>
-    <RefreshView x:DataType="vm:EmployeeViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
-        <CollectionView
-                  x:Name="EmployeeListView"
-                  x:DataType="vm:EmployeeViewModel"
-                  ItemsSource="{Binding Items}"
-                  VerticalOptions="FillAndExpand">
+
+    <RefreshView x:DataType="vm:ParentViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+        <CollectionView 
+            x:Name="ItemsListView"
+            x:DataType="vm:ParentViewModel"
+            ItemsSource="{Binding Items}"
+            VerticalOptions="FillAndExpand">
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="vm:EmployeeItemViewModel">
+                <DataTemplate x:DataType="vm:ParentItemViewModel">
                     <SwipeView>
                         <SwipeView.LeftItems>
-                            <SwipeItem x:DataType="vm:EmployeeItemViewModel"
-                               Text="Delete"
-                               BackgroundColor="LightPink"
-                               Command="{Binding DeleteCommand}"
-                               CommandParameter="{Binding Source={Reference EmployeeListView}, Path=BindingContext}">
+                            <SwipeItem x:DataType="vm:ParentItemViewModel"
+                                Text="Delete"
+                                BackgroundColor="LightPink"
+                                Command="{Binding DeleteCommand}"
+                                CommandParameter="{Binding Source={Reference ItemsListView}, Path=BindingContext}">
                             </SwipeItem>
-                            </SwipeView.LeftItems>
+                        </SwipeView.LeftItems>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -43,7 +44,7 @@
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer 
                                     NumberOfTapsRequired="1"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:EmployeeViewModel}}, Path=ItemTappedCommand}"		
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ParentViewModel}}, Path=ItemTappedCommand}"		
                                     CommandParameter="{Binding}">
                                 </TapGestureRecognizer>
                             </Grid.GestureRecognizers>

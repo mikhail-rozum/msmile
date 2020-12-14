@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MSmile.Mobile.ViewModels.Parent"
+             x:Class="MSmile.Mobile.Views.Parent.ParentDetailPage">
+    <ContentPage.Content>
+        <Grid x:DataType="vm:ParentDetailViewModel">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Column="0" Grid.Row="0" Text="Фамилия"/>
+            <Entry Grid.Column="1" Grid.Row="0" Keyboard="Default" Text="{Binding LastName}"/>
+
+            <Label Grid.Column="0" Grid.Row="1" Text="Имя"/>
+            <Entry Grid.Column="1" Grid.Row="1" Keyboard="Default" Text="{Binding FirstName}"/>
+
+            <Label Grid.Column="0" Grid.Row="2" Text="Отчество"/>
+            <Entry Grid.Column="1" Grid.Row="2" Keyboard="Default" Text="{Binding MiddleName}"/>
+
+            <Label Grid.Column="0" Grid.Row="3" Text="Коментарий"/>
+            <Editor Grid.Column="1" Grid.Row="3" Keyboard="Text" Text="{Binding Comment}"/>
+
+            <StackLayout Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
+                <Button Text="Отменить" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                <Button Text="Сохранить" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
