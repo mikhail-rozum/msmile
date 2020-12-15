@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MSmile.Mobile.ViewModels.Skill"
+             x:Class="MSmile.Mobile.Views.Skill.SkillDetailPage">
+    <ContentPage.Content>
+        <Grid x:DataType="vm:SkillDetailViewModel">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Text="Название" FontSize="Medium" />
+            <Entry Grid.Row="0" Grid.Column="1" Text="{Binding Name, Mode=TwoWay}" FontSize="Medium" />
+
+            <Label Grid.Row="1" Grid.Column="0" Text="Описание" FontSize="Medium" />
+            <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Description, Mode=TwoWay}" FontSize="Medium" />
+
+            <StackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
+                <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                <Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

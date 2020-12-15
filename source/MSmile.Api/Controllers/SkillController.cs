@@ -40,6 +40,18 @@
         }
 
         /// <summary>
+        /// Get the skill.
+        /// </summary>
+        /// <param name="service">Service.</param>
+        /// <param name="id">Id.</param>
+        /// <returns>Skill.</returns>
+        [HttpGet("{id}")]
+        public Task<SkillDto> Get([FromServices] SkillService service, [FromRoute] long id)
+        {
+            return service.Get(id);
+        }
+
+        /// <summary>
         /// Adds Skill.
         /// </summary>
         /// <param name="dto">Dto.</param>

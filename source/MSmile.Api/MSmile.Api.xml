@@ -306,6 +306,14 @@
             <param name="pageSize">Page size.</param>
             <returns>Skills.</returns>
         </member>
+        <member name="M:MSmile.Api.Controllers.SkillController.Get(MSmile.Services.DataServices.SkillService,System.Int64)">
+            <summary>
+            Get the skill.
+            </summary>
+            <param name="service">Service.</param>
+            <param name="id">Id.</param>
+            <returns>Skill.</returns>
+        </member>
         <member name="M:MSmile.Api.Controllers.SkillController.Add(MSmile.Dto.Dto.SkillDto,MSmile.Services.DataServices.SkillService)">
             <summary>
             Adds Skill.

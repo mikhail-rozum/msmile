@@ -1,4 +1,4 @@
-﻿namespace MSmile.Mobile.ViewModels.Parent
+﻿namespace MSmile.Mobile.ViewModels.Skill
 {
     using System;
     using System.Collections.Generic;
@@ -7,45 +7,39 @@
     using System.Threading.Tasks;
 
     using MSmile.Api.Client;
-    using MSmile.Mobile.Views.Parent;
+    using MSmile.Mobile.Views.Skill;
 
     using Xamarin.Forms;
 
     /// <summary>
-    /// Parent view model.
+    /// Skill view model.
     /// </summary>
-    public class ParentViewModel : BaseViewModel
+    public class SkillViewModel : BaseViewModel
     {
-        private readonly ParentClient _parentClient;
-        private ObservableCollection<ParentItemViewModel> _items;
-        private ParentItemViewModel _selectedItem;
+        private ObservableCollection<SkillItemViewModel> _items;
 
         /// <summary>
         /// ctor.
         /// </summary>
-        public ParentViewModel()
+        public SkillViewModel()
         {
-            Items = new ObservableCollection<ParentItemViewModel>();
-            _parentClient = DependencyService.Get<ParentClient>();
-        }
-
-        /// <summary>
-        /// Selected item.
-        /// </summary>
-        public ParentItemViewModel SelectedItem
-        {
-            get => _selectedItem;
-            set => SetProperty(ref _selectedItem, value);
+            Items = new ObservableCollection<SkillItemViewModel>();
+            SkillClient = DependencyService.Get<SkillClient>();
         }
 
         /// <summary>
         /// Items.
         /// </summary>
-        public ObservableCollection<ParentItemViewModel> Items
+        public ObservableCollection<SkillItemViewModel> Items
         {
             get => _items;
             set => SetProperty(ref _items, value);
         }
+
+        /// <summary>
+        /// Skill client.
+        /// </summary>
+        private SkillClient SkillClient { get; }
 
         /// <summary>
         /// Load items command.
@@ -53,14 +47,14 @@
         public Command LoadItemsCommand => new Command(async () => await ExecuteLoadItems());
 
         /// <summary>
-        /// Add item command
+        /// Add item command.
         /// </summary>
         public Command AddItemCommand => new Command(ExecuteAddItem);
 
         /// <summary>
         /// Item tapped command.
         /// </summary>
-        public Command<ParentItemViewModel> ItemTappedCommand => new Command<ParentItemViewModel>(ExecuteTappedItem);
+        public Command<SkillItemViewModel> ItemTappedCommand => new Command<SkillItemViewModel>(ExecuteTappedItem);
 
         /// <summary>
         /// On appearing handler.
@@ -68,7 +62,15 @@
         public void OnAppearing()
         {
             IsBusy = true;
-            SelectedItem = null;
+        }
+
+        private async void ExecuteTappedItem(SkillItemViewModel item)
+        {
+            if (item == null)
+                return;
+
+            var state = $"{nameof(SkillDetailPage)}?{nameof(SkillDetailViewModel.ItemId)}={item.Id}";
+            await Shell.Current.GoToAsync(state);
         }
 
         private async Task ExecuteLoadItems()
@@ -78,8 +80,8 @@
             try
             {
                 Items.Clear();
-                var result = await _parentClient.GetAllAllAsync();
-                var items = Mapper.Map<List<ParentItemViewModel>>(result);
+                var result = await SkillClient.GetAllAllAsync();
+                var items = Mapper.Map<List<SkillItemViewModel>>(result);
                 foreach (var item in items)
                 {
                     Items.Add(item);
@@ -97,16 +99,7 @@
 
         private async void ExecuteAddItem()
         {
-            await Shell.Current.GoToAsync(nameof(ParentDetailPage));
-        }
-
-        private async void ExecuteTappedItem(ParentItemViewModel item)
-        {
-            if (item == null)
-                return;
-
-            var state = $"{nameof(ParentDetailPage)}?{nameof(ParentDetailViewModel.ItemId)}={item.Id}";
-            await Shell.Current.GoToAsync(state);
+            await Shell.Current.GoToAsync(nameof(SkillDetailPage));
         }
     }
 }

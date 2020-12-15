@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MSmile.Mobile.ViewModels.Skill"
+             x:Class="MSmile.Mobile.Views.Skill.SkillPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Добавить" Command="{Binding AddItemCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <RefreshView x:DataType="vm:SkillViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <CollectionView 
+            x:Name="ItemsListView"
+            x:DataType="vm:SkillViewModel"
+            ItemsSource="{Binding Items}"
+            VerticalOptions="FillAndExpand">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:SkillItemViewModel">
+                        <SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItem x:DataType="vm:SkillItemViewModel"
+                                Text="Delete"
+                                BackgroundColor="LightPink"
+                                Command="{Binding DeleteCommand}"
+                                CommandParameter="{Binding Source={Reference ItemsListView}, Path=BindingContext}">
+                                </SwipeItem>
+                            </SwipeView.LeftItems>
+                            <Grid Padding="10" x:DataType="vm:SkillItemViewModel">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.1*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Text="{Binding Id}" 
+                                       LineBreakMode="NoWrap" 
+                                       Style="{DynamicResource ListItemTextStyle}" 
+                                       FontSize="16" />
+                                <Label Grid.Column="1" Text="{Binding Name}" 
+                                       LineBreakMode="NoWrap"
+                                       Style="{DynamicResource ListItemDetailTextStyle}"
+                                       FontSize="13" />
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        NumberOfTapsRequired="1"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SkillViewModel}}, Path=ItemTapped}"		
+                                        CommandParameter="{Binding }">
+                                    </TapGestureRecognizer>
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </ContentPage.Content>
+</ContentPage>

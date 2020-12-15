@@ -46,7 +46,7 @@
                                 <TapGestureRecognizer 
                                     NumberOfTapsRequired="1"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type difficultyLevel:DifficultyLevelViewModel}}, Path=ItemTapped}"		
-                                    CommandParameter="{Binding .}">
+                                    CommandParameter="{Binding}">
                                 </TapGestureRecognizer>
                             </Grid.GestureRecognizers>
                         </Grid>
