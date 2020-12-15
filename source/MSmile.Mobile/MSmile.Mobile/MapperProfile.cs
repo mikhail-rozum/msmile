@@ -8,6 +8,7 @@
     using MSmile.Mobile.ViewModels.DifficultyLevel;
     using MSmile.Mobile.ViewModels.Employee;
     using MSmile.Mobile.ViewModels.Parent;
+    using MSmile.Mobile.ViewModels.Pupil;
     using MSmile.Mobile.ViewModels.Skill;
 
     /// <summary>
@@ -30,6 +31,10 @@
             CreateMap<ParentDetailViewModel, ParentDto>();
             CreateMap<SkillDto, SkillItemViewModel>();
             CreateMap<SkillDto, SkillDetailViewModel>().ReverseMap();
+            CreateMap<PupilDto, PupilItemViewModel>();
+            CreateMap<PupilDto, PupilDetailViewModel>();
+            CreateMap<PupilDetailViewModel, PupilDto>()
+                .ForMember(dst => dst.BirthDate, opt => opt.MapFrom(src => src.BirthDate.ToUniversalTime()));
         }
     }
 }

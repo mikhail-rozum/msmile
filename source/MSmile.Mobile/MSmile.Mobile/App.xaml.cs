@@ -19,6 +19,7 @@
             DependencyService.Register<EmployeeClient>();
             DependencyService.Register<ParentClient>();
             DependencyService.Register<SkillClient>();
+            DependencyService.Register<PupilClient>();
 
             MainPage = new AppShell();
         }

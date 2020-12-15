@@ -5,6 +5,7 @@
        xmlns:emp="clr-namespace:MSmile.Mobile.Views.Employee"
        xmlns:parent="clr-namespace:MSmile.Mobile.Views.Parent"
        xmlns:skill="clr-namespace:MSmile.Mobile.Views.Skill"
+       xmlns:pupil="clr-namespace:MSmile.Mobile.Views.Pupil"
        xmlns:common="clr-namespace:MSmile.Mobile.Views;assembly=MSmile.Mobile"
        Title="MSmile.Mobile"
        x:Class="MSmile.Mobile.AppShell">
@@ -98,7 +99,9 @@
     <FlyoutItem Title="Навыки" Icon="icon_feed.png">
         <ShellContent Route="SkillPage" ContentTemplate="{DataTemplate skill:SkillPage}" />
     </FlyoutItem>
-
+    <FlyoutItem Title="Ученики" Icon="icon_feed.png">
+        <ShellContent Route="PupilPage" ContentTemplate="{DataTemplate pupil:PupilPage}" />
+    </FlyoutItem>
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
     <MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
