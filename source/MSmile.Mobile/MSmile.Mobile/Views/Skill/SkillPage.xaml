@@ -11,6 +11,7 @@
             <CollectionView 
             x:Name="ItemsListView"
             x:DataType="vm:SkillViewModel"
+            SelectionMode="None"
             ItemsSource="{Binding Items}"
             VerticalOptions="FillAndExpand">
                 <CollectionView.ItemTemplate>
@@ -40,8 +41,8 @@
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer 
                                         NumberOfTapsRequired="1"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SkillViewModel}}, Path=ItemTapped}"		
-                                        CommandParameter="{Binding }">
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SkillViewModel}}, Path=ItemTappedCommand}"		
+                                        CommandParameter="{Binding}">
                                     </TapGestureRecognizer>
                                 </Grid.GestureRecognizers>
                             </Grid>

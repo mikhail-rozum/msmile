@@ -18,6 +18,7 @@
             DependencyService.Register<DifficultyLevelClient>();
             DependencyService.Register<EmployeeClient>();
             DependencyService.Register<ParentClient>();
+            DependencyService.Register<SkillClient>();
 
             MainPage = new AppShell();
         }

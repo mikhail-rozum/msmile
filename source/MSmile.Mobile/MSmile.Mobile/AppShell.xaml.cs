@@ -6,6 +6,7 @@
     using MSmile.Mobile.Views.DifficultyLevel;
     using MSmile.Mobile.Views.Employee;
     using MSmile.Mobile.Views.Parent;
+    using MSmile.Mobile.Views.Skill;
 
     public partial class AppShell : Xamarin.Forms.Shell
     {
@@ -15,6 +16,7 @@
             Routing.RegisterRoute(nameof(DifficultyLevelDetailPage), typeof(DifficultyLevelDetailPage));
             Routing.RegisterRoute(nameof(EmployeeDetailPage), typeof(EmployeeDetailPage));
             Routing.RegisterRoute(nameof(ParentDetailPage), typeof(ParentDetailPage));
+            Routing.RegisterRoute(nameof(SkillDetailPage), typeof(SkillDetailPage));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)

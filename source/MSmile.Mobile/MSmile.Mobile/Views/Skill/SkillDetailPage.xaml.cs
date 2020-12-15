@@ -1,5 +1,7 @@
 ﻿namespace MSmile.Mobile.Views.Skill
 {
+    using MSmile.Mobile.ViewModels.Skill;
+
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -9,6 +11,7 @@
         public SkillDetailPage()
         {
             InitializeComponent();
+            BindingContext = new SkillDetailViewModel();
         }
     }
 }

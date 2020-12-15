@@ -30,7 +30,12 @@
         public string ItemId
         {
             get => _itemId;
-            set => _itemId = value;
+            set
+            {
+                _itemId = value;
+                if (!string.IsNullOrEmpty(_itemId))
+                    LoadItem(Convert.ToInt64(_itemId));
+            }
         }
 
         /// <summary>
@@ -104,7 +109,8 @@
         {
             try
             {
-                //var dto = await SkillClient.GetAllAllAsync()
+                var dto = await SkillClient.GetAsync(id);
+                Mapper.Map(dto, this);
             }
             catch (Exception ex)
             {
