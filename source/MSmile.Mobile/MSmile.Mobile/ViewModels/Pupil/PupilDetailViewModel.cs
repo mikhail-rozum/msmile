@@ -1,10 +1,15 @@
 ﻿namespace MSmile.Mobile.ViewModels.Pupil
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
 
     using MSmile.Api.Client;
     using MSmile.Dto.Dto;
+    using MSmile.Mobile.ViewModels.Parent;
+    using MSmile.Mobile.Views;
+
+    using Rg.Plugins.Popup.Pages;
 
     using Xamarin.Forms;
 
@@ -21,6 +26,10 @@
         private DateTime _birthDate;
         private string _comment;
         private string _itemId;
+
+        private List<ParentItemViewModel> _parents;
+
+        private ParentViewModel _parent;
 
         /// <summary>
         /// ctor.
@@ -104,6 +113,24 @@
         }
 
         /// <summary>
+        /// Parent.
+        /// </summary>
+        public ParentViewModel Parent
+        {
+            get => _parent;
+            set => SetProperty(ref _parent, value);
+        }
+
+        /// <summary>
+        /// Parents.
+        /// </summary>
+        public List<ParentItemViewModel> Parents
+        {
+            get => _parents;
+            set => SetProperty(ref _parents, value);
+        }
+
+        /// <summary>
         /// Save command.
         /// </summary>
         public Command SaveCommand => new Command(ExecuteSave, Validate);
@@ -112,6 +139,13 @@
         /// Cancel command.
         /// </summary>
         public Command CancelCommand => new Command(ExecuteCancel);
+
+        public Command AddParentCommand => new Command(ExecuteAddParent);
+
+        private async void ExecuteAddParent()
+        {
+            await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PushAsync(new PopupPage());
+        }
 
         private async void ExecuteCancel()
         {

@@ -15,6 +15,8 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Label Grid.Column="0" Grid.Row="0" Text="Фамилия"/>
         <Entry Grid.Column="1" Grid.Row="0" Keyboard="Default" Text="{Binding LastName}"/>
@@ -31,7 +33,25 @@
         <Label Grid.Column="0" Grid.Row="4" Text="Коментарий"/>
         <Editor Grid.Column="1" Grid.Row="4" Keyboard="Text" Text="{Binding Comment}"/>
 
-        <StackLayout Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
+        <Button Grid.Column="0" Grid.Row="5" Text="Добавить" Clicked="Button_OnClicked"/>
+
+        <TableView Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2">
+            <TableRoot>
+                <TableSection Title="Родители">
+                    <ViewCell>
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <ImageButton Source="abc_ic_star_black_48dp.png"/>
+                                <ImageButton Source="abc_ic_star_half_black_48dp.png"/>
+                            </StackLayout>
+                            <CollectionView></CollectionView>
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+            </TableRoot>
+        </TableView>
+
+        <StackLayout Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
             <Button Text="Отменить" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
             <Button Text="Сохранить" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
         </StackLayout>
