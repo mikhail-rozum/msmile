@@ -30,6 +30,14 @@
         }
 
         /// <summary>
+        /// Brief name.
+        /// </summary>
+        public string BriefName
+        {
+            get => $"{LastName} {FirstName} {MiddleName}";
+        }
+
+        /// <summary>
         /// First name.
         /// </summary>
         public string FirstName

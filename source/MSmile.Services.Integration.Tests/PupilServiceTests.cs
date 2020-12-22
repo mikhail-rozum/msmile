@@ -1,6 +1,7 @@
 ﻿namespace MSmile.Services.Integration.Tests
 {
     using System;
+    using System.Collections.Generic;
 
     using FluentAssertions;
 
@@ -30,13 +31,31 @@
             await this.ExecuteTest(
                 async (context, service) =>
                 {
+                    var parent = new Parent
+                    {
+                        FirstName = "A",
+                        MiddleName = "B",
+                        LastName = "C",
+                        Comment = "D"
+                    };
+
+                    await context.Parent.AddAsync(parent);
+                    await context.SaveChangesAsync();
+
                     var dto = new PupilDto
                     {
                         FirstName = "First name",
                         MiddleName = "Middle name",
                         LastName = "Last name",
                         BirthDate = DateTime.UtcNow.Date,
-                        Comment = "Comment"
+                        Comment = "Comment",
+                        Parents = new List<ListItemDto>
+                        {
+                            new ListItemDto
+                            {
+                                Id = parent.Id
+                            }
+                        }
                     };
 
                     var result = await service.Add(dto);
@@ -50,6 +69,7 @@
                     dto.LastName.Should().Be(entity.LastName);
                     dto.BirthDate.Should().Be(entity.BirthDate);
                     dto.Comment.Should().Be(entity.Comment);
+                    dto.Parents.Count.Should().Be(entity.ParentPupil.Count);
                 });
         }
 

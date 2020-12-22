@@ -27,13 +27,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Converters\" />
     <Folder Include="Models\" />
     <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\ChooseParentView.xaml">
+    <EmbeddedResource Update="Views\Pupil\ChooseParentView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Employee\EmployeeDetailPage.xaml">
@@ -60,5 +59,11 @@
     <EmbeddedResource Update="Views\Skill\SkillPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Views\ChooseParentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
   </ItemGroup>
 </Project>

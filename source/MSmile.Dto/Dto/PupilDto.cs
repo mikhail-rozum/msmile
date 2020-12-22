@@ -1,6 +1,7 @@
 ﻿namespace MSmile.Dto.Dto
 {
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Pupil dto.
@@ -31,5 +32,10 @@
         /// Comment.
         /// </summary>
         public string Comment { get; set; }
+
+        /// <summary>
+        /// Parents.
+        /// </summary>
+        public List<ListItemDto> Parents { get; set; }
     }
 }

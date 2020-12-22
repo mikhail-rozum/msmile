@@ -33,7 +33,7 @@
         <Label Grid.Column="0" Grid.Row="4" Text="Коментарий"/>
         <Editor Grid.Column="1" Grid.Row="4" Keyboard="Text" Text="{Binding Comment}"/>
 
-        <Button Grid.Column="0" Grid.Row="5" Text="Добавить" Clicked="Button_OnClicked"/>
+        <Button Grid.Column="0" Grid.Row="5" Text="Добавить" Command="{Binding AddParentCommand}"/>
 
         <TableView Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2">
             <TableRoot>

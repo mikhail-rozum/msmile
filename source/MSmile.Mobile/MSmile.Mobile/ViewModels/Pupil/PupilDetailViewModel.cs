@@ -7,11 +7,10 @@
     using MSmile.Api.Client;
     using MSmile.Dto.Dto;
     using MSmile.Mobile.ViewModels.Parent;
-    using MSmile.Mobile.Views;
-
-    using Rg.Plugins.Popup.Pages;
 
     using Xamarin.Forms;
+
+    using ChooseParentView = MSmile.Mobile.Views.Pupil.ChooseParentView;
 
     /// <summary>
     /// Pupil detail view model.
@@ -140,11 +139,14 @@
         /// </summary>
         public Command CancelCommand => new Command(ExecuteCancel);
 
+        /// <summary>
+        /// Add parent command.
+        /// </summary>
         public Command AddParentCommand => new Command(ExecuteAddParent);
 
         private async void ExecuteAddParent()
         {
-            await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PushAsync(new PopupPage());
+            await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PushAsync(new ChooseParentView(Id));
         }
 
         private async void ExecuteCancel()
