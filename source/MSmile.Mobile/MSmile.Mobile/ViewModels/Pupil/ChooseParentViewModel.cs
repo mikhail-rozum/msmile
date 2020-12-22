@@ -118,17 +118,18 @@
                     return;
 
                 var dto = await _pupilClient.GetAsync(_pupilId);
-                await _pupilClient.AddAsync(dto);
+                dto.Parents ??= new List<ListItemDto>();
+
+                dto.Parents.Add(new ListItemDto
+                {
+                    Id = SelectedItem.Id
+                });
+                await _pupilClient.UpdateAsync(dto);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
             }
-            finally
-            {
-                await Shell.Current.GoToAsync("..");
-            }
         }
-
     }
 }

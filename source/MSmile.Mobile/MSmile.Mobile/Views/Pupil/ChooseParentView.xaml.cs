@@ -1,9 +1,13 @@
 ﻿namespace MSmile.Mobile.Views.Pupil
 {
+    using System;
+
     using dotMorten.Xamarin.Forms;
 
     using MSmile.Mobile.ViewModels.Parent;
     using MSmile.Mobile.ViewModels.Pupil;
+
+    using Rg.Plugins.Popup.Extensions;
 
     using Xamarin.Forms.Xaml;
 
@@ -34,6 +38,11 @@
             {
                 _viewModel.SelectedItem = selectedItem;
             }
+        }
+
+        private void OnSaveClicked(object sender, EventArgs e)
+        {
+            Navigation.PopPopupAsync();
         }
     }
 }

@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:MSmile.Mobile.ViewModels.Pupil"
+             xmlns:pvm="clr-namespace:MSmile.Mobile.ViewModels.Parent"
              x:Class="MSmile.Mobile.Views.Pupil.PupilDetailPage">
     <Grid x:DataType="vm:PupilDetailViewModel">
         <Grid.ColumnDefinitions>
@@ -15,6 +16,7 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition Height="*"/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
@@ -35,23 +37,19 @@
 
         <Button Grid.Column="0" Grid.Row="5" Text="Добавить" Command="{Binding AddParentCommand}"/>
 
-        <TableView Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2">
-            <TableRoot>
-                <TableSection Title="Родители">
-                    <ViewCell>
-                        <StackLayout>
-                            <StackLayout Orientation="Horizontal">
-                                <ImageButton Source="abc_ic_star_black_48dp.png"/>
-                                <ImageButton Source="abc_ic_star_half_black_48dp.png"/>
-                            </StackLayout>
-                            <CollectionView></CollectionView>
-                        </StackLayout>
-                    </ViewCell>
-                </TableSection>
-            </TableRoot>
-        </TableView>
+        <CollectionView Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" ItemsSource="{Binding Parents}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="pvm:ParentItemViewModel">
+                    <StackLayout Margin="3" Orientation="Horizontal">
+                        <Label Text="{Binding LastName}"/>
+                        <Label Text="{Binding FirstName}"/>
+                        <Label Text="{Binding MiddleName}"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
-        <StackLayout Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
+        <StackLayout Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
             <Button Text="Отменить" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
             <Button Text="Сохранить" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
         </StackLayout>

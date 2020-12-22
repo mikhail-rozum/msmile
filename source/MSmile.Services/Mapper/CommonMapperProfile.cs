@@ -22,7 +22,8 @@
                     opt => opt.MapFrom(src => src.ParentId))
                 .ForMember(dst => dst.Name, 
                     opt => opt.MapFrom(src => $"{src.Parent.LastName} {src.Parent.FirstName} {src.Parent.MiddleName}"));
-            this.CreateMap<Pupil, PupilDto>();
+            this.CreateMap<Pupil, PupilDto>()
+                .ForMember(dst => dst.Parents, opt => opt.MapFrom(src => src.ParentPupil));
             this.CreateMap<PupilDto, Pupil>().ForMember(
                 dst => dst.ParentPupil,
                 opt =>

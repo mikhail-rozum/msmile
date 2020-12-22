@@ -45,6 +45,7 @@
                 FontSize="30"
                 Text="Добавить"
                 TextColor="White"
+                Clicked="OnSaveClicked"
                 Command="{Binding AddItemCommand}"/>
     </StackLayout>
 </pages:PopupPage>

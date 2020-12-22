@@ -146,7 +146,8 @@
 
         private async void ExecuteAddParent()
         {
-            await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PushAsync(new ChooseParentView(Id));
+            var page = new ChooseParentView(Id);
+            await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PushAsync(page);
         }
 
         private async void ExecuteCancel()
