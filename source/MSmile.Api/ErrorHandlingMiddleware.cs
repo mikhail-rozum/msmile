@@ -42,7 +42,7 @@
             {
                 this.logger.LogInformation(ex, "Business logic error");
                 context.Response.StatusCode = StatusCodes.Status400BadRequest;
-                await context.Response.WriteAsync("Bad request. The sent request could not be processed.");
+                await context.Response.WriteAsync($"Bad request. The sent request could not be processed. Reason: {ex.Message}");
             }
             catch (Exception ex)
             {

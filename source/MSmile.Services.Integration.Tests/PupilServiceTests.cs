@@ -11,6 +11,8 @@
     using MSmile.Dto.Dto;
     using MSmile.Services.DataServices;
 
+    using Newtonsoft.Json;
+
     using Xunit;
 
     /// <inheritdoc />
@@ -101,8 +103,18 @@
                         MiddleName = "Middle name 1",
                         LastName = "Last name 1",
                         Comment = "Comment 1",
-                        BirthDate = DateTime.UtcNow.AddDays(1).Date
+                        BirthDate = DateTime.UtcNow.AddDays(1).Date,
+                        Parents = new List<ListItemDto>
+                        {
+                            new ListItemDto
+                            {
+                                Id = 111,
+                                Name = "asdfasfasdf"
+                            }
+                        }
                     };
+
+                    var str = JsonConvert.SerializeObject(dto);
 
                     var result = await service.Update(dto);
                     var entity = await context.Pupil.FirstOrDefaultAsync(x => x.Id == pupil.Id);

@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:MSmile.Mobile.ViewModels.Pupil"
-             xmlns:pvm="clr-namespace:MSmile.Mobile.ViewModels.Parent"
+             xmlns:pvm="clr-namespace:MSmile.Mobile.ViewModels"
              x:Class="MSmile.Mobile.Views.Pupil.PupilDetailPage">
     <Grid x:DataType="vm:PupilDetailViewModel">
         <Grid.ColumnDefinitions>
@@ -17,7 +17,6 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition Height="*"/>
-            <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Label Grid.Column="0" Grid.Row="0" Text="Фамилия"/>
@@ -37,17 +36,18 @@
 
         <Button Grid.Column="0" Grid.Row="5" Text="Добавить" Command="{Binding AddParentCommand}"/>
 
-        <CollectionView Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" ItemsSource="{Binding Parents}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="pvm:ParentItemViewModel">
-                    <StackLayout Margin="3" Orientation="Horizontal">
-                        <Label Text="{Binding LastName}"/>
-                        <Label Text="{Binding FirstName}"/>
-                        <Label Text="{Binding MiddleName}"/>
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+        <ScrollView Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2">
+            <CollectionView x:Name="ParentsItemsView" ItemsSource="{Binding Parents}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="pvm:ListItemViewModel">
+                        <StackLayout Orientation="Horizontal">
+                            <ImageButton Source="red_cross.png" Command="{Binding Source={Reference ParentsItemsView}, Path=BindingContext.DeleteParentCommand}" CommandParameter="{Binding Id}"/>
+                            <Label Margin="3" FontSize="Large" Text="{Binding Name}"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
 
         <StackLayout Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
             <Button Text="Отменить" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>

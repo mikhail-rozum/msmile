@@ -55,7 +55,7 @@
         /// Get all objects.
         /// </summary>
         /// <returns>Dtos.</returns>
-        public Task<List<TDto>> GetAll()
+        public virtual Task<List<TDto>> GetAll()
         {
             return this.Repository
                 .Get()
@@ -69,7 +69,7 @@
         /// <param name="page">Page number.</param>
         /// <param name="pageSize">Page size.</param>
         /// <returns>Dtos.</returns>
-        public Task<List<TDto>> GetAll(int page, int pageSize)
+        public virtual Task<List<TDto>> GetAll(int page, int pageSize)
         {
             return this.Repository
                 .Get()
@@ -84,7 +84,7 @@
         /// </summary>
         /// <param name="id">Id.</param>
         /// <returns>Object.</returns>
-        public Task<TDto> Get(long id)
+        public virtual Task<TDto> Get(long id)
         {
             return this.Repository
                 .Get()
@@ -98,7 +98,7 @@
         /// </summary>
         /// <param name="dto">Dto.</param>
         /// <returns>Dto.</returns>
-        public async Task<TDto> Add(TDto dto)
+        public virtual async Task<TDto> Add(TDto dto)
         {
             dto.Id = default;
 
@@ -118,10 +118,9 @@
         /// </summary>
         /// <param name="dto">Dto.</param>
         /// <returns>Dto.</returns>
-        public async Task<TDto> Update(TDto dto)
+        public virtual async Task<TDto> Update(TDto dto)
         {
-            var entity = await this.Repository
-                .SingleOrDefaultAsync(x => x.Id == dto.Id) 
+            var entity = await GetEntityForUpdate(dto.Id)
                 ?? throw new BusinessException(MessageConstants.Common.EntityNotFound);
 
             this.Mapper.Map(dto, entity);
@@ -139,9 +138,19 @@
         /// Deletes object.
         /// </summary>
         /// <param name="id">Id.</param>
-        public Task Delete(long id)
+        public virtual Task Delete(long id)
         {
             return this.Repository.DeleteAsync(x => x.Id == id);
+        }
+
+        /// <summary>
+        /// Returns an entity (and child collections if it is necessary) for update.
+        /// </summary>
+        /// <param name="id">Id.</param>
+        /// <remarks>Override this method if you need to update entity's sub-collections.</remarks>
+        protected virtual Task<TEntity> GetEntityForUpdate(long id)
+        {
+            return this.Repository.Get(x => x.Id == id).SingleOrDefaultAsync();
         }
     }
 }

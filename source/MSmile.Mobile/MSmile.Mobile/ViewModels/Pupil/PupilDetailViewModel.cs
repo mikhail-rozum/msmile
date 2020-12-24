@@ -2,7 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Diagnostics;
+    using System.Linq;
 
     using MSmile.Api.Client;
     using MSmile.Dto.Dto;
@@ -26,7 +28,7 @@
         private string _comment;
         private string _itemId;
 
-        private List<ParentItemViewModel> _parents;
+        private ObservableCollection<ListItemViewModel> _parents;
 
         private ParentViewModel _parent;
 
@@ -123,7 +125,7 @@
         /// <summary>
         /// Parents.
         /// </summary>
-        public List<ParentItemViewModel> Parents
+        public ObservableCollection<ListItemViewModel> Parents
         {
             get => _parents;
             set => SetProperty(ref _parents, value);
@@ -143,6 +145,27 @@
         /// Add parent command.
         /// </summary>
         public Command AddParentCommand => new Command(ExecuteAddParent);
+
+        /// <summary>
+        /// Delete parent command.
+        /// </summary>
+        public Command<long> DeleteParentCommand => new Command<long>(ExecuteDeleteParent);
+
+        private async void ExecuteDeleteParent(long parentId)
+        {
+            try
+            {
+                var dto = await PupilClient.GetAsync(Id);
+                dto.Parents = dto.Parents?.Where(x => x.Id != parentId).ToList();
+                await PupilClient.UpdateAsync(dto);
+                var removedParent = Parents.First(x => x.Id == parentId);
+                Parents.Remove(removedParent);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
 
         private async void ExecuteAddParent()
         {
