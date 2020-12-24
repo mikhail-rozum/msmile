@@ -38,6 +38,7 @@
         public PupilDetailViewModel()
         {
             PupilClient = DependencyService.Get<PupilClient>();
+            Parents = new ObservableCollection<ListItemViewModel>();
         }
 
         /// <summary>
@@ -149,17 +150,13 @@
         /// <summary>
         /// Delete parent command.
         /// </summary>
-        public Command<long> DeleteParentCommand => new Command<long>(ExecuteDeleteParent);
+        public Command<ListItemViewModel> DeleteParentCommand => new Command<ListItemViewModel>(ExecuteDeleteParent);
 
-        private async void ExecuteDeleteParent(long parentId)
+        private void ExecuteDeleteParent(ListItemViewModel parent)
         {
             try
             {
-                var dto = await PupilClient.GetAsync(Id);
-                dto.Parents = dto.Parents?.Where(x => x.Id != parentId).ToList();
-                await PupilClient.UpdateAsync(dto);
-                var removedParent = Parents.First(x => x.Id == parentId);
-                Parents.Remove(removedParent);
+                Parents.Remove(parent);
             }
             catch (Exception ex)
             {
