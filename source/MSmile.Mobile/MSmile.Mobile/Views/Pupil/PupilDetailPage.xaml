@@ -40,7 +40,7 @@
             <CollectionView x:Name="ParentsItemsView" ItemsSource="{Binding Parents}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="pvm:ListItemViewModel">
-                        <StackLayout Orientation="Horizontal">
+                        <StackLayout Orientation="Horizontal" Margin="3">
                             <ImageButton Source="red_cross.png" Command="{Binding Source={Reference ParentsItemsView}, Path=BindingContext.DeleteParentCommand}" CommandParameter="{Binding Id}"/>
                             <Label Margin="3" FontSize="Large" Text="{Binding Name}"/>
                         </StackLayout>

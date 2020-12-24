@@ -170,6 +170,7 @@
         private async void ExecuteAddParent()
         {
             var page = new ChooseParentView(Id);
+            page.Disappearing += OnChooseParentClosed;
             await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PushAsync(page);
         }
 
@@ -212,6 +213,28 @@
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+            }
+        }
+
+        private void OnChooseParentClosed(object sender, EventArgs e)
+        {
+            try
+            {
+                var page = (ChooseParentView)sender;
+
+                if (!page.Result || page.ViewModel.SelectedItem == null)
+                    return;
+
+                this.Parents.Add(
+                    new ListItemViewModel
+                    {
+                        Id = page.ViewModel.SelectedItem.Id,
+                        Name = $"{page.ViewModel.SelectedItem.LastName} {page.ViewModel.SelectedItem.FirstName} {page.ViewModel.SelectedItem.MiddleName}"
+                    });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
             }
         }
     }

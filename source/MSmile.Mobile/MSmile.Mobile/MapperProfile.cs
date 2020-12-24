@@ -22,7 +22,7 @@
         /// </summary>
         public MapperProfile()
         {
-            CreateMap<ListItemDto, ListItemViewModel>();
+            CreateMap<ListItemDto, ListItemViewModel>().ReverseMap();
             CreateMap<DifficultyLevelDto, DifficultyLevelItemViewModel>();
             CreateMap<EmployeeDto, EmployeeItemViewModel>();
             CreateMap<EmployeeDto, EmployeeDetailViewModel>();

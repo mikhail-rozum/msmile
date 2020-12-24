@@ -14,13 +14,17 @@
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ChooseParentView
     {
-        private readonly ChooseParentViewModel _viewModel;
+        public ChooseParentViewModel ViewModel { get; }
+
+        public bool Result { get; private set; }
+
+
 
         public ChooseParentView(long pupilId)
         {
             InitializeComponent();
 
-            BindingContext = _viewModel = new ChooseParentViewModel(pupilId);
+            BindingContext = ViewModel = new ChooseParentViewModel(pupilId);
         }
 
         private void OnTextChanged(object sender, AutoSuggestBoxTextChangedEventArgs e)
@@ -28,7 +32,7 @@
             if (e.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
                 var autocompleteBox = (AutoSuggestBox)sender;
-                _viewModel.UpdateSuggestions(autocompleteBox.Text);
+                ViewModel.UpdateSuggestions(autocompleteBox.Text);
             }
         }
 
@@ -36,12 +40,13 @@
         {
             if (e.ChosenSuggestion is ParentItemViewModel selectedItem)
             {
-                _viewModel.SelectedItem = selectedItem;
+                ViewModel.SelectedItem = selectedItem;
             }
         }
 
         private void OnSaveClicked(object sender, EventArgs e)
         {
+            Result = true;
             Navigation.PopPopupAsync();
         }
     }

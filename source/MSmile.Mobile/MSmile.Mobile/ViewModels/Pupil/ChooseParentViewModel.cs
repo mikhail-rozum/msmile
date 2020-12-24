@@ -112,24 +112,6 @@
 
         private async void ExecuteAddItem()
         {
-            try
-            {
-                if (SelectedItem == null)
-                    return;
-
-                var dto = await _pupilClient.GetAsync(_pupilId);
-                dto.Parents ??= new List<ListItemDto>();
-
-                dto.Parents.Add(new ListItemDto
-                {
-                    Id = SelectedItem.Id
-                });
-                await _pupilClient.UpdateAsync(dto);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
         }
     }
 }
