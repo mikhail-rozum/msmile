@@ -1,9 +1,9 @@
 ﻿namespace MSmile.Dto.Dto
 {
     /// <summary>
-    /// Task dto.
+    /// Exercise dto.
     /// </summary>
-    public class TaskDto : BaseDto
+    public class ExerciseDto : BaseDto
     {
         /// <summary>
         /// Name.

@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 
+#nullable disable
+
 namespace MSmile.Db.Entities
 {
     public partial class DifficultyLevel
     {
         public DifficultyLevel()
         {
-            Task = new HashSet<Task>();
+            Exercises = new HashSet<Exercise>();
         }
 
         public long Id { get; set; }
         public string Name { get; set; }
 
-        public virtual ICollection<Task> Task { get; set; }
+        public virtual ICollection<Exercise> Exercises { get; set; }
     }
 }

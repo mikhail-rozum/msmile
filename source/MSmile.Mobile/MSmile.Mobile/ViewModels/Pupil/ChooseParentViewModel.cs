@@ -3,10 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
 
     using MSmile.Api.Client;
-    using MSmile.Dto.Dto;
     using MSmile.Mobile.ViewModels.Parent;
 
     using Xamarin.Forms;

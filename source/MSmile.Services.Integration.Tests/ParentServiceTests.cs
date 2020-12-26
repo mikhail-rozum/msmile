@@ -37,7 +37,7 @@
                     };
 
                     var result = await service.Add(dto);
-                    var entity = await context.Parent.FirstOrDefaultAsync(x => x.Id == result.Id);
+                    var entity = await context.Parents.FirstOrDefaultAsync(x => x.Id == result.Id);
 
                     result.Should().NotBeNull();
                     entity.Should().NotBeNull();
@@ -66,7 +66,7 @@
                         Comment = "Comment"
                     };
 
-                    await context.Parent.AddAsync(parent);
+                    await context.Parents.AddAsync(parent);
                     await context.SaveChangesAsync();
 
                     var dto = new ParentDto
@@ -79,7 +79,7 @@
                     };
 
                     var result = await service.Update(dto);
-                    var entity = await context.Parent.FirstOrDefaultAsync(x => x.Id == parent.Id);
+                    var entity = await context.Parents.FirstOrDefaultAsync(x => x.Id == parent.Id);
 
                     result.Should().NotBeNull();
                     entity.Should().NotBeNull();
@@ -118,11 +118,11 @@
                         Comment = "Comment"
                     };
 
-                    await context.Parent.AddAsync(parent);
+                    await context.Parents.AddAsync(parent);
                     await context.SaveChangesAsync();
 
                     await service.Delete(parent.Id);
-                    var entity = await context.Parent.FirstOrDefaultAsync(x => x.Id == parent.Id);
+                    var entity = await context.Parents.FirstOrDefaultAsync(x => x.Id == parent.Id);
 
                     entity.Should().BeNull();
                 });
@@ -145,7 +145,7 @@
                         Comment = "Comment"
                     };
 
-                    await context.Parent.AddAsync(parent);
+                    await context.Parents.AddAsync(parent);
                     await context.SaveChangesAsync();
 
                     var result = await service.Get(parent.Id);

@@ -1,5 +1,7 @@
 ﻿namespace MSmile.Services.Integration.Tests
 {
+    using System.Threading.Tasks;
+
     using FluentAssertions;
 
     using Microsoft.EntityFrameworkCore;
@@ -11,10 +13,10 @@
     using Xunit;
 
     /// <inheritdoc />
-    public class TaskServiceTests : TestBase<TaskService>
+    public class ExerciseServiceTests : TestBase<ExerciseService>
     {
         /// <inheritdoc />
-        public TaskServiceTests(DiFixture diFixture)
+        public ExerciseServiceTests(DiFixture diFixture)
             : base(diFixture)
         {
         }
@@ -23,7 +25,7 @@
         /// Add successful test.
         /// </summary>
         [Fact]
-        public async System.Threading.Tasks.Task AddShouldSuccess()
+        public async Task AddShouldSuccess()
         {
             await this.ExecuteTest(
                 async (context, service) =>
@@ -33,10 +35,10 @@
                         Name = "Name"
                     };
 
-                    await context.DifficultyLevel.AddAsync(level);
+                    await context.DifficultyLevels.AddAsync(level);
                     await context.SaveChangesAsync();
 
-                    var dto = new TaskDto
+                    var dto = new ExerciseDto
                     {
                         Name = "Name",
                         CustomerDescription = "Customer description",
@@ -45,7 +47,7 @@
                     };
 
                     var result = await service.Add(dto);
-                    var entity = await context.Task.FirstOrDefaultAsync(x => x.Id == result.Id);
+                    var entity = await context.Exercises.FirstOrDefaultAsync(x => x.Id == result.Id);
 
                     result.Should().NotBeNull();
                     entity.Should().NotBeNull();
@@ -62,7 +64,7 @@
         /// Update success test.
         /// </summary>
         [Fact]
-        public async System.Threading.Tasks.Task UpdateShouldSuccess()
+        public async Task UpdateShouldSuccess()
         {
             await this.ExecuteTest(
                 async (context, service) =>
@@ -77,28 +79,28 @@
                         Name = "Name new"
                     };
 
-                    var task = new Task
+                    var exercise = new Exercise
                     {
                         Name = "Name",
                         DifficultyLevel = level,
                         Description = "Desc"
                     };
 
-                    await context.DifficultyLevel.AddAsync(level);
-                    await context.DifficultyLevel.AddAsync(level2);
-                    await context.Task.AddAsync(task);
+                    await context.DifficultyLevels.AddAsync(level);
+                    await context.DifficultyLevels.AddAsync(level2);
+                    await context.Exercises.AddAsync(exercise);
                     await context.SaveChangesAsync();
 
-                    var dto = new TaskDto
+                    var dto = new ExerciseDto
                     {
-                        Id = task.Id,
+                        Id = exercise.Id,
                         Name = "Name1",
                         Description = "Desc1",
                         DifficultyLevelId = level2.Id
                     };
 
                     var result = await service.Update(dto);
-                    var entity = await context.Task.FirstOrDefaultAsync(x => x.Id == task.Id);
+                    var entity = await context.Exercises.FirstOrDefaultAsync(x => x.Id == exercise.Id);
 
                     dto.Id.Should().Be(result.Id);
                     dto.Id.Should().Be(entity.Id);
@@ -115,7 +117,7 @@
         /// Delete successful test.
         /// </summary>
         [Fact]
-        public async System.Threading.Tasks.Task DeleteShouldSuccess()
+        public async Task DeleteShouldSuccess()
         {
             await this.ExecuteTest(
                 async (context, service) =>
@@ -130,20 +132,20 @@
                         Name = "Name new"
                     };
 
-                    var task = new Task
+                    var exercise = new Exercise
                     {
                         Name = "Name",
                         DifficultyLevel = level,
                         Description = "Desc"
                     };
 
-                    await context.DifficultyLevel.AddAsync(level);
-                    await context.DifficultyLevel.AddAsync(level2);
-                    await context.Task.AddAsync(task);
+                    await context.DifficultyLevels.AddAsync(level);
+                    await context.DifficultyLevels.AddAsync(level2);
+                    await context.Exercises.AddAsync(exercise);
                     await context.SaveChangesAsync();
 
-                    await service.Delete(task.Id);
-                    var entity = await context.Task.FirstOrDefaultAsync(x => x.Id == task.Id);
+                    await service.Delete(exercise.Id);
+                    var entity = await context.Exercises.FirstOrDefaultAsync(x => x.Id == exercise.Id);
 
                     entity.Should().BeNull();
                 });
@@ -153,7 +155,7 @@
         /// Get should return a record.
         /// </summary>
         [Fact]
-        public async System.Threading.Tasks.Task GetShouldReturn()
+        public async Task GetShouldReturn()
         {
             await this.ExecuteTest(
                 async (context, service) =>
@@ -168,19 +170,19 @@
                         Name = "Name new"
                     };
 
-                    var task = new Task
+                    var exercise = new Exercise
                     {
                         Name = "Name",
                         DifficultyLevel = level,
                         Description = "Desc"
                     };
 
-                    await context.DifficultyLevel.AddAsync(level);
-                    await context.DifficultyLevel.AddAsync(level2);
-                    await context.Task.AddAsync(task);
+                    await context.DifficultyLevels.AddAsync(level);
+                    await context.DifficultyLevels.AddAsync(level2);
+                    await context.Exercises.AddAsync(exercise);
                     await context.SaveChangesAsync();
 
-                    var result = await service.Get(task.Id);
+                    var result = await service.Get(exercise.Id);
 
                     result.Should().NotBeNull();
                 });

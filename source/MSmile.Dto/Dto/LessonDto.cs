@@ -1,7 +1,6 @@
 ﻿namespace MSmile.Dto.Dto
 {
     using System;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Lesson dto.
@@ -42,10 +41,5 @@
         /// Comment.
         /// </summary>
         public string Comment { get; set; }
-
-        /// <summary>
-        /// Tasks.
-        /// </summary>
-        public List<DictionaryDto> Tasks { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     using FluentAssertions;
 
@@ -10,8 +11,6 @@
     using MSmile.Db.Entities;
     using MSmile.Dto.Dto;
     using MSmile.Services.DataServices;
-
-    using Newtonsoft.Json;
 
     using Xunit;
 
@@ -28,7 +27,7 @@
         /// Add successful test.
         /// </summary>
         [Fact]
-        public async System.Threading.Tasks.Task AddShouldSuccess()
+        public async Task AddShouldSuccess()
         {
             await this.ExecuteTest(
                 async (context, service) =>
@@ -41,7 +40,7 @@
                         Comment = "D"
                     };
 
-                    await context.Parent.AddAsync(parent);
+                    await context.Parents.AddAsync(parent);
                     await context.SaveChangesAsync();
 
                     var dto = new PupilDto
@@ -61,7 +60,7 @@
                     };
 
                     var result = await service.Add(dto);
-                    var entity = await context.Pupil.FirstOrDefaultAsync(x => x.Id == result.Id);
+                    var entity = await context.Pupils.FirstOrDefaultAsync(x => x.Id == result.Id);
 
                     result.Should().NotBeNull();
                     entity.Should().NotBeNull();
@@ -71,7 +70,7 @@
                     dto.LastName.Should().Be(entity.LastName);
                     dto.BirthDate.Should().Be(entity.BirthDate);
                     dto.Comment.Should().Be(entity.Comment);
-                    dto.Parents.Count.Should().Be(entity.ParentPupil.Count);
+                    dto.Parents.Count.Should().Be(entity.ParentPupils.Count);
                 });
         }
 
@@ -79,7 +78,7 @@
         /// Update successful test.
         /// </summary>
         [Fact]
-        public async System.Threading.Tasks.Task UpdateShouldSuccess()
+        public async Task UpdateShouldSuccess()
         {
             await this.ExecuteTest(
                 async (context, service) =>
@@ -93,7 +92,7 @@
                         Comment = "Comment"
                     };
 
-                    await context.Pupil.AddAsync(pupil);
+                    await context.Pupils.AddAsync(pupil);
                     await context.SaveChangesAsync();
 
                     var dto = new PupilDto
@@ -103,21 +102,11 @@
                         MiddleName = "Middle name 1",
                         LastName = "Last name 1",
                         Comment = "Comment 1",
-                        BirthDate = DateTime.UtcNow.AddDays(1).Date,
-                        Parents = new List<ListItemDto>
-                        {
-                            new ListItemDto
-                            {
-                                Id = 111,
-                                Name = "asdfasfasdf"
-                            }
-                        }
+                        BirthDate = DateTime.UtcNow.AddDays(1).Date
                     };
 
-                    var str = JsonConvert.SerializeObject(dto);
-
                     var result = await service.Update(dto);
-                    var entity = await context.Pupil.FirstOrDefaultAsync(x => x.Id == pupil.Id);
+                    var entity = await context.Pupils.FirstOrDefaultAsync(x => x.Id == pupil.Id);
 
                     result.Should().NotBeNull();
                     entity.Should().NotBeNull();
@@ -146,7 +135,7 @@
         /// Delete successful test.
         /// </summary>
         [Fact]
-        public async System.Threading.Tasks.Task DeleteShouldSuccess()
+        public async Task DeleteShouldSuccess()
         {
             await this.ExecuteTest(
                 async (context, service) =>
@@ -160,12 +149,12 @@
                         Comment = "Comment"
                     };
 
-                    await context.Pupil.AddAsync(pupil);
+                    await context.Pupils.AddAsync(pupil);
                     await context.SaveChangesAsync();
 
                     await service.Delete(pupil.Id);
 
-                    var entity = await context.Pupil.FirstOrDefaultAsync(x => x.Id == pupil.Id);
+                    var entity = await context.Pupils.FirstOrDefaultAsync(x => x.Id == pupil.Id);
 
                     entity.Should().BeNull();
                 });
@@ -175,7 +164,7 @@
         /// Get should return a record.
         /// </summary>
         [Fact]
-        public async System.Threading.Tasks.Task GetShouldReturn()
+        public async Task GetShouldReturn()
         {
             await this.ExecuteTest(
                 async (context, service) =>
@@ -189,7 +178,7 @@
                         Comment = "Comment"
                     };
 
-                    await context.Pupil.AddAsync(pupil);
+                    await context.Pupils.AddAsync(pupil);
                     await context.SaveChangesAsync();
 
                     var result = await service.Get(pupil.Id);

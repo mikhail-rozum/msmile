@@ -26,7 +26,7 @@
         protected override Task<Pupil> GetEntityForUpdate(long id)
         {
             return this.Repository.Get(x => x.Id == id)
-                .Include(x => x.ParentPupil)
+                .Include(x => x.ParentPupils)
                 .SingleOrDefaultAsync();
         }
     }

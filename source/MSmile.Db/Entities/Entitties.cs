@@ -59,9 +59,9 @@
     }
 
     /// <summary>
-    /// Task.
+    /// Exercise.
     /// </summary>
-    public partial class Task : IEntityWithId
+    public partial class Exercise : IEntityWithId
     {
     }
 

@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 
+#nullable disable
+
 namespace MSmile.Db.Entities
 {
-    public partial class Task
+    public partial class Exercise
     {
-        public Task()
+        public Exercise()
         {
-            LessonTask = new HashSet<LessonTask>();
-            TaskSkill = new HashSet<TaskSkill>();
+            ExerciseSkills = new HashSet<ExerciseSkill>();
         }
 
         public long Id { get; set; }
@@ -18,7 +19,6 @@ namespace MSmile.Db.Entities
         public string CustomerDescription { get; set; }
 
         public virtual DifficultyLevel DifficultyLevel { get; set; }
-        public virtual ICollection<LessonTask> LessonTask { get; set; }
-        public virtual ICollection<TaskSkill> TaskSkill { get; set; }
+        public virtual ICollection<ExerciseSkill> ExerciseSkills { get; set; }
     }
 }

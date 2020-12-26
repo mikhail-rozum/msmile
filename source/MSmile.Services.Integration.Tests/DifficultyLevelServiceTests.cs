@@ -37,7 +37,7 @@
 
                     var result = await service.Add(dto);
 
-                    var entity = await context.DifficultyLevel
+                    var entity = await context.DifficultyLevels
                         .AsNoTracking()
                         .FirstOrDefaultAsync(x => x.Id == result.Id);
 
@@ -61,7 +61,7 @@
                         Name = "Test level"
                     };
 
-                    await context.DifficultyLevel.AddAsync(level);
+                    await context.DifficultyLevels.AddAsync(level);
                     await context.SaveChangesAsync();
 
                     var dto = new DifficultyLevelDto
@@ -72,7 +72,7 @@
 
                     var result = await service.Update(dto);
 
-                    var entity = await context.DifficultyLevel.FirstOrDefaultAsync(x => x.Id == level.Id);
+                    var entity = await context.DifficultyLevels.FirstOrDefaultAsync(x => x.Id == level.Id);
 
                     result.Should().NotBeNull();
                     entity.Should().NotBeNull();
@@ -105,7 +105,7 @@
                     await service.Delete(level.Id);
 
                     var entity = await context
-                        .DifficultyLevel
+                        .DifficultyLevels
                         .FirstOrDefaultAsync(x => x.Id == level.Id);
                     entity.Should().BeNull();
                 });

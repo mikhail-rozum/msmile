@@ -51,8 +51,8 @@
                         Comment = "Comment"
                     };
 
-                    await context.Employee.AddAsync(employee);
-                    await context.Pupil.AddAsync(pupil);
+                    await context.Employees.AddAsync(employee);
+                    await context.Pupils.AddAsync(pupil);
                     await context.SaveChangesAsync();
 
                     var dto = new LessonDto
@@ -67,7 +67,7 @@
                     var result = await service.Add(dto);
 
                     var entity = await context
-                        .Lesson
+                        .Lessons
                         .FirstOrDefaultAsync(x => x.Id == result.Id);
 
                     dto.Comment.Should().Be(entity.Comment);
@@ -116,9 +116,9 @@
                         Pupil = pupil
                     };
 
-                    await context.Employee.AddAsync(employee);
-                    await context.Pupil.AddAsync(pupil);
-                    await context.Lesson.AddAsync(lesson);
+                    await context.Employees.AddAsync(employee);
+                    await context.Pupils.AddAsync(pupil);
+                    await context.Lessons.AddAsync(lesson);
                     await context.SaveChangesAsync();
 
                     var dto = new LessonDto
@@ -133,7 +133,7 @@
 
                     var result = await service.Update(dto);
 
-                    var entity = await context.Lesson.FirstOrDefaultAsync(x => x.Id == lesson.Id);
+                    var entity = await context.Lessons.FirstOrDefaultAsync(x => x.Id == lesson.Id);
 
                     result.Should().NotBeNull();
                     entity.Should().NotBeNull();
@@ -195,14 +195,14 @@
                         Pupil = pupil
                     };
 
-                    await context.Employee.AddAsync(employee);
-                    await context.Pupil.AddAsync(pupil);
-                    await context.Lesson.AddAsync(lesson);
+                    await context.Employees.AddAsync(employee);
+                    await context.Pupils.AddAsync(pupil);
+                    await context.Lessons.AddAsync(lesson);
                     await context.SaveChangesAsync();
 
                     await service.Delete(lesson.Id);
 
-                    var entity = await context.Lesson.FirstOrDefaultAsync(x => x.Id == lesson.Id);
+                    var entity = await context.Lessons.FirstOrDefaultAsync(x => x.Id == lesson.Id);
 
                     entity.Should().BeNull();
                 });
@@ -245,9 +245,9 @@
                         Pupil = pupil
                     };
 
-                    await context.Employee.AddAsync(employee);
-                    await context.Pupil.AddAsync(pupil);
-                    await context.Lesson.AddAsync(lesson);
+                    await context.Employees.AddAsync(employee);
+                    await context.Pupils.AddAsync(pupil);
+                    await context.Lessons.AddAsync(lesson);
                     await context.SaveChangesAsync();
 
                     var result = await service.Get(lesson.Id);

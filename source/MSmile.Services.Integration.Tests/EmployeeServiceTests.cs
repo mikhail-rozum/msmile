@@ -44,7 +44,7 @@
 
                     var result = await service.Add(dto);
                     var entity = await context
-                        .Employee
+                        .Employees
                         .AsNoTracking()
                         .FirstOrDefaultAsync(x => x.Id == result.Id);
 
@@ -78,7 +78,7 @@
                         Comment = "Comment"
                     };
 
-                    await context.Employee.AddAsync(employee);
+                    await context.Employees.AddAsync(employee);
                     await context.SaveChangesAsync();
 
                     var dto = new EmployeeDto
@@ -94,7 +94,7 @@
 
                     var result = await service.Update(dto);
                     var entity = await context
-                        .Employee
+                        .Employees
                         .FirstOrDefaultAsync(x => x.Id == employee.Id);
 
                     result.Should().NotBeNull();
@@ -142,12 +142,12 @@
                         Comment = "Comment"
                     };
 
-                    await context.Employee.AddAsync(employee);
+                    await context.Employees.AddAsync(employee);
                     await context.SaveChangesAsync();
 
                     await service.Delete(employee.Id);
 
-                    var entity = await context.Employee.FirstOrDefaultAsync(x => x.Id == employee.Id);
+                    var entity = await context.Employees.FirstOrDefaultAsync(x => x.Id == employee.Id);
                     entity.Should().BeNull();
                 });
         }
@@ -171,7 +171,7 @@
                         Comment = "Comment"
                     };
 
-                    await context.Employee.AddAsync(employee);
+                    await context.Employees.AddAsync(employee);
                     await context.SaveChangesAsync();
 
                     var result = await service.Get(employee.Id);

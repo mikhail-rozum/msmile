@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 
+#nullable disable
+
 namespace MSmile.Db.Entities
 {
     public partial class Employee
     {
         public Employee()
         {
-            Lesson = new HashSet<Lesson>();
-            User = new HashSet<User>();
+            Lessons = new HashSet<Lesson>();
+            Users = new HashSet<User>();
         }
 
         public long Id { get; set; }
@@ -20,7 +22,7 @@ namespace MSmile.Db.Entities
         public string Comment { get; set; }
         public byte[] Photo { get; set; }
 
-        public virtual ICollection<Lesson> Lesson { get; set; }
-        public virtual ICollection<User> User { get; set; }
+        public virtual ICollection<Lesson> Lessons { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

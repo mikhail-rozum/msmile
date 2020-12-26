@@ -5,9 +5,9 @@
     using MSmile.Dto.Dto;
 
     /// <summary>
-    /// Validator for <see cref="TaskDto"/>
+    /// Validator for <see cref="ExerciseDto"/>
     /// </summary>
-    public class TaskValidator : AbstractValidator<TaskDto>
+    public class TaskValidator : AbstractValidator<ExerciseDto>
     {
         /// <summary>
         /// ctor.

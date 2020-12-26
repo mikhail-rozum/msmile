@@ -1,8 +1,6 @@
 ﻿namespace MSmile.Db.Extensions
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
 
     using FluentMigrator.Runner;
 
@@ -57,8 +55,7 @@
         {
             using (var scope = serviceProvider.CreateScope())
             {
-                var runner = scope.ServiceProvider.GetService<IMigrationRunner>();
-
+                var runner = scope.ServiceProvider.GetRequiredService<IMigrationRunner>();
                 runner.MigrateUp();
             }
         }

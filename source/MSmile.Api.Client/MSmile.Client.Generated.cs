@@ -4035,18 +4035,18 @@ namespace MSmile.Api.Client
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
 
         /// <summary>Get all the tasks.</summary>
-        /// <returns>Tasks.</returns>
+        /// <returns>Exercises.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<TaskDto>> GetAllAllAsync()
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<ExerciseDto>> GetAllAllAsync()
         {
             return GetAllAllAsync(System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get all the tasks.</summary>
-        /// <returns>Tasks.</returns>
+        /// <returns>Exercises.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.List<TaskDto>> GetAllAllAsync(System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.List<ExerciseDto>> GetAllAllAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Task");
@@ -4081,7 +4081,7 @@ namespace MSmile.Api.Client
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.List<TaskDto>>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.List<ExerciseDto>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -4112,7 +4112,7 @@ namespace MSmile.Api.Client
         /// <param name="dto">Dto.</param>
         /// <returns>Dto.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<TaskDto> AddAsync(TaskDto dto)
+        public System.Threading.Tasks.Task<ExerciseDto> AddAsync(ExerciseDto dto)
         {
             return AddAsync(dto, System.Threading.CancellationToken.None);
         }
@@ -4122,7 +4122,7 @@ namespace MSmile.Api.Client
         /// <param name="dto">Dto.</param>
         /// <returns>Dto.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<TaskDto> AddAsync(TaskDto dto, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<ExerciseDto> AddAsync(ExerciseDto dto, System.Threading.CancellationToken cancellationToken)
         {
             if (dto == null)
                 throw new System.ArgumentNullException("dto");
@@ -4163,7 +4163,7 @@ namespace MSmile.Api.Client
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<TaskDto>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<ExerciseDto>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -4194,7 +4194,7 @@ namespace MSmile.Api.Client
         /// <param name="dto">Dto.</param>
         /// <returns>Dto.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<TaskDto> UpdateAsync(TaskDto dto)
+        public System.Threading.Tasks.Task<ExerciseDto> UpdateAsync(ExerciseDto dto)
         {
             return UpdateAsync(dto, System.Threading.CancellationToken.None);
         }
@@ -4204,7 +4204,7 @@ namespace MSmile.Api.Client
         /// <param name="dto">Dto.</param>
         /// <returns>Dto.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<TaskDto> UpdateAsync(TaskDto dto, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<ExerciseDto> UpdateAsync(ExerciseDto dto, System.Threading.CancellationToken cancellationToken)
         {
             if (dto == null)
                 throw new System.ArgumentNullException("dto");
@@ -4245,7 +4245,7 @@ namespace MSmile.Api.Client
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<TaskDto>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<ExerciseDto>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -4275,9 +4275,9 @@ namespace MSmile.Api.Client
         /// <summary>Get all the tasks.</summary>
         /// <param name="page">Page number.</param>
         /// <param name="pageSize">Page size.</param>
-        /// <returns>Tasks.</returns>
+        /// <returns>Exercises.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<TaskDto>> GetAllAsync(int? page, int? pageSize)
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<ExerciseDto>> GetAllAsync(int? page, int? pageSize)
         {
             return GetAllAsync(page, pageSize, System.Threading.CancellationToken.None);
         }
@@ -4286,9 +4286,9 @@ namespace MSmile.Api.Client
         /// <summary>Get all the tasks.</summary>
         /// <param name="page">Page number.</param>
         /// <param name="pageSize">Page size.</param>
-        /// <returns>Tasks.</returns>
+        /// <returns>Exercises.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.List<TaskDto>> GetAllAsync(int? page, int? pageSize, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.List<ExerciseDto>> GetAllAsync(int? page, int? pageSize, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Task/getAll?");
@@ -4332,7 +4332,7 @@ namespace MSmile.Api.Client
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.List<TaskDto>>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.List<ExerciseDto>>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);

@@ -1,5 +1,7 @@
 namespace MSmile.Services.Integration.Tests
 {
+    using System.Threading.Tasks;
+
     using FluentAssertions;
 
     using Microsoft.EntityFrameworkCore;
@@ -9,8 +11,6 @@ namespace MSmile.Services.Integration.Tests
     using MSmile.Services.DataServices;
 
     using Xunit;
-
-    using Task = System.Threading.Tasks.Task;
 
     /// <inheritdoc />
     public class SkillServiceTests : TestBase<SkillService>
@@ -41,7 +41,7 @@ namespace MSmile.Services.Integration.Tests
 
                     var result = await service.Add(dto);
 
-                    var entity = await context.Skill
+                    var entity = await context.Skills
                         .AsNoTracking()
                         .FirstOrDefaultAsync(x => x.Id == result.Id);
 
@@ -67,7 +67,7 @@ namespace MSmile.Services.Integration.Tests
                         Description = "Test description"
                     };
 
-                    await context.Skill.AddAsync(skill);
+                    await context.Skills.AddAsync(skill);
                     await context.SaveChangesAsync();
 
                     var dto = new SkillDto
@@ -79,7 +79,7 @@ namespace MSmile.Services.Integration.Tests
 
                     var result = await service.Update(dto);
 
-                    var entity = await context.Skill.FirstOrDefaultAsync(x => x.Id == skill.Id);
+                    var entity = await context.Skills.FirstOrDefaultAsync(x => x.Id == skill.Id);
 
                     result.Should().NotBeNull();
                     entity.Should().NotBeNull();
@@ -110,12 +110,12 @@ namespace MSmile.Services.Integration.Tests
                         Description = "Description"
                     };
 
-                    await context.Skill.AddAsync(skill);
+                    await context.Skills.AddAsync(skill);
                     await context.SaveChangesAsync();
 
                     await service.Delete(skill.Id);
 
-                    var entity = await context.Skill.FirstOrDefaultAsync(x => x.Id == skill.Id);
+                    var entity = await context.Skills.FirstOrDefaultAsync(x => x.Id == skill.Id);
                     entity.Should().BeNull();
                 });
         }
@@ -135,7 +135,7 @@ namespace MSmile.Services.Integration.Tests
                         Description = "Test description"
                     };
 
-                    await context.Skill.AddAsync(skill);
+                    await context.Skills.AddAsync(skill);
                     await context.SaveChangesAsync();
 
                     var result = await service.Get(skill.Id);

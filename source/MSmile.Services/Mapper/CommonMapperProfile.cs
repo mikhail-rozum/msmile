@@ -23,9 +23,9 @@
                 .ForMember(dst => dst.Name, 
                     opt => opt.MapFrom(src => $"{src.Parent.LastName} {src.Parent.FirstName} {src.Parent.MiddleName}"));
             this.CreateMap<Pupil, PupilDto>()
-                .ForMember(dst => dst.Parents, opt => opt.MapFrom(src => src.ParentPupil));
+                .ForMember(dst => dst.Parents, opt => opt.MapFrom(src => src.ParentPupils));
             this.CreateMap<PupilDto, Pupil>().ForMember(
-                dst => dst.ParentPupil,
+                dst => dst.ParentPupils,
                 opt =>
                     opt.MapFrom(
                         src => src.Parents == null
@@ -37,7 +37,7 @@
                                         ParentId = x.Id, PupilId = src.Id
                                     })));
             this.CreateMap<Parent, ParentDto>().ReverseMap();
-            this.CreateMap<Lesson, LessonDto>().ForMember(dst => dst.Tasks, opt => opt.MapFrom(src => src.LessonTask));
+            this.CreateMap<Lesson, LessonDto>();
         }
     }
 }

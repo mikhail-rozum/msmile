@@ -1,0 +1,2 @@
+dotnet ef dbcontext scaffold name=MSmileDb Npgsql.EntityFrameworkCore.PostgreSQL --output-dir Entities --context MSmileDbContext --context-dir Infrastructure --force --verbose --project "..\source\MSmile.Db\MSmile.Db.csproj" --startup-project "..\source\MSmile.Api\MSmile.Api.csproj"
+pause
