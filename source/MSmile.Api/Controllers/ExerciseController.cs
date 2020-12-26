@@ -9,14 +9,14 @@
     using MSmile.Services.DataServices;
 
     /// <summary>
-    /// Task controller.
+    /// Exercise controller.
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class TaskController : Controller
+    public class ExerciseController : Controller
     {
         /// <summary>
-        /// Get all the tasks.
+        /// Get all the exercises.
         /// </summary>
         /// <param name="service">Service.</param>
         /// <returns>Exercises.</returns>
@@ -27,7 +27,7 @@
         }
 
         /// <summary>
-        /// Get all the tasks.
+        /// Get all the exercises.
         /// </summary>
         /// <param name="service">Service.</param>
         /// <param name="page">Page number.</param>
@@ -40,7 +40,7 @@
         }
 
         /// <summary>
-        /// Adds Task.
+        /// Adds exercise.
         /// </summary>
         /// <param name="dto">Dto.</param>
         /// <param name="service">Service.</param>
@@ -52,7 +52,7 @@
         }
 
         /// <summary>
-        /// Updates Task.
+        /// Updates exercise.
         /// </summary>
         /// <param name="dto">Dto.</param>
         /// <param name="service">Service.</param>
@@ -64,10 +64,10 @@
         }
 
         /// <summary>
-        /// Deletes the task.
+        /// Deletes the exercises.
         /// </summary>
         /// <param name="id">Id.</param>
-        /// <param name="service">Task service.</param>
+        /// <param name="service">Exercise service.</param>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] long id, [FromServices] ExerciseService service)
         {

@@ -129,6 +129,50 @@
             <param name="id">Id.</param>
             <param name="service">Employees service.</param>
         </member>
+        <member name="T:MSmile.Api.Controllers.ExerciseController">
+            <summary>
+            Exercise controller.
+            </summary>
+        </member>
+        <member name="M:MSmile.Api.Controllers.ExerciseController.GetAll(MSmile.Services.DataServices.ExerciseService)">
+            <summary>
+            Get all the exercises.
+            </summary>
+            <param name="service">Service.</param>
+            <returns>Exercises.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.ExerciseController.GetAll(MSmile.Services.DataServices.ExerciseService,System.Int32,System.Int32)">
+            <summary>
+            Get all the exercises.
+            </summary>
+            <param name="service">Service.</param>
+            <param name="page">Page number.</param>
+            <param name="pageSize">Page size.</param>
+            <returns>Exercises.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.ExerciseController.Add(MSmile.Dto.Dto.ExerciseDto,MSmile.Services.DataServices.ExerciseService)">
+            <summary>
+            Adds exercise.
+            </summary>
+            <param name="dto">Dto.</param>
+            <param name="service">Service.</param>
+            <returns>Dto.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.ExerciseController.Update(MSmile.Dto.Dto.ExerciseDto,MSmile.Services.DataServices.ExerciseService)">
+            <summary>
+            Updates exercise.
+            </summary>
+            <param name="dto">Dto.</param>
+            <param name="service">Service.</param>
+            <returns>Dto.</returns>
+        </member>
+        <member name="M:MSmile.Api.Controllers.ExerciseController.Delete(System.Int64,MSmile.Services.DataServices.ExerciseService)">
+            <summary>
+            Deletes the exercises.
+            </summary>
+            <param name="id">Id.</param>
+            <param name="service">Exercise service.</param>
+        </member>
         <member name="T:MSmile.Api.Controllers.LessonController">
             <summary>
             Lesson controller.
@@ -336,50 +380,6 @@
             </summary>
             <param name="id">Id.</param>
             <param name="service">Skill service.</param>
-        </member>
-        <member name="T:MSmile.Api.Controllers.TaskController">
-            <summary>
-            Task controller.
-            </summary>
-        </member>
-        <member name="M:MSmile.Api.Controllers.TaskController.GetAll(MSmile.Services.DataServices.ExerciseService)">
-            <summary>
-            Get all the tasks.
-            </summary>
-            <param name="service">Service.</param>
-            <returns>Exercises.</returns>
-        </member>
-        <member name="M:MSmile.Api.Controllers.TaskController.GetAll(MSmile.Services.DataServices.ExerciseService,System.Int32,System.Int32)">
-            <summary>
-            Get all the tasks.
-            </summary>
-            <param name="service">Service.</param>
-            <param name="page">Page number.</param>
-            <param name="pageSize">Page size.</param>
-            <returns>Exercises.</returns>
-        </member>
-        <member name="M:MSmile.Api.Controllers.TaskController.Add(MSmile.Dto.Dto.ExerciseDto,MSmile.Services.DataServices.ExerciseService)">
-            <summary>
-            Adds Task.
-            </summary>
-            <param name="dto">Dto.</param>
-            <param name="service">Service.</param>
-            <returns>Dto.</returns>
-        </member>
-        <member name="M:MSmile.Api.Controllers.TaskController.Update(MSmile.Dto.Dto.ExerciseDto,MSmile.Services.DataServices.ExerciseService)">
-            <summary>
-            Updates Task.
-            </summary>
-            <param name="dto">Dto.</param>
-            <param name="service">Service.</param>
-            <returns>Dto.</returns>
-        </member>
-        <member name="M:MSmile.Api.Controllers.TaskController.Delete(System.Int64,MSmile.Services.DataServices.ExerciseService)">
-            <summary>
-            Deletes the task.
-            </summary>
-            <param name="id">Id.</param>
-            <param name="service">Task service.</param>
         </member>
         <member name="T:MSmile.Api.Controllers.TestController">
             <summary>
