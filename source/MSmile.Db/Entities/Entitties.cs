@@ -24,13 +24,6 @@
     }
 
     /// <summary>
-    /// Lesson task.
-    /// </summary>
-    public partial class LessonTask : IEntity
-    {
-    }
-
-    /// <summary>
     /// Parent.
     /// </summary>
     public partial class Parent : IEntityWithId
@@ -66,9 +59,9 @@
     }
 
     /// <summary>
-    /// Task skill.
+    /// Check list.
     /// </summary>
-    public partial class TaskSkill : IEntity
+    public partial class CheckList : IEntityWithId
     {
     }
 }

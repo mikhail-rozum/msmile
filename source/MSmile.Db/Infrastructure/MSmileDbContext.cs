@@ -18,16 +18,21 @@ namespace MSmile.Db.Infrastructure
         {
         }
 
+        public virtual DbSet<CheckList> CheckLists { get; set; }
+        public virtual DbSet<CheckListExercise> CheckListExercises { get; set; }
         public virtual DbSet<DifficultyLevel> DifficultyLevels { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Exercise> Exercises { get; set; }
         public virtual DbSet<ExerciseSkill> ExerciseSkills { get; set; }
         public virtual DbSet<Lesson> Lessons { get; set; }
+        public virtual DbSet<LessonExerciseResult> LessonExerciseResults { get; set; }
+        public virtual DbSet<LessonStimulus> LessonStimuli { get; set; }
         public virtual DbSet<Parent> Parents { get; set; }
         public virtual DbSet<ParentContact> ParentContacts { get; set; }
         public virtual DbSet<ParentPupil> ParentPupils { get; set; }
         public virtual DbSet<Pupil> Pupils { get; set; }
         public virtual DbSet<Skill> Skills { get; set; }
+        public virtual DbSet<Stimulus> Stimuli { get; set; }
         public virtual DbSet<Test> Tests { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<VersionInfo> VersionInfos { get; set; }
@@ -43,6 +48,44 @@ namespace MSmile.Db.Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "en_US.utf8");
+
+            modelBuilder.Entity<CheckList>(entity =>
+            {
+                entity.ToTable("CheckList");
+
+                entity.HasComment("Check list");
+
+                entity.Property(e => e.Created).HasColumnType("date");
+
+                entity.Property(e => e.Modified).HasColumnType("date");
+
+                entity.HasOne(d => d.Pupil)
+                    .WithMany(p => p.CheckLists)
+                    .HasForeignKey(d => d.PupilId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CheckList_PupilId_Pupil_Id");
+            });
+
+            modelBuilder.Entity<CheckListExercise>(entity =>
+            {
+                entity.HasKey(e => new { e.CheckListId, e.ExerciseId });
+
+                entity.ToTable("CheckListExercise");
+
+                entity.HasComment("Link between check list and exercise");
+
+                entity.HasOne(d => d.CheckList)
+                    .WithMany(p => p.CheckListExercises)
+                    .HasForeignKey(d => d.CheckListId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CheckListExercise_CheckListId_CheckList_Id");
+
+                entity.HasOne(d => d.Exercise)
+                    .WithMany(p => p.CheckListExercises)
+                    .HasForeignKey(d => d.ExerciseId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CheckListExercise_ExerciseId_Exercise_Id");
+            });
 
             modelBuilder.Entity<DifficultyLevel>(entity =>
             {
@@ -135,17 +178,59 @@ namespace MSmile.Db.Infrastructure
 
                 entity.Property(e => e.Comment).HasMaxLength(1000);
 
+                entity.HasOne(d => d.CheckList)
+                    .WithMany(p => p.Lessons)
+                    .HasForeignKey(d => d.CheckListId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Lesson_CheckListId_CheckList_Id");
+
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.Lessons)
                     .HasForeignKey(d => d.EmployeeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Lesson_EmployeeId_Employee_Id");
+            });
 
-                entity.HasOne(d => d.Pupil)
-                    .WithMany(p => p.Lessons)
-                    .HasForeignKey(d => d.PupilId)
+            modelBuilder.Entity<LessonExerciseResult>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("LessonExerciseResult");
+
+                entity.HasComment("Results of execution of each exercise on a lesson");
+
+                entity.HasOne(d => d.Exercise)
+                    .WithMany()
+                    .HasForeignKey(d => d.ExerciseId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Lesson_PupilId_Pupil_Id");
+                    .HasConstraintName("FK_LessonExerciseResult_ExerciseId_Exercise_Id");
+
+                entity.HasOne(d => d.Lesson)
+                    .WithMany()
+                    .HasForeignKey(d => d.LessonId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_LessonExerciseResult_LessonId_Lesson_Id");
+            });
+
+            modelBuilder.Entity<LessonStimulus>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("LessonStimulus");
+
+                entity.HasComment("Stimulus and their frequency for each lesson");
+
+                entity.HasOne(d => d.Lesson)
+                    .WithMany()
+                    .HasForeignKey(d => d.LessonId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_LessonStimulus_LessonId_Lesson_Id");
+
+                entity.HasOne(d => d.Stimulus)
+                    .WithMany()
+                    .HasForeignKey(d => d.StimulusId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_LessonStimulus_StimulusId_Stimulus_Id");
             });
 
             modelBuilder.Entity<Parent>(entity =>
@@ -241,6 +326,23 @@ namespace MSmile.Db.Infrastructure
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<Stimulus>(entity =>
+            {
+                entity.ToTable("Stimulus");
+
+                entity.HasComment("Stimulus for pupils");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.HasOne(d => d.Pupil)
+                    .WithMany(p => p.Stimuli)
+                    .HasForeignKey(d => d.PupilId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Stimulus_PupilId_Pupil_Id");
             });
 
             modelBuilder.Entity<Test>(entity =>

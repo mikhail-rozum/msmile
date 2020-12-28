@@ -51,8 +51,15 @@
                         Comment = "Comment"
                     };
 
+                    var checkList = new CheckList
+                    {
+                        Pupil = pupil,
+                        Created = DateTime.Now
+                    };
+
                     await context.Employees.AddAsync(employee);
                     await context.Pupils.AddAsync(pupil);
+                    await context.CheckLists.AddAsync(checkList);
                     await context.SaveChangesAsync();
 
                     var dto = new LessonDto
@@ -61,7 +68,7 @@
                         Date = DateTime.UtcNow,
                         EmployeeId = employee.Id,
                         FactDate = DateTime.UtcNow.AddDays(1),
-                        PupilId = pupil.Id
+                        CheckListId = checkList.Id
                     };
 
                     var result = await service.Add(dto);
@@ -73,8 +80,8 @@
                     dto.Comment.Should().Be(entity.Comment);
                     dto.Date.Date.Should().Be(entity.Date.Date);
                     dto.EmployeeId.Should().Be(entity.EmployeeId);
+                    dto.CheckListId.Should().Be(entity.CheckListId);
                     dto.FactDate.Value.Date.Should().Be(entity.FactDate.Value.Date);
-                    dto.PupilId.Should().Be(entity.PupilId);
                 });
         }
 
@@ -107,17 +114,24 @@
                         Comment = "Comment"
                     };
 
+                    var checkList = new CheckList
+                    {
+                        Pupil = pupil,
+                        Created = DateTime.Now
+                    };
+
                     var lesson = new Lesson
                     {
                         Comment = "Comment",
                         Date = DateTime.UtcNow,
                         Employee = employee,
                         FactDate = DateTime.UtcNow.AddDays(1),
-                        Pupil = pupil
+                        CheckList = checkList
                     };
 
                     await context.Employees.AddAsync(employee);
                     await context.Pupils.AddAsync(pupil);
+                    await context.CheckLists.AddAsync(checkList);
                     await context.Lessons.AddAsync(lesson);
                     await context.SaveChangesAsync();
 
@@ -127,8 +141,8 @@
                         Comment = "Comment1",
                         Date = DateTime.UtcNow.AddDays(3),
                         EmployeeId = employee.Id,
-                        FactDate = DateTime.UtcNow.AddDays(4),
-                        PupilId = pupil.Id,
+                        CheckListId = checkList.Id,
+                        FactDate = DateTime.UtcNow.AddDays(4)
                     };
 
                     var result = await service.Update(dto);
@@ -150,11 +164,11 @@
                     dto.EmployeeId.Should().Be(result.EmployeeId);
                     dto.EmployeeId.Should().Be(entity.EmployeeId);
 
+                    dto.CheckListId.Should().Be(result.CheckListId);
+                    dto.CheckListId.Should().Be(entity.CheckListId);
+
                     dto.FactDate.Value.Date.Should().Be(result.FactDate.Value.Date);
                     dto.FactDate.Value.Date.Should().Be(entity.FactDate.Value.Date);
-
-                    dto.PupilId.Should().Be(result.PupilId);
-                    dto.PupilId.Should().Be(entity.PupilId);
                 });
         }
 
@@ -186,17 +200,24 @@
                         Comment = "Comment"
                     };
 
+                    var checkList = new CheckList
+                    {
+                        Pupil = pupil,
+                        Created = DateTime.Now
+                    };
+
                     var lesson = new Lesson
                     {
                         Comment = "Comment",
                         Date = DateTime.UtcNow,
                         Employee = employee,
-                        FactDate = DateTime.UtcNow.AddDays(1),
-                        Pupil = pupil
+                        CheckList = checkList,
+                        FactDate = DateTime.UtcNow.AddDays(1)
                     };
 
                     await context.Employees.AddAsync(employee);
                     await context.Pupils.AddAsync(pupil);
+                    await context.CheckLists.AddAsync(checkList);
                     await context.Lessons.AddAsync(lesson);
                     await context.SaveChangesAsync();
 
@@ -236,17 +257,24 @@
                         Comment = "Comment"
                     };
 
+                    var checkList = new CheckList
+                    {
+                        Pupil = pupil,
+                        Created = DateTime.Now
+                    };
+
                     var lesson = new Lesson
                     {
                         Comment = "Comment",
                         Date = DateTime.UtcNow,
                         Employee = employee,
-                        FactDate = DateTime.UtcNow.AddDays(1),
-                        Pupil = pupil
+                        CheckList = checkList,
+                        FactDate = DateTime.UtcNow.AddDays(1)
                     };
 
                     await context.Employees.AddAsync(employee);
                     await context.Pupils.AddAsync(pupil);
+                    await context.CheckLists.AddAsync(checkList);
                     await context.Lessons.AddAsync(lesson);
                     await context.SaveChangesAsync();
 

@@ -9,6 +9,7 @@ namespace MSmile.Db.Entities
     {
         public Exercise()
         {
+            CheckListExercises = new HashSet<CheckListExercise>();
             ExerciseSkills = new HashSet<ExerciseSkill>();
         }
 
@@ -19,6 +20,7 @@ namespace MSmile.Db.Entities
         public string CustomerDescription { get; set; }
 
         public virtual DifficultyLevel DifficultyLevel { get; set; }
+        public virtual ICollection<CheckListExercise> CheckListExercises { get; set; }
         public virtual ICollection<ExerciseSkill> ExerciseSkills { get; set; }
     }
 }

@@ -8,14 +8,9 @@
     public class LessonDto : BaseDto
     {
         /// <summary>
-        /// Pupil id.
+        /// Check list id.
         /// </summary>
-        public long PupilId { get; set; }
-
-        /// <summary>
-        /// Pupil.
-        /// </summary>
-        public PupilDto Pupil { get; set; }
+        public long CheckListId { get; set; }
 
         /// <summary>
         /// Employee id.

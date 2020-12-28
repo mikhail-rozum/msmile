@@ -9,8 +9,9 @@ namespace MSmile.Db.Entities
     {
         public Pupil()
         {
-            Lessons = new HashSet<Lesson>();
+            CheckLists = new HashSet<CheckList>();
             ParentPupils = new HashSet<ParentPupil>();
+            Stimuli = new HashSet<Stimulus>();
         }
 
         public long Id { get; set; }
@@ -20,7 +21,8 @@ namespace MSmile.Db.Entities
         public DateTime BirthDate { get; set; }
         public string Comment { get; set; }
 
-        public virtual ICollection<Lesson> Lessons { get; set; }
+        public virtual ICollection<CheckList> CheckLists { get; set; }
         public virtual ICollection<ParentPupil> ParentPupils { get; set; }
+        public virtual ICollection<Stimulus> Stimuli { get; set; }
     }
 }
