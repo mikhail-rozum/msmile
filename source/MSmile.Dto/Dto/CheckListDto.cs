@@ -8,6 +8,16 @@
     public class CheckListDto : BaseDto
     {
         /// <summary>
+        /// Employee id.
+        /// </summary>
+        public long EmployeeId { get; set; }
+
+        /// <summary>
+        /// Employee.
+        /// </summary>
+        public EmployeeDto Employee { get; set; }
+
+        /// <summary>
         /// Pupil id.
         /// </summary>
         public long PupilId { get; set; }

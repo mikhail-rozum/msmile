@@ -59,6 +59,12 @@ namespace MSmile.Db.Infrastructure
 
                 entity.Property(e => e.Modified).HasColumnType("date");
 
+                entity.HasOne(d => d.Employee)
+                    .WithMany(p => p.CheckLists)
+                    .HasForeignKey(d => d.EmployeeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CheckList_EmployeeId_Employee_Id");
+
                 entity.HasOne(d => d.Pupil)
                     .WithMany(p => p.CheckLists)
                     .HasForeignKey(d => d.PupilId)

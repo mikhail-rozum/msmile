@@ -9,6 +9,7 @@ namespace MSmile.Db.Entities
     {
         public Employee()
         {
+            CheckLists = new HashSet<CheckList>();
             Lessons = new HashSet<Lesson>();
             Users = new HashSet<User>();
         }
@@ -22,6 +23,7 @@ namespace MSmile.Db.Entities
         public string Comment { get; set; }
         public byte[] Photo { get; set; }
 
+        public virtual ICollection<CheckList> CheckLists { get; set; }
         public virtual ICollection<Lesson> Lessons { get; set; }
         public virtual ICollection<User> Users { get; set; }
     }

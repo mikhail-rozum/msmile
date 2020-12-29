@@ -17,7 +17,9 @@ namespace MSmile.Db.Entities
         public long PupilId { get; set; }
         public DateTime Created { get; set; }
         public DateTime? Modified { get; set; }
+        public long EmployeeId { get; set; }
 
+        public virtual Employee Employee { get; set; }
         public virtual Pupil Pupil { get; set; }
         public virtual ICollection<CheckListExercise> CheckListExercises { get; set; }
         public virtual ICollection<Lesson> Lessons { get; set; }

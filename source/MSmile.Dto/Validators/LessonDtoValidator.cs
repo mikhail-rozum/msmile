@@ -16,6 +16,7 @@
         {
             this.RuleFor(x => x.Id).NotNull();
             this.RuleFor(x => x.EmployeeId).NotNull().NotEmpty();
+            this.RuleFor(x => x.CheckListId).NotNull().NotEmpty();
             this.RuleFor(x => x.Date).NotNull().NotEmpty();
         }
     }

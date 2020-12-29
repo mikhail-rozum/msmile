@@ -53,6 +53,7 @@
 
                     var checkList = new CheckList
                     {
+                        Employee = employee,
                         Pupil = pupil,
                         Created = DateTime.Now
                     };
@@ -116,6 +117,7 @@
 
                     var checkList = new CheckList
                     {
+                        Employee = employee,
                         Pupil = pupil,
                         Created = DateTime.Now
                     };
@@ -202,6 +204,7 @@
 
                     var checkList = new CheckList
                     {
+                        Employee = employee,
                         Pupil = pupil,
                         Created = DateTime.Now
                     };
@@ -259,6 +262,7 @@
 
                     var checkList = new CheckList
                     {
+                        Employee = employee,
                         Pupil = pupil,
                         Created = DateTime.Now
                     };

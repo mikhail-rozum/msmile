@@ -58,6 +58,7 @@
             services.AddTransient<ParentService>();
             services.AddTransient<ExerciseService>();
             services.AddTransient<LessonService>();
+            services.AddTransient<CheckListService>();
         }
     }
 }

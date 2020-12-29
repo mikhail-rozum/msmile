@@ -64,4 +64,11 @@
     public partial class CheckList : IEntityWithId
     {
     }
+
+    /// <summary>
+    /// Check list exercise.
+    /// </summary>
+    public partial class CheckListExercise : IEntity
+    {
+    }
 }
