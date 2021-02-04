@@ -71,4 +71,11 @@
     public partial class CheckListExercise : IEntity
     {
     }
+
+    /// <summary>
+    /// Stimulus.
+    /// </summary>
+    public partial class Stimulus : IEntityWithId
+    {
+    }
 }

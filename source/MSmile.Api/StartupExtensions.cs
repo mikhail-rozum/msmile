@@ -1,5 +1,9 @@
 ﻿namespace MSmile.Api
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     using AutoMapper;
 
     using FluentValidation.AspNetCore;
@@ -7,9 +11,10 @@
     using Microsoft.Extensions.DependencyInjection;
 
     using MSmile.Dto.Validators;
-    using MSmile.Services;
     using MSmile.Services.DataServices;
     using MSmile.Services.Mapper;
+
+    using Z.BulkOperations.Internal;
 
     /// <summary>
     /// Extensions for starting up
@@ -22,11 +27,14 @@
         /// <param name="services">Services.</param>
         public static void AddAutoMapper(this IServiceCollection services)
         {
+            var profilesTypes = GetNonGenericDerivatives(typeof(MapperProfileBase));
             var mapperConfig = new MapperConfiguration(
                 mc =>
                 {
-                    mc.AddProfile<DictionariesMapperProfile>();
-                    mc.AddProfile<CommonMapperProfile>();
+                    foreach (var profilesType in profilesTypes)
+                    {
+                        mc.AddProfile(profilesType);
+                    }
                 });
 
             var mapper = mapperConfig.CreateMapper();
@@ -50,15 +58,38 @@
         /// <param name="services">Services.</param>
         public static void AddDataServices(this IServiceCollection services)
         {
-            services.AddTransient<SkillService>();
-            services.AddTransient<DifficultyLevelService>();
-            services.AddTransient<EmployeeService>();
-            services.AddTransient<PupilService>();
-            services.AddTransient<DataGenerationService>();
-            services.AddTransient<ParentService>();
-            services.AddTransient<ExerciseService>();
-            services.AddTransient<LessonService>();
-            services.AddTransient<CheckListService>();
+            var servicesTypes = GetGenericDerivatives(typeof(BaseCrudService<,>));
+            foreach (var serviceType in servicesTypes)
+            {
+                services.AddTransient(serviceType);
+            }
+        }
+
+        private static List<Type> GetGenericDerivatives(Type genericBaseType)
+        {
+            return genericBaseType
+                .GetAssemblyCore()
+                .GetTypes()
+                .Where(x =>
+                    x.IsClass
+                    && !x.IsAbstract
+                    && x.BaseType != null
+                    && x.BaseType.IsGenericType
+                    && x.BaseType.GetGenericTypeDefinition() == genericBaseType)
+                .ToList();
+        }
+
+        private static List<Type> GetNonGenericDerivatives(Type baseType)
+        {
+            return baseType
+                .GetAssemblyCore()
+                .GetTypes()
+                .Where(x =>
+                    x.IsClass
+                    && !x.IsAbstract
+                    && x.BaseType != null
+                    && x.IsAssignableTo(typeof(MapperProfileBase)))
+                .ToList();
         }
     }
 }

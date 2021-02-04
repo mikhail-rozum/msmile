@@ -17,11 +17,6 @@
         public CommonMapperProfile()
         {
             this.CreateMap<Employee, EmployeeDto>().ReverseMap();
-            this.CreateMap<ParentPupil, ListItemDto>()
-                .ForMember(dst => dst.Id, 
-                    opt => opt.MapFrom(src => src.ParentId))
-                .ForMember(dst => dst.Name, 
-                    opt => opt.MapFrom(src => $"{src.Parent.LastName} {src.Parent.FirstName} {src.Parent.MiddleName}"));
             this.CreateMap<Pupil, PupilDto>()
                 .ForMember(dst => dst.Parents, opt => opt.MapFrom(src => src.ParentPupils));
             this.CreateMap<PupilDto, Pupil>().ForMember(
@@ -38,6 +33,8 @@
                                     })));
             this.CreateMap<Parent, ParentDto>().ReverseMap();
             this.CreateMap<Lesson, LessonDto>();
+            this.CreateMap<Stimulus, StimulusDto>();
+            this.CreateMap<StimulusDto, Stimulus>();
         }
     }
 }
