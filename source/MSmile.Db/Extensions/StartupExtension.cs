@@ -44,7 +44,8 @@
                       .WithGlobalConnectionString(configuration.GetConnectionString(ConnectionName))
                       .ScanIn(typeof(AddTestTable).Assembly)
                       .For
-                      .Migrations());
+                      .Migrations())
+                .AddLogging(lb => lb.AddFluentMigratorConsole());
         }
 
         /// <summary>
