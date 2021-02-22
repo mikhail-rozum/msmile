@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services:
   pg_db:
@@ -15,28 +15,30 @@ services:
       
   backend:
     environment:
+      - ASPNETCORE_URLS=http://+:8000
       - MSmile_ConnectionStrings__MSmileDb=HOST=pg_db;DB=MSmileDb;UID=postgres;PWD=1882320;PORT=5432;
       - MSmile_LogSettings__Path=/var/lib/msmile/logs/Log-{Date}.log
     build: 
       context: .
+      dockerfile: ci/Dockerfile(amd64)
       args:
         logpath: /var/lib/msmile/logs/
     ports:
-      - "8000:80"
+      - "8000:8000"
     volumes:
       - /home/v0id/msmile-files/logs:/var/lib/msmile/logs/
     depends_on:
       - pg_db
 
   ng_proxy:
-    image: arm64v8/nginx:latest
+    image: nginx:latest
     restart: always
     ports:
       - "80:80"
     environment:
       - NGINX_HOST=foobar.com
-      - NGINX_PORT=8001
+      - NGINX_PORT=8000
     volumes:
-      - ./ci/nginx.conf:/etc/nginx/nginx.conf
+      - ./ci/nginx-local.conf:/etc/nginx/nginx.conf
     depends_on:
       - backend

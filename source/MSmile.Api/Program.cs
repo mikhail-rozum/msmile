@@ -1,7 +1,5 @@
 namespace MSmile.Api
 {
-    using System.IO;
-
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Hosting;
@@ -12,6 +10,8 @@ namespace MSmile.Api
     /// </summary>
     public class Program
     {
+        private const string EnvironmentPrefix = "MSmile_";
+
         /// <summary>
         /// Entry point.
         /// </summary>
@@ -31,7 +31,7 @@ namespace MSmile.Api
                 .ConfigureAppConfiguration(
                     (context, builder) =>
                     {
-                        builder.AddEnvironmentVariables();
+                        builder.AddEnvironmentVariables(EnvironmentPrefix);
                     })
                 .ConfigureLogging(
                     (context, builder) =>
