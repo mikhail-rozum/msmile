@@ -53,6 +53,15 @@
         }
 
         /// <summary>
+        /// Registers data generation services.
+        /// </summary>
+        /// <param name="services"></param>
+        public static void AddDataGenServices(this IServiceCollection services)
+        {
+            services.AddTransient<DataGenerationService>();
+        }
+
+        /// <summary>
         /// Registers all the data services.
         /// </summary>
         /// <param name="services">Services.</param>

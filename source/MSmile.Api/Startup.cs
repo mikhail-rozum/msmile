@@ -39,6 +39,7 @@ namespace MSmile.Api
             services.AddSwaggerDocument();
             services.AddFluentValidator();
             services.AddDataServices();
+            services.AddDataGenServices();
         }
 
         /// <summary>
