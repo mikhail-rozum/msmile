@@ -5,6 +5,7 @@ namespace MSmile.Api
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
+    using MSmile.Api.Authentication;
     using MSmile.Db.Extensions;
 
     /// <summary>
@@ -32,8 +33,11 @@ namespace MSmile.Api
         /// <param name="services">Services collection.</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDatabase(this.Configuration);
-            services.AddMigrations(this.Configuration);
+            services.Configure<JwtTokenConfiguration>(Configuration.GetSection(nameof(JwtTokenConfiguration)));
+
+            services.ConfigureAuthentication(Configuration);
+            services.AddDatabase(Configuration);
+            services.AddMigrations(Configuration);
             services.AddAutoMapper();
             services.AddControllers();
             services.AddSwaggerDocument();

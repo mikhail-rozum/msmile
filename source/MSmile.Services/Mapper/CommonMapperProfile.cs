@@ -35,6 +35,7 @@
             this.CreateMap<Lesson, LessonDto>();
             this.CreateMap<Stimulus, StimulusDto>();
             this.CreateMap<StimulusDto, Stimulus>();
+            this.CreateMap<User, UserDto>();
         }
     }
 }

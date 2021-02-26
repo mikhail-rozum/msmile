@@ -78,4 +78,11 @@
     public partial class Stimulus : IEntityWithId
     {
     }
+
+    /// <summary>
+    /// User.
+    /// </summary>
+    public partial class User : IEntityWithId
+    {
+    }
 }

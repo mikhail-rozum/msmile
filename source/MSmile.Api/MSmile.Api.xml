@@ -4,6 +4,125 @@
         <name>MSmile.Api</name>
     </assembly>
     <members>
+        <member name="T:MSmile.Api.Authentication.AuthenticationExtensions">
+            <summary>
+            Authentication extensions.
+            </summary>
+        </member>
+        <member name="M:MSmile.Api.Authentication.AuthenticationExtensions.ConfigureAuthentication(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Configures application authentication.
+            </summary>
+            <param name="services">Services.</param>
+            <param name="configuration">Configuration.</param>
+        </member>
+        <member name="M:MSmile.Api.Authentication.AuthenticationExtensions.GetSymmetricSecurityKey(System.String)">
+            <summary>
+            Returns symmetric security key from a secret string..
+            </summary>
+            <param name="secret">Secret string.</param>
+            <returns>Security key.</returns>
+        </member>
+        <member name="T:MSmile.Api.Authentication.AuthenticationModel">
+            <summary>
+            Authentication model.
+            </summary>
+        </member>
+        <member name="P:MSmile.Api.Authentication.AuthenticationModel.Login">
+            <summary>
+            Login.
+            </summary>
+        </member>
+        <member name="P:MSmile.Api.Authentication.AuthenticationModel.PasswordHash">
+            <summary>
+            Password hash.
+            </summary>
+        </member>
+        <member name="T:MSmile.Api.Authentication.AuthenticationService">
+            <summary>
+            Authentication service.
+            </summary>
+        </member>
+        <member name="M:MSmile.Api.Authentication.AuthenticationService.#ctor(Microsoft.Extensions.Options.IOptions{MSmile.Api.Authentication.JwtTokenConfiguration},MSmile.Db.Infrastructure.IRepository{MSmile.Db.Entities.User})">
+            <summary>
+            ctor.
+            </summary>
+            <param name="configuration">Configuration.</param>
+            <param name="userRepository">User repository.</param>
+        </member>
+        <member name="M:MSmile.Api.Authentication.AuthenticationService.Authenticate(System.String,System.String)">
+            <summary>
+            Authenticates user.
+            </summary>
+            <param name="login">Login.</param>
+            <param name="passwordHash">Password hash.</param>
+            <returns>User model.</returns>
+        </member>
+        <member name="M:MSmile.Api.Authentication.AuthenticationService.CreateToken(System.Collections.Generic.IEnumerable{System.Security.Claims.Claim})">
+            <summary>
+            Creates a JWT token.
+            </summary>
+            <param name="claims">Claims.</param>
+            <returns>Token.</returns>
+        </member>
+        <member name="T:MSmile.Api.Authentication.JwtTokenConfiguration">
+            <summary>
+            JWT token configuration.
+            </summary>
+        </member>
+        <member name="P:MSmile.Api.Authentication.JwtTokenConfiguration.Secret">
+            <summary>
+            Application secret.
+            </summary>
+        </member>
+        <member name="P:MSmile.Api.Authentication.JwtTokenConfiguration.Issuer">
+            <summary>
+            Token publisher.
+            </summary>
+        </member>
+        <member name="P:MSmile.Api.Authentication.JwtTokenConfiguration.TokenLifetime">
+            <summary>
+            Token lifetime.
+            </summary>
+        </member>
+        <member name="T:MSmile.Api.Authentication.UserModel">
+            <summary>
+            User model.
+            </summary>
+        </member>
+        <member name="P:MSmile.Api.Authentication.UserModel.Id">
+            <summary>
+            Id.
+            </summary>
+        </member>
+        <member name="P:MSmile.Api.Authentication.UserModel.Login">
+            <summary>
+            Login.
+            </summary>
+        </member>
+        <member name="P:MSmile.Api.Authentication.UserModel.EmployeeName">
+            <summary>
+            Employee name.
+            </summary>
+        </member>
+        <member name="P:MSmile.Api.Authentication.UserModel.Token">
+            <summary>
+            Token.
+            </summary>
+        </member>
+        <member name="T:MSmile.Api.Controllers.AuthenticateController">
+            <summary>
+            Authentication controller.
+            </summary>
+        </member>
+        <member name="M:MSmile.Api.Controllers.AuthenticateController.Authenticate(MSmile.Api.Authentication.AuthenticationService,MSmile.Api.Authentication.AuthenticationModel)">
+            <summary>
+            Authenticates a user.
+            </summary>
+            <param name="service">Service.</param>
+            <param name="model">Model.</param>
+            <returns>User model.</returns>
+        </member>
         <member name="T:MSmile.Api.Controllers.DataGenController">
             <summary>
             Generates test data.
@@ -478,6 +597,12 @@
             Registers all needed classes for FluentValidator
             </summary>
             <param name="services">Services</param>
+        </member>
+        <member name="M:MSmile.Api.StartupExtensions.AddDataGenServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Registers data generation services.
+            </summary>
+            <param name="services"></param>
         </member>
         <member name="M:MSmile.Api.StartupExtensions.AddDataServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
