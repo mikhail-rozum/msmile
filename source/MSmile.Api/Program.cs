@@ -32,6 +32,11 @@ namespace MSmile.Api
                     (context, builder) =>
                     {
                         builder.AddEnvironmentVariables(EnvironmentPrefix);
+
+                        if (context.HostingEnvironment.IsDevelopment())
+                        {
+                            builder.AddUserSecrets<Program>();
+                        }
                     })
                 .ConfigureLogging(
                     (context, builder) =>

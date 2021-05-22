@@ -1,11 +1,4 @@
 {
-  "Docker": {
-    "commandName": "Docker",
-    "launchBrowser": true,
-    "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
-    "publishAllPorts": true,
-    "useSSL": true
-  },
   "MSmile.Api": {
     "commandName": "Project",
     "launchBrowser": true,
@@ -18,7 +11,9 @@
   "profiles": {
     "MSmile.Api": {
       "commandName": "Project",
-      "sqlDebugging": true
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
     }
   }
 }

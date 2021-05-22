@@ -4,6 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <Authors>Mikhail Rozum</Authors>
     <Product>MSmile.Api</Product>
+    <UserSecretsId>e50467e4-4653-4b69-8430-ecc074a62463</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
