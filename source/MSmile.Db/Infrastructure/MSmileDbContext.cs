@@ -205,6 +205,8 @@ namespace MSmile.Db.Infrastructure
 
                 entity.HasComment("Results of execution of each exercise on a lesson");
 
+                entity.Property(e => e.Comment).HasMaxLength(500);
+
                 entity.HasOne(d => d.Exercise)
                     .WithMany()
                     .HasForeignKey(d => d.ExerciseId)

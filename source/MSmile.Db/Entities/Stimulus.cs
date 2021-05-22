@@ -5,8 +5,6 @@ using System.Collections.Generic;
 
 namespace MSmile.Db.Entities
 {
-    using MSmile.Db.Infrastructure;
-
     public partial class Stimulus
     {
         public long Id { get; set; }

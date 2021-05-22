@@ -10,6 +10,7 @@ namespace MSmile.Db.Entities
         public long LessonId { get; set; }
         public long ExerciseId { get; set; }
         public short Percentage { get; set; }
+        public string Comment { get; set; }
 
         public virtual Exercise Exercise { get; set; }
         public virtual Lesson Lesson { get; set; }
